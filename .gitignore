@@ -17,3 +17,6 @@ data/*.db-*
 data/*.sqlite
 data/*.sqlite-*
 !data/.gitkeep
+
+media/*
+!media/.gitkeep

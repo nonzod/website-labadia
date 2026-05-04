@@ -4,6 +4,9 @@ import { fileURLToPath } from 'node:url'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { buildConfig } from 'payload'
 
+import { Leads } from './collections/Leads'
+import { Media } from './collections/Media'
+import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { serverEnv } from './lib/env'
 
@@ -17,7 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users],
+  collections: [Users, Media, Posts, Leads],
   db: sqliteAdapter({
     client: {
       url: serverEnv.databaseUrl,
