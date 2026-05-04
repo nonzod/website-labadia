@@ -6,7 +6,6 @@ import { FeatureShowcase } from '@/components/public/FeatureShowcase'
 import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
 import { getPublicHref, publicContent } from '@/lib/public-content'
-import { siteConfig } from '@/lib/site'
 
 type LocalePageProps = {
   params: Promise<{
@@ -35,7 +34,7 @@ export default async function HomePage({ params }: LocalePageProps) {
             <Link className="primary-link" href={getPublicHref('contact', lang)}>
               {copy.hero.primaryLabel}
             </Link>
-            <a className="secondary-link" href="#public-foundation">
+            <a className="secondary-link" href="#house-overview">
               {copy.hero.secondaryLabel}
             </a>
           </div>
@@ -51,7 +50,7 @@ export default async function HomePage({ params }: LocalePageProps) {
         </aside>
       </section>
 
-      <section className="content-stack" id="public-foundation">
+      <section className="content-stack" id="house-overview">
         <SectionHeading
           body={copy.intro.body}
           eyebrow={copy.intro.eyebrow}
@@ -62,6 +61,7 @@ export default async function HomePage({ params }: LocalePageProps) {
           <FeatureShowcase
             body={feature.body}
             eyebrow={feature.eyebrow}
+            id={index === 0 ? 'stay-overview' : 'territory-overview'}
             items={feature.items}
             key={feature.title}
             mediaBody={feature.mediaBody}
@@ -77,7 +77,7 @@ export default async function HomePage({ params }: LocalePageProps) {
           eyebrow={copy.cta.eyebrow}
           primaryHref={getPublicHref('contact', lang)}
           primaryLabel={copy.cta.primaryLabel}
-          secondaryHref={siteConfig.adminPath}
+          secondaryHref="#territory-overview"
           secondaryLabel={copy.cta.secondaryLabel}
           title={copy.cta.title}
         />

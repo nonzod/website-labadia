@@ -12,7 +12,7 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 | T04 | P0 | completato | Definizione collection `Media`, `Posts`, `Leads` | T02, T03 | modello dati iniziale nel CMS |
 | T05 | P1 | completato | Shell frontend pubblico e layout condiviso | T03 | base UI server-first per pagine pubbliche |
 | T06 | P1 | completato | Blog pubblico bilingue | T04, T05 | lista e dettaglio articoli funzionanti |
-| T12 | P1 | pending | Riposizionamento homepage e copy pubblica | T05 | narrativa home coerente con la dimora |
+| T12 | P1 | completato | Riposizionamento homepage e copy pubblica | T05 | narrativa home coerente con la dimora |
 | T13 | P1 | pending | Ristrutturazione homepage: hero, due porte, proof, eventi | T05, T12 | homepage allineata all'architettura editoriale |
 | T14 | P1 | pending | Allineamento design system pubblico a palette ufficiale | T05 | token, tipografia e stati UI coerenti |
 | T15 | P1 | pending | Integrazione fotografia e media narrativi in homepage | T12, T13, T14 | homepage visualmente immersiva |
@@ -37,7 +37,7 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 - [T04 - Collection CMS](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T04-collections-cms.md) `completato`
 - [T05 - Shell frontend pubblico](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T05-shell-frontend.md) `completato`
 - [T06 - Blog pubblico bilingue](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T06-blog-pubblico.md) `completato`
-- [T12 - Riposizionamento homepage e copy pubblica](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T12-homepage-copy-positioning.md)
+- [T12 - Riposizionamento homepage e copy pubblica](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T12-homepage-copy-positioning.md) `completato`
 - [T13 - Ristrutturazione homepage](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T13-homepage-ia-sections.md)
 - [T14 - Allineamento design system pubblico](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T14-design-system-pubblico.md)
 - [T15 - Integrazione fotografia e media narrativi](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T15-homepage-media-fotografia.md)

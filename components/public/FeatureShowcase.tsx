@@ -1,6 +1,7 @@
 type FeatureShowcaseProps = {
   body: string
   eyebrow: string
+  id?: string
   items: string[]
   mediaBody: string
   mediaKicker: string
@@ -12,6 +13,7 @@ type FeatureShowcaseProps = {
 export function FeatureShowcase({
   body,
   eyebrow,
+  id,
   items,
   mediaBody,
   mediaKicker,
@@ -20,7 +22,10 @@ export function FeatureShowcase({
   title,
 }: FeatureShowcaseProps) {
   return (
-    <section className={reversed ? 'feature-showcase feature-showcase-reversed' : 'feature-showcase'}>
+    <section
+      className={reversed ? 'feature-showcase feature-showcase-reversed' : 'feature-showcase'}
+      id={id}
+    >
       <div className="feature-copy">
         <p className="section-eyebrow">{eyebrow}</p>
         <h3>{title}</h3>
