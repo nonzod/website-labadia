@@ -1,0 +1,80 @@
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
+import { CtaBand } from '@/components/public/CtaBand'
+import { SectionHeading } from '@/components/public/SectionHeading'
+import { isSupportedLocale } from '@/lib/i18n'
+import { getPublicHref, publicContent } from '@/lib/public-content'
+
+type ContactPageProps = {
+  params: Promise<{
+    lang: string
+  }>
+}
+
+export default async function ContactPage({ params }: ContactPageProps) {
+  const { lang } = await params
+
+  if (!isSupportedLocale(lang)) {
+    notFound()
+  }
+
+  const copy = publicContent[lang].contact
+
+  return (
+    <main className="page-shell" id="main-content">
+      <section className="contact-hero">
+        <div className="hero-card">
+          <p className="eyebrow">{copy.hero.eyebrow}</p>
+          <h1>{copy.hero.title}</h1>
+          <p className="lead">{copy.hero.body}</p>
+
+          <div className="cta-row">
+            <Link className="primary-link" href={getPublicHref('home', lang)}>
+              {copy.hero.primaryLabel}
+            </Link>
+            <a className="secondary-link" href="#contact-areas">
+              {copy.hero.secondaryLabel}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="content-stack" id="contact-areas">
+        <SectionHeading
+          body={copy.hero.body}
+          eyebrow={copy.cardsLabel}
+          title={copy.process.title}
+        />
+
+        <div className="detail-grid" aria-label={copy.cardsLabel}>
+          {copy.cards.map((card) => (
+            <article className="detail-card" key={card.title}>
+              <h2>{card.title}</h2>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <section className="process-panel">
+          <p className="section-eyebrow">{copy.process.eyebrow}</p>
+          <ul className="process-list">
+            {copy.process.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <CtaBand
+          body={copy.hero.body}
+          eyebrow={copy.process.eyebrow}
+          primaryHref={getPublicHref('home', lang)}
+          primaryLabel={copy.hero.primaryLabel}
+          secondaryHref="#contact-areas"
+          secondaryLabel={copy.hero.secondaryLabel}
+          title={copy.process.title}
+        />
+      </section>
+    </main>
+  )
+}

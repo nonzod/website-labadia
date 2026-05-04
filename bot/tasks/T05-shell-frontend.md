@@ -4,6 +4,10 @@
 
 `P1`
 
+## Stato
+
+`completato` il `2026-05-04`
+
 ## Obiettivo
 
 Costruire la base del sito pubblico con layout, componenti condivisi e struttura pronta per pagine editoriali e di conversione.

@@ -1,6 +1,7 @@
 export const siteConfig = {
   adminPath: '/admin',
-  projectName: 'La Badia Web',
-  projectTagline: 'Scaffold Next.js + Payload pronto per evolvere in un sito bilingue content-first.',
+  locationLabel: 'San Venanzo, Umbria',
+  projectName: 'La Badia',
+  projectTagline: 'Dimora rurale tra ospitalita, paesaggio e racconto del territorio.',
   supportedLocales: ['it', 'en'],
 } as const

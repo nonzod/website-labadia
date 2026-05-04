@@ -1,44 +1,12 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { CtaBand } from '@/components/public/CtaBand'
+import { FeatureShowcase } from '@/components/public/FeatureShowcase'
+import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
+import { getPublicHref, publicContent } from '@/lib/public-content'
 import { siteConfig } from '@/lib/site'
-
-const foundations = {
-  en: [
-    'App Router with an explicit locale segment',
-    'Shared locale utilities for fallback and language switching',
-    'Payload CMS ready for localized fields in a single document',
-    'Public frontend and admin kept separate within the same runtime',
-  ],
-  it: [
-    'App Router con segmento lingua esplicito',
-    'Utility condivise per fallback e cambio lingua',
-    'Payload CMS predisposto a campi localizzati nello stesso documento',
-    'Frontend pubblico e admin separati nello stesso runtime',
-  ],
-} as const
-
-const pageCopy = {
-  en: {
-    ctaPrimary: 'Open admin',
-    ctaSecondary: 'Payload documentation',
-    eyebrow: 'La Badia',
-    fallback: 'Primary locale: Italian. Explicit fallback for localized content: Italian when English is missing.',
-    heading: 'Bilingual routing is now the baseline for the public website.',
-    lead: 'The application now exposes locale-aware URLs, shared resolution helpers and a CMS configuration aligned with a single-record IT/EN content model.',
-    statusLabel: 'Available foundations',
-  },
-  it: {
-    ctaPrimary: 'Apri admin',
-    ctaSecondary: 'Documentazione Payload',
-    eyebrow: 'La Badia',
-    fallback: 'Lingua primaria: italiano. Fallback esplicito per i contenuti localizzati: italiano quando manca la versione inglese.',
-    heading: 'Il routing bilingue e ora la baseline del sito pubblico.',
-    lead: 'L applicazione espone URL locale-aware, utility condivise di risoluzione e una configurazione CMS allineata a un modello contenuti IT/EN su record unico.',
-    statusLabel: 'Fondamenta disponibili',
-  },
-} as const
 
 type LocalePageProps = {
   params: Promise<{
@@ -53,39 +21,66 @@ export default async function HomePage({ params }: LocalePageProps) {
     notFound()
   }
 
-  const copy = pageCopy[lang]
+  const copy = publicContent[lang].home
 
   return (
-    <main className="landing-shell">
-      <section className="hero-card">
-        <p className="eyebrow">{copy.eyebrow}</p>
-        <h1>{copy.heading}</h1>
-        <p className="lead">{copy.lead}</p>
+    <main className="page-shell" id="main-content">
+      <section className="hero-grid">
+        <div className="hero-card">
+          <p className="eyebrow">{copy.hero.eyebrow}</p>
+          <h1>{copy.hero.title}</h1>
+          <p className="lead">{copy.hero.body}</p>
 
-        <div className="cta-row">
-          <Link className="primary-link" href={siteConfig.adminPath}>
-            {copy.ctaPrimary}
-          </Link>
-          <a
-            className="secondary-link"
-            href="https://payloadcms.com/docs/getting-started/installation"
-            rel="noreferrer"
-            target="_blank"
-          >
-            {copy.ctaSecondary}
-          </a>
+          <div className="cta-row">
+            <Link className="primary-link" href={getPublicHref('contact', lang)}>
+              {copy.hero.primaryLabel}
+            </Link>
+            <a className="secondary-link" href="#public-foundation">
+              {copy.hero.secondaryLabel}
+            </a>
+          </div>
         </div>
 
-        <p className="locale-note">{copy.fallback}</p>
+        <aside className="hero-panel" aria-label={copy.highlightsLabel}>
+          <p className="section-eyebrow">{copy.highlightsLabel}</p>
+          <ul className="hero-highlights">
+            {copy.highlights.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </aside>
       </section>
 
-      <section className="status-grid" aria-label={copy.statusLabel}>
-        {foundations[lang].map((item) => (
-          <article className="status-card" key={item}>
-            <span className="status-dot" aria-hidden="true" />
-            <p>{item}</p>
-          </article>
+      <section className="content-stack" id="public-foundation">
+        <SectionHeading
+          body={copy.intro.body}
+          eyebrow={copy.intro.eyebrow}
+          title={copy.intro.title}
+        />
+
+        {copy.features.map((feature, index) => (
+          <FeatureShowcase
+            body={feature.body}
+            eyebrow={feature.eyebrow}
+            items={feature.items}
+            key={feature.title}
+            mediaBody={feature.mediaBody}
+            mediaKicker={feature.mediaKicker}
+            mediaTitle={feature.mediaTitle}
+            reversed={index % 2 === 1}
+            title={feature.title}
+          />
         ))}
+
+        <CtaBand
+          body={copy.cta.body}
+          eyebrow={copy.cta.eyebrow}
+          primaryHref={getPublicHref('contact', lang)}
+          primaryLabel={copy.cta.primaryLabel}
+          secondaryHref={siteConfig.adminPath}
+          secondaryLabel={copy.cta.secondaryLabel}
+          title={copy.cta.title}
+        />
       </section>
     </main>
   )
