@@ -7,6 +7,7 @@
 ## Obiettivo
 
 Preparare l'applicazione al deploy su cluster `Kubernetes` Infomaniak rispettando i vincoli critici di `SQLite`.
+La struttura dei manifest deve rispettare l'attuale implementazione già presente per altri applicativi nel namespace "http" qui `/mnt/XFS1TB/Workspace/k3s/infomaniak/base/http`, prendere come esempio e riferimento questi manifest.
 
 ## Scope
 
@@ -21,7 +22,7 @@ Preparare l'applicazione al deploy su cluster `Kubernetes` Infomaniak rispettand
 - manifest `Deployment`
 - manifest `PVC`
 - manifest `Secret` o convenzione di gestione secret
-- manifest `Ingress` o equivalente
+- manifest `Ingress`
 - note operative su backup e restore del volume
 
 ## Dipendenze
