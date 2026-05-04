@@ -11,7 +11,7 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 | T03 | P0 | completato | Setup i18n e routing bilingue `IT/EN` | T01 | architettura locale stabile |
 | T04 | P0 | completato | Definizione collection `Media`, `Posts`, `Leads` | T02, T03 | modello dati iniziale nel CMS |
 | T05 | P1 | completato | Shell frontend pubblico e layout condiviso | T03 | base UI server-first per pagine pubbliche |
-| T06 | P1 | pending | Blog pubblico bilingue | T04, T05 | lista e dettaglio articoli funzionanti |
+| T06 | P1 | completato | Blog pubblico bilingue | T04, T05 | lista e dettaglio articoli funzionanti |
 | T07 | P1 | pending | Pagina contatti e persistenza lead | T04, T05 | form pubblico con salvataggio dati |
 | T08 | P1 | pending | Integrazione email `SMTP` per richieste contatto | T07 | invio email post-salvataggio |
 | T09 | P1 | pending | SEO tecnico di base | T03, T05, T06 | metadata, sitemap e robots coerenti |
@@ -31,7 +31,7 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 - [T03 - I18n e routing](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T03-i18n-routing.md) `completato`
 - [T04 - Collection CMS](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T04-collections-cms.md) `completato`
 - [T05 - Shell frontend pubblico](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T05-shell-frontend.md) `completato`
-- [T06 - Blog pubblico bilingue](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T06-blog-pubblico.md)
+- [T06 - Blog pubblico bilingue](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T06-blog-pubblico.md) `completato`
 - [T07 - Contatti e lead persistence](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T07-contatti-leads.md)
 - [T08 - Integrazione SMTP](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T08-smtp-email.md)
 - [T09 - SEO tecnico di base](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T09-seo-tecnico.md)

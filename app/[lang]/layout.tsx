@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { SiteFooter } from '@/components/public/SiteFooter'
 import { SiteHeader } from '@/components/public/SiteHeader'
 import { appLocales, isSupportedLocale } from '@/lib/i18n'
+import { getPostLocaleSwitcherPathnames } from '@/lib/posts'
 import { publicContent } from '@/lib/public-content'
 
 type LocaleLayoutProps = Readonly<{
@@ -28,6 +29,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   const requestHeaders = await headers()
   const currentPathname = requestHeaders.get('x-badia-pathname') ?? `/${lang}`
+  const localeSwitchPathnames = await getPostLocaleSwitcherPathnames(currentPathname)
   const skipToContentLabel = publicContent[lang].header.skipToContentLabel
 
   return (
@@ -35,7 +37,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <a className="skip-link" href="#main-content">
         {skipToContentLabel}
       </a>
-      <SiteHeader currentPathname={currentPathname} locale={lang} />
+      <SiteHeader
+        currentPathname={currentPathname}
+        locale={lang}
+        localeSwitchPathnames={localeSwitchPathnames}
+      />
       {children}
       <SiteFooter locale={lang} />
     </div>

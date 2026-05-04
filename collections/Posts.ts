@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { adminOnlyCollectionAccess } from '@/lib/payload/access'
+import { authenticatedAccess, publishedPostsReadAccess } from '@/lib/payload/access'
 
 const locales = ['it', 'en'] as const
 
@@ -26,7 +26,12 @@ const formatSlug = (value: string): string =>
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
-  access: adminOnlyCollectionAccess,
+  access: {
+    create: authenticatedAccess,
+    delete: authenticatedAccess,
+    read: publishedPostsReadAccess,
+    update: authenticatedAccess,
+  },
   admin: {
     defaultColumns: ['title', 'status', 'publishedAt', 'updatedAt'],
     useAsTitle: 'title',

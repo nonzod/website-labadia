@@ -3,6 +3,7 @@ import type { AppLocale } from '@/lib/i18n'
 import { getLocalizedPathname } from '@/lib/i18n'
 
 export const publicPathnames = {
+  blog: '/blog',
   contact: '/contatti',
   home: '/',
 } as const
@@ -78,7 +79,29 @@ type ContactCopy = {
   }
 }
 
+type BlogCopy = {
+  backToBlogLabel: string
+  emptyBody: string
+  emptyTitle: string
+  hero: {
+    body: string
+    eyebrow: string
+    primaryLabel: string
+    secondaryLabel: string
+    title: string
+  }
+  list: {
+    body: string
+    eyebrow: string
+    title: string
+  }
+  metadataLabel: string
+  postAnchorLabel: string
+  readMoreLabel: string
+}
+
 type PublicCopy = {
+  blog: BlogCopy
   contact: ContactCopy
   footer: {
     links: FooterLink[]
@@ -99,6 +122,26 @@ type PublicCopy = {
 
 export const publicContent: Record<AppLocale, PublicCopy> = {
   en: {
+    blog: {
+      backToBlogLabel: 'Back to the journal',
+      emptyBody: 'Published stories from the house and the territory will appear here as soon as they are available in the CMS.',
+      emptyTitle: 'The journal is ready for its first article.',
+      hero: {
+        body: 'A bilingual editorial surface for stories, notes from the house, and local routes worth reading before or after a stay.',
+        eyebrow: 'Journal',
+        primaryLabel: 'Open contact page',
+        secondaryLabel: 'Browse articles',
+        title: 'Stories that connect the house with the surrounding landscape.',
+      },
+      list: {
+        body: 'Published entries are listed server-side, ordered by publication date, and prepared for future SEO enrichment.',
+        eyebrow: 'Published articles',
+        title: 'A public archive fed directly by Payload.',
+      },
+      metadataLabel: 'Published',
+      postAnchorLabel: 'Go to article list',
+      readMoreLabel: 'Read article',
+    },
     contact: {
       cards: [
         {
@@ -135,6 +178,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     footer: {
       links: [
         { href: 'home', label: 'Home' },
+        { href: 'blog', label: 'Journal' },
         { href: 'contact', label: 'Contact' },
       ],
       navigationLabel: 'Footer navigation',
@@ -146,6 +190,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       languageSwitcherLabel: 'Language switcher',
       navigation: [
         { href: 'home', label: 'Home' },
+        { href: 'blog', label: 'Journal' },
         { href: 'contact', label: 'Contact' },
       ],
       navigationLabel: 'Primary navigation',
@@ -201,6 +246,26 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     },
   },
   it: {
+    blog: {
+      backToBlogLabel: 'Torna al blog',
+      emptyBody: 'Qui compariranno gli articoli pubblicati dal CMS, dedicati alla dimora, al territorio e ai ritmi del soggiorno.',
+      emptyTitle: 'Il blog e pronto per il primo articolo.',
+      hero: {
+        body: 'Una superficie editoriale bilingue per racconti, appunti dalla dimora e itinerari locali da leggere prima o dopo il soggiorno.',
+        eyebrow: 'Blog',
+        primaryLabel: 'Apri la pagina contatti',
+        secondaryLabel: 'Vai agli articoli',
+        title: 'Storie che tengono insieme dimora, paesaggio e territorio.',
+      },
+      list: {
+        body: 'Gli articoli pubblicati sono elencati lato server, ordinati per data di pubblicazione e pronti per l arricchimento SEO dei prossimi task.',
+        eyebrow: 'Articoli pubblicati',
+        title: 'Un archivio pubblico alimentato direttamente da Payload.',
+      },
+      metadataLabel: 'Pubblicato',
+      postAnchorLabel: 'Vai alla lista articoli',
+      readMoreLabel: 'Leggi articolo',
+    },
     contact: {
       cards: [
         {
@@ -237,6 +302,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     footer: {
       links: [
         { href: 'home', label: 'Home' },
+        { href: 'blog', label: 'Blog' },
         { href: 'contact', label: 'Contatti' },
       ],
       navigationLabel: 'Navigazione footer',
@@ -248,6 +314,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       languageSwitcherLabel: 'Cambio lingua',
       navigation: [
         { href: 'home', label: 'Home' },
+        { href: 'blog', label: 'Blog' },
         { href: 'contact', label: 'Contatti' },
       ],
       navigationLabel: 'Navigazione principale',

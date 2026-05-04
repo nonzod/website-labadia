@@ -8,10 +8,11 @@ import { siteConfig } from '@/lib/site'
 
 type SiteHeaderProps = {
   currentPathname: string
+  localeSwitchPathnames?: Partial<Record<AppLocale, string>> | null
   locale: AppLocale
 }
 
-export function SiteHeader({ currentPathname, locale }: SiteHeaderProps) {
+export function SiteHeader({ currentPathname, locale, localeSwitchPathnames }: SiteHeaderProps) {
   const copy = publicContent[locale].header
 
   return (
@@ -36,7 +37,9 @@ export function SiteHeader({ currentPathname, locale }: SiteHeaderProps) {
 
         <div className="locale-switcher" aria-label={copy.languageSwitcherLabel}>
           {appLocales.map((targetLocale) => {
-            const href = switchLocalePathname(currentPathname, targetLocale)
+            const href =
+              localeSwitchPathnames?.[targetLocale] ??
+              switchLocalePathname(currentPathname, targetLocale)
             const isActive = targetLocale === locale
 
             return (
