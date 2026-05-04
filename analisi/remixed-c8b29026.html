@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Badia — Architettura del sito</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --stone:       #c8b89a;
+  --earth:       #8b7355;
+  --dark:        #2a2218;
+  --ink:         #3d3325;
+  --muted:       #7a6e62;
+  --pale:        #f5f0e8;
+  --cream:       #faf7f2;
+  --white:       #ffffff;
+  --iris:        #6b5b8a;
+  --iris-light:  #ede8f4;
+  --green:       #4a6741;
+  --green-light: #eaf0e8;
+  --teal:        #2a5a48;
+  --teal-light:  #eef5f2;
+  --amber:       #8a6a2a;
+  --amber-light: #f4eedf;
+  --coral:       #8a3a2a;
+  --coral-light: #f4e8e5;
+  --border:      #ddd5c5;
+  --border-dark: #c8b89a;
+}
+
+body {
+  font-family: 'DM Mono', monospace;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 64px 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, .serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ── HEADER ── */
+.doc-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 36px;
+  margin-bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.doc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+.doc-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.doc-meta {
+  text-align: right;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 20px;
+  margin-top: 52px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-label:first-of-type { margin-top: 0; }
+
+/* ── BRIEF GRID ── */
+.brief-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.brief-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 20px;
+}
+.brief-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.brief-card p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.brief-card.full { grid-column: span 2; }
+
+/* ── DECISION ROW ── */
+.decision {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.decision:last-child { border-bottom: none; }
+.decision-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  min-width: 120px;
+}
+.decision-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: var(--dark);
+}
+.decision-note {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-left: auto;
+  font-style: italic;
+}
+
+/* ── DIAGRAM SVG WRAPPER ── */
+.diagram-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px 24px 24px;
+  overflow: hidden;
+}
+
+/* ── PAGE ARCHITECTURE ── */
+.page-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.page-block-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.page-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--dark);
+  flex: 1;
+}
+.page-slug {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.page-tag {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.page-body {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.page-body.wide { grid-template-columns: 1fr 1fr; }
+.page-body.single { grid-template-columns: 1fr; }
+
+.content-block {
+  background: var(--pale);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 12px 14px;
+}
+.content-block.span2 { grid-column: span 2; }
+.content-block.span3 { grid-column: span 3; }
+.content-block-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.content-block ul {
+  list-style: none;
+  padding: 0;
+}
+.content-block ul li {
+  font-size: 10.5px;
+  color: var(--muted);
+  padding: 1.5px 0;
+}
+.content-block ul li::before {
+  content: '— ';
+  color: var(--stone);
+}
+
+/* In-page section (not a page, just a block within the page) */
+.inpage-section {
+  background: var(--iris-light);
+  border: 1px solid #c5b8dc;
+  border-radius: 5px;
+  padding: 12px 14px;
+}
+.inpage-section .content-block-title { color: var(--iris); }
+
+.inpage-featured {
+  background: var(--iris-light);
+  border: 1.5px solid var(--iris);
+  border-radius: 5px;
+  padding: 12px 14px;
+  position: relative;
+}
+.inpage-featured::before {
+  content: '✦ In evidenza';
+  position: absolute;
+  top: -8px; left: 12px;
+  background: var(--iris);
+  color: white;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.inpage-featured .content-block-title { color: var(--iris); }
+
+/* CTA block */
+.cta-block {
+  background: var(--coral-light);
+  border: 1px solid #d4a89a;
+  border-radius: 5px;
+  padding: 12px 14px;
+}
+.cta-block .content-block-title { color: var(--coral); }
+
+/* SEO block */
+.seo-block {
+  background: var(--amber-light);
+  border: 1px solid #d4c090;
+  border-radius: 5px;
+  padding: 12px 14px;
+}
+.seo-block .content-block-title { color: var(--amber); }
+
+/* ── NOTE ── */
+.note {
+  background: var(--pale);
+  border-left: 3px solid var(--stone);
+  border-radius: 0 5px 5px 0;
+  padding: 10px 14px;
+  font-size: 10.5px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 8px;
+}
+
+/* ── NAV BAR MOCK ── */
+.nav-mock {
+  background: var(--pale);
+  border: 1px dashed var(--border);
+  border-radius: 7px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.nav-mock-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.nav-mock-links {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+.nav-cta {
+  background: var(--coral);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+}
+
+/* ── DESIGN SYSTEM ── */
+.font-specimen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.font-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+}
+.font-name {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.font-sample-serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--dark);
+  line-height: 1.2;
+}
+.font-sample-mono {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.8;
+}
+.font-use {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+.palette-note {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 20px;
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── FOOTER ── */
+.doc-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 72px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+@media print {
+  body { padding: 24px; }
+  .brief-grid, .font-specimen { gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════ HEADER ══════════════════════════════════ -->
+<header class="doc-header">
+  <div>
+    <h1 class="doc-title">La Badia</h1>
+    <p class="doc-subtitle">Architettura del sito — documento di lavoro</p>
+  </div>
+  <div class="doc-meta">
+    Versione 2.0<br>
+    Vocabolo Badia 5, San Venanzo<br>
+    Umbria · Italia<br>
+    <br>
+    Palette: in attesa
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════ BRIEF ══════════════════════════════════ -->
+<div class="section-label">01 — Il progetto</div>
+
+<div class="brief-grid">
+  <div class="brief-card">
+    <div class="brief-card-title">La struttura</div>
+    <p>Casa in pietra in un borghetto di campagna. Appartamento al 3º e 4º piano, circa 150 mq. 6 posti letto. Salone di 41 mq con affreschi zodiacali, cucina-soggiorno con tavolo ovale antico, 2 camere matrimoniali, 1 suite al piano superiore con bagno privato. Mobili antichi originali. Bagni nuovi.</p>
+  </div>
+  <div class="brief-card">
+    <div class="brief-card-title">Il contesto</div>
+    <p>Giardino all'italiana da 2000 mq: roseto circolare in pietra, querce, glicini, iris, narcisi, orchidee selvatiche, ulivi. Upupe tra i rami, fagiani nei campi. Borghetto con edifici adiacenti in pietra, tra cui una sala abside affittabile per eventi. Strada asfaltata fino a 100 m, parcheggio privato.</p>
+  </div>
+  <div class="brief-card">
+    <div class="brief-card-title">L'offerta principale</div>
+    <p>Affitto breve dell'intero appartamento (non singole camere). Angolo bar con selezione di vini locali acquistabili. Convenzioni con cantine e ristoranti. Su richiesta: cuoco privato, degustazioni, visite guidate, transfer, camminate con erbe spontanee.</p>
+  </div>
+  <div class="brief-card">
+    <div class="brief-card-title">L'offerta eventi</div>
+    <p>Aperta anche a chi non soggiorna. Club del vino, percorsi enogastronomici, tertulie nel salone affrescato, piccoli concerti di musica classica, workshop e mini corsi di cucina italiana. Sala abside per eventi su richiesta.</p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════ DECISIONI ══════════════════════════════════ -->
+<div class="section-label">02 — Decisioni di architettura</div>
+
+<div style="background:var(--white); border:1px solid var(--border); border-radius:8px; padding:4px 20px; margin-bottom:12px;">
+  <div class="decision">
+    <span class="decision-label">Struttura</span>
+    <span class="decision-value">Un solo sito, un solo dominio</span>
+    <span class="decision-note">Nessun sito separato per le esperienze — tutta l'autorità SEO resta concentrata</span>
+  </div>
+  <div class="decision">
+    <span class="decision-label">Evoluzione futura</span>
+    <span class="decision-value">esperienze.labadia.it</span>
+    <span class="decision-note">Sottodominio da attivare solo se "Vivi la Badia" diventa brand autonomo</span>
+  </div>
+  <div class="decision">
+    <span class="decision-label">Homepage</span>
+    <span class="decision-value">Due porte d'ingresso narrative</span>
+    <span class="decision-note">Separano i pubblici senza separare il sito</span>
+  </div>
+  <div class="decision">
+    <span class="decision-label">Porta 1</span>
+    <span class="decision-value">La Dimora</span>
+    <span class="decision-note">Per chi cerca dove soggiornare in Umbria</span>
+  </div>
+  <div class="decision">
+    <span class="decision-label">Porta 2</span>
+    <span class="decision-value">Vivi la Badia</span>
+    <span class="decision-note">Per chi cerca esperienze sul territorio, anche senza soggiornare</span>
+  </div>
+  <div class="decision">
+    <span class="decision-label">Suite Iris</span>
+    <span class="decision-value">Sezione in-page, non voce di menu</span>
+    <span class="decision-note">Box in evidenza dentro La Dimora — non ha ingresso separato</span>
+  </div>
+  <div class="decision">
+    <span class="decision-label">CTA primario</span>
+    <span class="decision-value">Prenota ora — fisso in header</span>
+    <span class="decision-note">Su mobile: pulsante fisso in basso. Integrazione: Lodgify / Hostaway / widget Airbnb</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════ NAVIGAZIONE ══════════════════════════════════ -->
+<div class="section-label">03 — Header fisso</div>
+
+<div class="nav-mock">
+  <div>
+    <div class="nav-mock-label">Navigazione principale — presente in ogni pagina</div>
+    <div class="nav-mock-links">La Badia &nbsp;·&nbsp; La Dimora &nbsp;·&nbsp; Esperienze &nbsp;·&nbsp; Territorio &nbsp;·&nbsp; Racconti &nbsp;·&nbsp; Contatti</div>
+  </div>
+  <div class="nav-cta">Prenota ora →</div>
+</div>
+<div class="note">Il bottone "Prenota ora" è l'unico elemento sempre visibile in ogni schermata. Su mobile si fissa in basso come barra persistente.</div>
+
+
+<!-- ══════════════════════════════════ DIAGRAMMA ══════════════════════════════════ -->
+<div class="section-label">04 — Diagramma sitemap</div>
+
+<div class="diagram-wrap">
+<svg width="100%" viewBox="0 0 920 520" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Sitemap La Badia</title>
+<desc>Diagramma ad albero del sito web La Badia con homepage, due porte d'ingresso e sezioni principali</desc>
+
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#c8b89a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<!-- HOMEPAGE -->
+<rect x="335" y="20" width="250" height="52" rx="8" fill="#eef5f2" stroke="#7ab8a4" stroke-width="0.8"/>
+<text font-family="Cormorant Garamond, serif" font-size="17" font-weight="500" fill="#2a5a48" x="460" y="42" text-anchor="middle">Homepage</text>
+<text font-family="DM Mono, monospace" font-size="10" fill="#4a8a74" x="460" y="60" text-anchor="middle">hero · due porte · eventi · recensioni</text>
+
+<!-- Lines from homepage to L1 -->
+<!-- to La Badia: center 88 -->
+<path d="M380 72 L88 140" stroke="#ddd5c5" stroke-width="0.7" fill="none"/>
+<!-- to La Dimora: center 248 -->
+<path d="M420 72 L248 140" stroke="#ddd5c5" stroke-width="0.7" fill="none"/>
+<!-- to Esperienze: center 460 -->
+<path d="M460 72 L460 140" stroke="#ddd5c5" stroke-width="0.7" fill="none"/>
+<!-- to Territorio: center 672 -->
+<path d="M500 72 L672 140" stroke="#ddd5c5" stroke-width="0.7" fill="none"/>
+<!-- to Racconti: center 832 -->
+<path d="M540 72 L832 140" stroke="#ddd5c5" stroke-width="0.7" fill="none"/>
+
+<!-- L1 ROW — 5 nodes -->
+<!-- LA BADIA x=28 w=120 center=88 -->
+<rect x="28" y="140" width="120" height="52" rx="7" fill="#f4eedf" stroke="#c8a860" stroke-width="0.8"/>
+<text font-family="Cormorant Garamond, serif" font-size="15" font-weight="500" fill="#6a4e18" x="88" y="161" text-anchor="middle">La Badia</text>
+<text font-family="DM Mono, monospace" font-size="9" fill="#8a6a2a" x="88" y="179" text-anchor="middle">storia · borghetto · giardino</text>
+
+<!-- LA DIMORA x=158 w=180 center=248 -->
+<rect x="158" y="140" width="180" height="52" rx="7" fill="#e8eef4" stroke="#7aaac8" stroke-width="0.8"/>
+<text font-family="Cormorant Garamond, serif" font-size="15" font-weight="500" fill="#2a4a6a" x="248" y="161" text-anchor="middle">La Dimora</text>
+<text font-family="DM Mono, monospace" font-size="9" fill="#3a5a78" x="248" y="179" text-anchor="middle">appartamento · camere · suite</text>
+
+<!-- ESPERIENZE x=360 w=200 center=460 -->
+<rect x="360" y="140" width="200" height="52" rx="7" fill="#eaf0e8" stroke="#7aaa74" stroke-width="0.8"/>
+<text font-family="Cormorant Garamond, serif" font-size="15" font-weight="500" fill="#2a4a28" x="460" y="161" text-anchor="middle">Esperienze</text>
+<text font-family="DM Mono, monospace" font-size="9" fill="#4a6741" x="460" y="179" text-anchor="middle">ospiti · eventi aperti · abside</text>
+
+<!-- TERRITORIO x=572 w=200 center=672 -->
+<rect x="572" y="140" width="200" height="52" rx="7" fill="#f4eedf" stroke="#c8a860" stroke-width="0.8"/>
+<text font-family="Cormorant Garamond, serif" font-size="15" font-weight="500" fill="#6a4e18" x="672" y="161" text-anchor="middle">Il Territorio</text>
+<text font-family="DM Mono, monospace" font-size="9" fill="#8a6a2a" x="672" y="179" text-anchor="middle">Umbria · cosa fare · partner</text>
+
+<!-- RACCONTI x=772 w=120 center=832 -->
+<rect x="772" y="140" width="120" height="52" rx="7" fill="#f4eedf" stroke="#c8a860" stroke-width="0.8"/>
+<text font-family="Cormorant Garamond, serif" font-size="15" font-weight="500" fill="#6a4e18" x="832" y="161" text-anchor="middle">Racconti</text>
+<text font-family="DM Mono, monospace" font-size="9" fill="#8a6a2a" x="832" y="179" text-anchor="middle">blog · SEO · stagioni</text>
+
+<!-- CONNECTOR LINES to L2 -->
+<!-- La Badia sub -->
+<line x1="88" y1="192" x2="68" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="88" y1="192" x2="118" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<!-- La Dimora sub -->
+<line x1="218" y1="192" x2="168" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="248" y1="192" x2="248" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="278" y1="192" x2="328" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<!-- Esperienze sub -->
+<line x1="420" y1="192" x2="390" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="460" y1="192" x2="460" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="500" y1="192" x2="530" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<!-- Territorio sub -->
+<line x1="642" y1="192" x2="632" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="702" y1="192" x2="712" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<!-- Racconti sub -->
+<line x1="812" y1="192" x2="802" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+<line x1="852" y1="192" x2="862" y2="262" stroke="#ddd5c5" stroke-width="0.6"/>
+
+<!-- L2 ROW — sub-items -->
+
+<!-- La Badia: Storia, Giardino -->
+<rect x="28" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9.5" font-weight="500" fill="#3d3325" x="68" y="278" text-anchor="middle">La storia</text>
+<text font-family="DM Mono, monospace" font-size="8.5" fill="#7a6e62" x="68" y="292" text-anchor="middle">borghetto</text>
+
+<rect x="78" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9.5" font-weight="500" fill="#3d3325" x="118" y="278" text-anchor="middle">Il giardino</text>
+<text font-family="DM Mono, monospace" font-size="8.5" fill="#7a6e62" x="118" y="292" text-anchor="middle">flora, fauna</text>
+
+<!-- La Dimora: Glicine, Narciso, Iris(featured), Salone/cucina -->
+<rect x="128" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9.5" font-weight="500" fill="#3d3325" x="168" y="278" text-anchor="middle">Cam. Glicine</text>
+<text font-family="DM Mono, monospace" font-size="8.5" fill="#7a6e62" x="168" y="292" text-anchor="middle">matrimoniale</text>
+
+<rect x="208" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9.5" font-weight="500" fill="#3d3325" x="248" y="278" text-anchor="middle">Cam. Narciso</text>
+<text font-family="DM Mono, monospace" font-size="8.5" fill="#7a6e62" x="248" y="292" text-anchor="middle">twin / matrim.</text>
+
+<!-- Suite Iris FEATURED -->
+<rect x="288" y="256" width="90" height="50" rx="5" fill="#ede8f4" stroke="#8b6aaa" stroke-width="1.2"/>
+<text font-family="DM Mono, monospace" font-size="8" fill="#5a4878" x="333" y="268" text-anchor="middle">✦ in evidenza</text>
+<text font-family="Cormorant Garamond, serif" font-size="12" font-weight="600" fill="#6b5b8a" x="333" y="284" text-anchor="middle">Suite Iris</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6898" x="333" y="298" text-anchor="middle">4º piano · privata</text>
+
+<!-- Salone + cucina (angolo bar) -->
+<rect x="158" y="320" width="220" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9.5" font-weight="500" fill="#3d3325" x="268" y="336" text-anchor="middle">Salone · cucina · angolo bar</text>
+<text font-family="DM Mono, monospace" font-size="8.5" fill="#7a6e62" x="268" y="350" text-anchor="middle">spazi comuni dell'appartamento</text>
+<line x1="248" y1="300" x2="268" y2="320" stroke="#ddd5c5" stroke-width="0.6"/>
+
+<!-- Esperienze: per ospiti, eventi aperti, abside -->
+<rect x="350" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="390" y="277" text-anchor="middle">Per ospiti</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="390" y="291" text-anchor="middle">cuoco, visite, bar</text>
+
+<rect x="420" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="460" y="277" text-anchor="middle">Calendario</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="460" y="291" text-anchor="middle">eventi aperti</text>
+
+<rect x="490" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="530" y="277" text-anchor="middle">Sala abside</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="530" y="291" text-anchor="middle">su richiesta</text>
+
+<!-- Territorio: cosa fare, partner -->
+<rect x="582" y="262" width="100" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="632" y="278" text-anchor="middle">Cosa fare</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="632" y="292" text-anchor="middle">San Venanzo, Umbria</text>
+
+<rect x="662" y="262" width="100" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="712" y="278" text-anchor="middle">Partner locali</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="712" y="292" text-anchor="middle">cantine, ristoranti</text>
+
+<!-- Racconti: blog, archivio -->
+<rect x="762" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="802" y="278" text-anchor="middle">Post stagionali</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="802" y="292" text-anchor="middle">natura, ricette</text>
+
+<rect x="822" y="262" width="80" height="38" rx="5" fill="#faf7f2" stroke="#ddd5c5" stroke-width="0.6"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#3d3325" x="862" y="278" text-anchor="middle">Storie ospiti</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#7a6e62" x="862" y="292" text-anchor="middle">borghetto, vita</text>
+
+<!-- CONTATTI (standalone, bottom right) -->
+<line x1="880" y1="72" x2="906" y2="390" stroke="#ddd5c5" stroke-width="0.5" stroke-dasharray="3 3"/>
+<rect x="856" y="390" width="52" height="38" rx="5" fill="#f4e8e5" stroke="#d4a89a" stroke-width="0.8"/>
+<text font-family="DM Mono, monospace" font-size="9" font-weight="500" fill="#8a3a2a" x="882" y="406" text-anchor="middle">Contatti</text>
+<text font-family="DM Mono, monospace" font-size="8" fill="#aa6858" x="882" y="420" text-anchor="middle">form · mappa</text>
+
+<!-- LEGEND -->
+<rect x="28" y="440" width="860" height="1" fill="#ddd5c5"/>
+<rect x="28" y="456" width="10" height="10" rx="2" fill="#eef5f2" stroke="#7ab8a4" stroke-width="0.8"/>
+<text font-family="DM Mono, monospace" font-size="9" fill="#7a6e62" x="44" y="465">Homepage</text>
+<rect x="120" y="456" width="10" height="10" rx="2" fill="#e8eef4" stroke="#7aaac8" stroke-width="0.8"/>
+<text font-family="DM Mono, monospace" font-size="9" fill="#7a6e62" x="136" y="465">La Dimora</text>
+<rect x="222" y="456" width="10" height="10" rx="2" fill="#eaf0e8" stroke="#7aaa74" stroke-width="0.8"/>
+<text font-family="DM Mono, monospace" font-size="9" fill="#7a6e62" x="238" y="465">Esperienze</text>
+<rect x="328" y="456" width="10" height="10" rx="2" fill="#f4eedf" stroke="#c8a860" stroke-width="0.8"/>
+<text font-family="DM Mono, monospace" font-size="9" fill="#7a6e62" x="344" y="465">Sezioni condivise</text>
+<rect x="466" y="456" width="10" height="10" rx="2" fill="#ede8f4" stroke="#8b6aaa" stroke-width="1.2"/>
+<text font-family="DM Mono, monospace" font-size="9" fill="#7a6e62" x="482" y="465">Suite Iris — in-page, non voce di menu</text>
+<rect x="688" y="456" width="10" height="10" rx="2" fill="#f4e8e5" stroke="#d4a89a" stroke-width="0.8"/>
+<text font-family="DM Mono, monospace" font-size="9" fill="#7a6e62" x="704" y="465">CTA / Contatti</text>
+</svg>
+</div>
+
+
+<!-- ══════════════════════════════════ ARCHITETTURA CONTENUTI ══════════════════════════════════ -->
+<div class="section-label">05 — Architettura dei contenuti per pagina</div>
+
+<!-- HOMEPAGE -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#2a5a48"></div>
+    <span class="page-title">Homepage</span>
+    <span class="page-slug">labadia.it/</span>
+    <span class="page-tag" style="background:#eef5f2; color:#2a5a48">Pagina di atterraggio</span>
+  </div>
+  <div class="page-body">
+    <div class="content-block span3">
+      <div class="content-block-title">Hero — primo schermo</div>
+      <ul>
+        <li>Fotografia ad alta emozione — giardino, salone con affreschi o vista esterna</li>
+        <li>Nome: La Badia, San Venanzo, Umbria</li>
+        <li>Sottotitolo breve (da definire con il copy)</li>
+        <li>CTA primario: Prenota ora + CTA secondario: Scopri le esperienze</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Le due porte</div>
+      <ul>
+        <li>Porta 1 — La Dimora: immagine + titolo + freccia</li>
+        <li>Porta 2 — Vivi la Badia: immagine + titolo + freccia</li>
+        <li>Due aree visive affiancate, stesso peso visivo</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Trust signals</div>
+      <ul>
+        <li>Selezione di 3–5 recensioni ospiti</li>
+        <li>Punteggi piattaforme (Airbnb, Booking)</li>
+        <li>Numero di soggiorni o anni di attività</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Prossimi eventi</div>
+      <ul>
+        <li>Anteprima 2–3 eventi in calendario</li>
+        <li>Data, titolo, link alla pagina Esperienze</li>
+        <li>Visibile anche a chi non soggiorna</li>
+      </ul>
+    </div>
+    <div class="seo-block">
+      <div class="content-block-title">SEO target</div>
+      <ul>
+        <li>affitto appartamento Umbria</li>
+        <li>casa vacanze San Venanzo</li>
+        <li>appartamento storico Umbria</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Footer</div>
+      <ul>
+        <li>Indirizzo, contatti, WhatsApp</li>
+        <li>Link social (Instagram prioritario)</li>
+        <li>Link privacy policy e cookie</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- LA DIMORA -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#3a5a78"></div>
+    <span class="page-title">La Dimora</span>
+    <span class="page-slug">labadia.it/la-dimora</span>
+    <span class="page-tag" style="background:#e8eef4; color:#3a5a78">Pagina unica — sezioni in-page</span>
+  </div>
+  <div class="page-body">
+    <div class="content-block span3">
+      <div class="content-block-title">Presentazione generale</div>
+      <ul>
+        <li>Intro: 150 mq al 3º e 4º piano, 6 posti letto, si affitta l'intero appartamento</li>
+        <li>Accesso libero a tutti gli spazi: giardino, aree comuni, angolo bar</li>
+        <li>Gallery fotografica principale (hero + carousel)</li>
+        <li>CTA fisso: Prenota ora / Verifica disponibilità</li>
+      </ul>
+    </div>
+    <div class="inpage-section">
+      <div class="content-block-title">Camera Glicine</div>
+      <ul>
+        <li>Matrimoniale · 3º piano</li>
+        <li>Arredata con mobili antichi originali</li>
+        <li>Foto dedicata</li>
+      </ul>
+    </div>
+    <div class="inpage-section">
+      <div class="content-block-title">Camera Narciso</div>
+      <ul>
+        <li>Matrimoniale · 3º piano</li>
+        <li>Convertibile in twin su richiesta</li>
+        <li>Foto dedicata</li>
+      </ul>
+    </div>
+    <div class="inpage-featured">
+      <div class="content-block-title">Suite Iris</div>
+      <ul>
+        <li>4º piano · letto matrimoniale</li>
+        <li>Bagno privato · spazio anticamera</li>
+        <li>La stanza più esclusiva — box visivo prominente</li>
+        <li>Foto a parte, testo di valorizzazione</li>
+      </ul>
+    </div>
+    <div class="inpage-section">
+      <div class="content-block-title">Il Salone</div>
+      <ul>
+        <li>41 mq · soffitti altissimi</li>
+        <li>Affreschi con segni zodiacali</li>
+        <li>Foto d'ambiente obbligatoria</li>
+      </ul>
+    </div>
+    <div class="inpage-section">
+      <div class="content-block-title">Cucina e soggiorno</div>
+      <ul>
+        <li>Spaziosa · completamente attrezzata</li>
+        <li>Tavolo ovale antico</li>
+        <li>Accesso al giardino</li>
+      </ul>
+    </div>
+    <div class="inpage-section">
+      <div class="content-block-title">Angolo bar</div>
+      <ul>
+        <li>Selezione vini del territorio</li>
+        <li>Acquistabili e consumabili in casa</li>
+        <li>Prodotti enogastronomici locali</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Dotazioni e servizi</div>
+      <ul>
+        <li>Parcheggio privato (piazzale di proprietà)</li>
+        <li>Bagni nuovi con doccia</li>
+        <li>Lettino/culla su richiesta</li>
+        <li>Wi-Fi, biancheria, ecc.</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Come arrivare</div>
+      <ul>
+        <li>Strada asfaltata fino a 100 m</li>
+        <li>Breve nota rassicurante sull'accessibilità</li>
+        <li>Link a Contatti per indicazioni complete</li>
+      </ul>
+    </div>
+    <div class="cta-block span3">
+      <div class="content-block-title">Blocco prenotazione</div>
+      <ul>
+        <li>Widget calendario disponibilità (Lodgify / Hostaway / Airbnb)</li>
+        <li>Ripetuto in fondo alla pagina oltre che in header</li>
+        <li>Tasto secondario: Hai domande? Scrivici su WhatsApp</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- LA BADIA -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#8a6a2a"></div>
+    <span class="page-title">La Badia</span>
+    <span class="page-slug">labadia.it/la-badia</span>
+    <span class="page-tag" style="background:#f4eedf; color:#8a6a2a">Chi siamo · Identità</span>
+  </div>
+  <div class="page-body wide">
+    <div class="content-block">
+      <div class="content-block-title">La storia</div>
+      <ul>
+        <li>Origine della casa in pietra</li>
+        <li>Il borghetto di campagna — gli edifici vicini</li>
+        <li>Come è nato il progetto di ospitalità</li>
+        <li>La filosofia: lentezza, autenticità, territorio</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Il giardino</div>
+      <ul>
+        <li>2000 mq · giardino all'italiana</li>
+        <li>Roseto circolare in pietra</li>
+        <li>Querce, glicini, iris, narcisi, orchidee selvatiche, ulivi</li>
+        <li>Fauna: upupe, fagiani, uccelli del territorio</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Il borghetto</div>
+      <ul>
+        <li>Gli altri edifici in pietra</li>
+        <li>La sala abside adiacente (link a Esperienze)</li>
+        <li>La comunità e le collaborazioni locali</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Chi gestisce</div>
+      <ul>
+        <li>Breve presentazione dei proprietari</li>
+        <li>Il rapporto con il luogo e la scelta di aprire</li>
+        <li>Tono personale — non istituzionale</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ESPERIENZE -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#4a6741"></div>
+    <span class="page-title">Esperienze</span>
+    <span class="page-slug">labadia.it/esperienze</span>
+    <span class="page-tag" style="background:#eaf0e8; color:#4a6741">Porta 2 — Vivi la Badia</span>
+  </div>
+  <div class="page-body">
+    <div class="content-block span3">
+      <div class="content-block-title">Intro — Vivi la Badia</div>
+      <ul>
+        <li>La Badia non è solo dove dormire — è un'esperienza del territorio</li>
+        <li>Divisione chiara tra le due offerte (ospiti / pubblico aperto)</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Per chi soggiorna</div>
+      <ul>
+        <li>Cuoco privato — cucina umbra in casa</li>
+        <li>Degustazione vini dell'angolo bar</li>
+        <li>Visite guidate: cantine, borghi, transfer</li>
+        <li>Camminate: erbe spontanee, fauna, natura</li>
+        <li>Tutti prenotabili all'arrivo o in anticipo</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Calendario eventi — aperti a tutti</div>
+      <ul>
+        <li>Club del vino — incontri periodici</li>
+        <li>Tertulie nel salone affrescato</li>
+        <li>Piccoli concerti di musica classica</li>
+        <li>Workshop e mini corsi di cucina italiana</li>
+        <li>Calendario aggiornato con date e prenotazione</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Sala abside</div>
+      <ul>
+        <li>Edificio adiacente — spazio per eventi</li>
+        <li>Capienza maggiore rispetto al salone</li>
+        <li>Disponibile su richiesta</li>
+        <li>CTA: Contattaci per condizioni e disponibilità</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- IL TERRITORIO -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#8a6a2a"></div>
+    <span class="page-title">Il Territorio</span>
+    <span class="page-slug">labadia.it/territorio</span>
+    <span class="page-tag" style="background:#f4eedf; color:#8a6a2a">SEO locale · Sezione condivisa</span>
+  </div>
+  <div class="page-body wide">
+    <div class="seo-block span2">
+      <div class="content-block-title">Scopo SEO principale</div>
+      <ul>
+        <li>Intercettare chi cerca "cosa fare a San Venanzo", "Umbria turismo", "cantine Umbria"</li>
+        <li>Questa pagina porta traffico da persone che non cercano ancora La Badia — ma potrebbero prenotarla</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">San Venanzo e dintorni</div>
+      <ul>
+        <li>Presentazione del territorio</li>
+        <li>Il vulcano di San Venanzo (curiosità geologica)</li>
+        <li>Borghi vicini: Orvieto, Todi, Perugia</li>
+        <li>Distanze e tempi di percorrenza</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Cosa fare</div>
+      <ul>
+        <li>Passeggiate e trekking nella zona</li>
+        <li>Orchidee selvatiche: dove e quando</li>
+        <li>Osservazione fauna (upupe, falchi, ecc.)</li>
+        <li>Mercati, sagre, eventi stagionali</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Partner locali</div>
+      <ul>
+        <li>Cantine convenzionate: nomi e link</li>
+        <li>Ristoranti consigliati nella zona</li>
+        <li>Produttori di olio, tartufo, formaggi</li>
+        <li>Segnalati con mappa o elenco</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- RACCONTI DAL TERRITORIO -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#8a6a2a"></div>
+    <span class="page-title">Racconti dal territorio</span>
+    <span class="page-slug">labadia.it/racconti</span>
+    <span class="page-tag" style="background:#f4eedf; color:#8a6a2a">Blog · SEO · Sezione condivisa</span>
+  </div>
+  <div class="page-body wide">
+    <div class="content-block">
+      <div class="content-block-title">Formato e frequenza</div>
+      <ul>
+        <li>Post narrativi, non promozionali</li>
+        <li>Frequenza consigliata: 1 ogni 2–3 settimane</li>
+        <li>Stagionalità: seguire flora, fauna, gastronomia</li>
+        <li>Lunghezza ideale: 600–900 parole per il SEO</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Temi consigliati</div>
+      <ul>
+        <li>Le upupe fanno il nido (primavera)</li>
+        <li>Le orchidee selvatiche di aprile</li>
+        <li>Strangozzi al tartufo — ricetta umbra</li>
+        <li>I vini di San Venanzo: guida alla cantina</li>
+        <li>Un weekend lento in Umbria</li>
+        <li>Il giardino in autunno</li>
+      </ul>
+    </div>
+    <div class="seo-block">
+      <div class="content-block-title">Keyword target per il blog</div>
+      <ul>
+        <li>cosa fare San Venanzo</li>
+        <li>orchidee selvatiche Umbria</li>
+        <li>agriturismo Umbria primavera</li>
+        <li>ricette umbre tradizionali</li>
+        <li>upupe nidificazione Italia</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Struttura di ogni post</div>
+      <ul>
+        <li>Immagine di apertura (giardino, fauna, piatto)</li>
+        <li>Titolo narrativo, non SEO-meccanico</li>
+        <li>Testo in prima persona o voce della casa</li>
+        <li>CTA in fondo: Vieni a viverlo → Prenota</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CONTATTI -->
+<div class="page-block">
+  <div class="page-block-header">
+    <div class="page-dot" style="background:#8a3a2a"></div>
+    <span class="page-title">Contatti</span>
+    <span class="page-slug">labadia.it/contatti</span>
+    <span class="page-tag" style="background:#f4e8e5; color:#8a3a2a">Conversioni · Come arrivare</span>
+  </div>
+  <div class="page-body">
+    <div class="cta-block">
+      <div class="content-block-title">Form di contatto</div>
+      <ul>
+        <li>Nome, email, date di interesse</li>
+        <li>Campo libero per richieste specifiche</li>
+        <li>Risposta entro 24h</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Canali diretti</div>
+      <ul>
+        <li>WhatsApp — contatto preferenziale</li>
+        <li>Email</li>
+        <li>Instagram (DM)</li>
+        <li>Link piattaforme (Airbnb, Booking)</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <div class="content-block-title">Come arrivare</div>
+      <ul>
+        <li>Indirizzo: Vocabolo Badia 5, San Venanzo</li>
+        <li>Nota: strada asfaltata fino a 100 m</li>
+        <li>Parcheggio privato disponibile</li>
+        <li>Mappa embed (Google Maps)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════ DESIGN SYSTEM ══════════════════════════════════ -->
+<div class="section-label">06 — Design system</div>
+
+<div class="font-specimen" style="margin-bottom:12px;">
+  <div class="font-card">
+    <div class="font-name">Cormorant Garamond — titoli e nomi</div>
+    <div class="font-sample-serif">La Dimora<br><em>Suite Iris</em></div>
+    <div class="font-use">Titoli di pagina · nomi delle camere · headline · citazioni · pull quote. Ispirato ai caratteri rinascimentali di Claude Garamond. Gratuito su Google Fonts.</div>
+  </div>
+  <div class="font-card">
+    <div class="font-name">DM Mono — etichette e interfaccia</div>
+    <div class="font-sample-mono">PRENOTA ORA →<br>labadia.it/la-dimora<br>#C8B89A · #3D3325</div>
+    <div class="font-use">Bottoni · etichette · slug URL · codici HEX · navigazione · note tecniche. Disegnato da Colophon Foundry. Contrasto tecnico vs. classico.</div>
+  </div>
+</div>
+
+  <div class="palette-note">
+  <strong style="font-family:'Cormorant Garamond',serif; font-size:15px; color:var(--dark);">Palette — in attesa</strong><br><br>
+  Incolla qui i valori HEX della tua palette quando sei pronto. Una volta definita, aggiorneremo questo documento con i campioni colore e le indicazioni d'uso (quale colore per quale elemento: titoli, sfondi, CTA, bordi, stati hover).
+</div>
+
+<!-- PALETTE -->
+<div style="margin-bottom:12px;">
+
+  <!-- 5 palette cards -->
+  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:10px;">
+
+    <!-- COTTO -->
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:7px; overflow:hidden;">
+      <div style="background:#C4674A; height:40px;"></div>
+      <div style="padding:10px 12px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; color:#3d3325; margin-bottom:6px;">Cotto</div>
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#E8C4B8;border:1px solid #ddd5c5;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#E8C4B8</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#D4967E;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#D4967E</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#C4674A;flex-shrink:0;"></div><span style="font-size:9px;font-weight:600;color:#3d3325;">#C4674A ★</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#9E4A32;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#9E4A32</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#6E3020;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#6E3020</span></div>
+        </div>
+        <div style="margin-top:8px; padding-top:7px; border-top:1px solid var(--border); font-size:9px; color:var(--muted); font-style:italic;">CTA primari, header, accenti</div>
+      </div>
+    </div>
+
+    <!-- GLICINE -->
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:7px; overflow:hidden;">
+      <div style="background:#9D8EC9; height:40px;"></div>
+      <div style="padding:10px 12px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; color:#3d3325; margin-bottom:6px;">Glicine</div>
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#DDD8F0;border:1px solid #ddd5c5;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#DDD8F0</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#BDB3DF;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#BDB3DF</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#9D8EC9;flex-shrink:0;"></div><span style="font-size:9px;font-weight:600;color:#3d3325;">#9D8EC9 ★</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#7263A8;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#7263A8</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#4C4180;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#4C4180</span></div>
+        </div>
+        <div style="margin-top:8px; padding-top:7px; border-top:1px solid var(--border); font-size:9px; color:var(--muted); font-style:italic;">Badge, tag, Suite Iris, accenti secondari</div>
+      </div>
+    </div>
+
+    <!-- NARCISO -->
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:7px; overflow:hidden;">
+      <div style="background:#F0C84E; height:40px;"></div>
+      <div style="padding:10px 12px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; color:#3d3325; margin-bottom:6px;">Narciso</div>
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#FBF0C6;border:1px solid #ddd5c5;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#FBF0C6</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#F7DF8A;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#F7DF8A</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#F0C84E;flex-shrink:0;"></div><span style="font-size:9px;font-weight:600;color:#3d3325;">#F0C84E ★</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#C89E28;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#C89E28</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#8A6C10;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#8A6C10</span></div>
+        </div>
+        <div style="margin-top:8px; padding-top:7px; border-top:1px solid var(--border); font-size:9px; color:var(--muted); font-style:italic;">Accenti decor., dot, icone, notifiche</div>
+      </div>
+    </div>
+
+    <!-- GRIGIO VENANZITE -->
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:7px; overflow:hidden;">
+      <div style="background:#6E7B72; height:40px;"></div>
+      <div style="padding:10px 12px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; color:#3d3325; margin-bottom:6px;">Venanzite</div>
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#C8D0CB;border:1px solid #ddd5c5;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#C8D0CB</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#A5B0A8;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#A5B0A8</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#6E7B72;flex-shrink:0;"></div><span style="font-size:9px;font-weight:600;color:#3d3325;">#6E7B72 ★</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#4C5750;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#4C5750</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#2E3630;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#2E3630</span></div>
+        </div>
+        <div style="margin-top:8px; padding-top:7px; border-top:1px solid var(--border); font-size:9px; color:var(--muted); font-style:italic;">Footer, navbar, testo corpo</div>
+      </div>
+    </div>
+
+    <!-- VERDE COLLINE -->
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:7px; overflow:hidden;">
+      <div style="background:#7A9458; height:40px;"></div>
+      <div style="padding:10px 12px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; color:#3d3325; margin-bottom:6px;">Colline</div>
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#C8D9B0;border:1px solid #ddd5c5;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#C8D9B0</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#A6C080;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#A6C080</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#7A9458;flex-shrink:0;"></div><span style="font-size:9px;font-weight:600;color:#3d3325;">#7A9458 ★</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#567034;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#567034</span></div>
+          <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:2px;background:#324018;flex-shrink:0;"></div><span style="font-size:9px;color:#7a6e62;">#324018</span></div>
+        </div>
+        <div style="margin-top:8px; padding-top:7px; border-top:1px solid var(--border); font-size:9px; color:var(--muted); font-style:italic;">Bottoni secondari, sezioni natura</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- GIORNO / NOTTE -->
+<div style="background:var(--white); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-top:12px;">
+  <!-- Header bicolore -->
+  <div style="display:grid; grid-template-columns:1fr 1fr;">
+    <div style="background:#FBF0C6; padding:18px 20px; border-right:1px solid #e8d8a0;">
+      <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:#8A6C10; margin-bottom:6px;">Modalità</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:22px; color:#3d3325;">☀ Giorno — Light</div>
+    </div>
+    <div style="background:#2E3630; padding:18px 20px;">
+      <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:#6E7B72; margin-bottom:6px;">Modalità</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:22px; color:#C8D0CB;">☽ Notte — Dark</div>
+    </div>
+  </div>
+
+  <!-- Colori applicati -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border);">
+
+    <!-- LIGHT: colori -->
+    <div style="padding:18px 20px; border-right:1px solid var(--border);">
+      <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted); margin-bottom:12px;">Assegnazione colori</div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:var(--pale); border-radius:5px; border:1px solid var(--border);">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#FBF0C6;border:1px solid #ddd5c5;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#C8D0CB;border:1px solid #ddd5c5;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--ink);">Sfondo pagina — Narciso Ch.1 + Venanzite Ch.1</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:var(--pale); border-radius:5px; border:1px solid var(--border);">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#2E3630;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#4C5750;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--ink);">Testi — Venanzite Sc.2 e Sc.1</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:var(--pale); border-radius:5px; border:1px solid var(--border);">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#C4674A;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#9E4A32;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--ink);">CTA "Prenota ora" — Cotto Base + hover Sc.1</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:var(--pale); border-radius:5px; border:1px solid var(--border);">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#9D8EC9;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#DDD8F0;border:1px solid #ddd5c5;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--ink);">Suite Iris badge — Glicine Base + Ch.1</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:var(--pale); border-radius:5px; border:1px solid var(--border);">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#7A9458;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#C8D9B0;border:1px solid #ddd5c5;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--ink);">Bottoni secondari, natura — Colline Base + Ch.1</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:var(--pale); border-radius:5px; border:1px solid var(--border);">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#F0C84E;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#6E7B72;"></div>
+          </div>
+          <div style="font-size:10px; color:var(--ink);">Icone / dot decorativi — Narciso + Venanzite</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DARK: colori -->
+    <div style="padding:18px 20px; background:#2E3630;">
+      <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:#6E7B72; margin-bottom:12px;">Assegnazione colori — modalità notte</div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:#3a4440; border-radius:5px; border:1px solid #4C5750;">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#2E3630;border:1px solid #4C5750;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#4C5750;"></div>
+          </div>
+          <div style="font-size:10px; color:#C8D0CB;">Sfondo pagina — Venanzite Sc.2 + Sc.1</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:#3a4440; border-radius:5px; border:1px solid #4C5750;">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#C8D0CB;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#FBF0C6;"></div>
+          </div>
+          <div style="font-size:10px; color:#C8D0CB;">Testi — Venanzite Ch.1, Narciso Ch.1 (titoli)</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:#3a4440; border-radius:5px; border:1px solid #4C5750;">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#D4967E;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#C4674A;"></div>
+          </div>
+          <div style="font-size:10px; color:#C8D0CB;">CTA "Prenota ora" — Cotto Ch.2 + hover Base</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:#3a4440; border-radius:5px; border:1px solid #4C5750;">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#4C4180;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#9D8EC9;"></div>
+          </div>
+          <div style="font-size:10px; color:#C8D0CB;">Suite Iris badge — Glicine Sc.2 sfondo + Base testo</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:#3a4440; border-radius:5px; border:1px solid #4C5750;">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#567034;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#A6C080;"></div>
+          </div>
+          <div style="font-size:10px; color:#C8D0CB;">Bottoni secondari, natura — Colline Sc.1 + Ch.2</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px; padding:7px 10px; background:#3a4440; border-radius:5px; border:1px solid #4C5750;">
+          <div style="display:flex; gap:3px;">
+            <div style="width:14px;height:14px;border-radius:2px;background:#C89E28;"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:#A5B0A8;"></div>
+          </div>
+          <div style="font-size:10px; color:#C8D0CB;">Icone / dot decorativi — Narciso Sc.1 + Venanzite Ch.2</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Fotografie + atmosfera -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border);">
+    <!-- LIGHT -->
+    <div style="padding:18px 20px; border-right:1px solid var(--border); display:flex; flex-direction:column; gap:10px;">
+      <div class="content-block">
+        <div class="content-block-title">Fotografie — set diurno</div>
+        <ul>
+          <li>Giardino all'alba — luce radente sulle pietre</li>
+          <li>Salone con affreschi in piena luce mattutina</li>
+          <li>Roseto in mattinata, iris e narcisi aperti</li>
+          <li>Colazione sul tavolo ovale con luce naturale</li>
+          <li>Facciata del borghetto — cielo azzurro</li>
+          <li>Tono: caldo, netto, dettagliato</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <div class="content-block-title">Atmosfera</div>
+        <ul>
+          <li>Passeggiate, giardino, lettura, colazione</li>
+          <li>Primavera / estate — natura in primo piano</li>
+          <li>Spazio, aria, lentezza diurna</li>
+        </ul>
+      </div>
+    </div>
+    <!-- DARK -->
+    <div style="padding:18px 20px; background:#2E3630; display:flex; flex-direction:column; gap:10px;">
+      <div style="background:#3a4440; border:1px solid #4C5750; border-radius:5px; padding:12px 14px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:600; color:#C8D0CB; margin-bottom:4px;">Fotografie — set notturno</div>
+        <ul style="list-style:none; padding:0;">
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Tramonto sul giardino — cielo cotto/glicine</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Salone illuminato a candele e lampade</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Calici di vino sulla terrazza al crepuscolo</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Cielo stellato sopra il borghetto in pietra</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Finestre illuminate — calore dall'interno</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Tono: morbido, caldo-scuro, avvolgente</li>
+        </ul>
+      </div>
+      <div style="background:#3a4440; border:1px solid #4C5750; border-radius:5px; padding:12px 14px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:600; color:#C8D0CB; margin-bottom:4px;">Atmosfera</div>
+        <ul style="list-style:none; padding:0;">
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Cena, vino, tertulias, musica classica</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Autunno / inverno — intimità, rifugio</li>
+          <li style="font-size:10.5px; color:#A5B0A8; padding:1.5px 0;"><span style="color:#6E7B72;">— </span>Raccoglimento, calore, mistero umbro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer nota tecnica -->
+  <div style="border-top:1px solid var(--border); padding:14px 20px; background:var(--pale); display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+    <div style="font-size:10.5px; color:var(--muted); font-style:italic;">
+      Il toggle Giorno/Notte sostituisce sia le variabili CSS dei colori sia il set fotografico attivo. Non è un semplice dark mode: è un cambio di racconto visivo e narrativo.
+    </div>
+    <div style="font-size:10.5px; color:var(--muted); font-style:italic;">
+      <strong style="font-style:normal; color:var(--ink);">Nota fotografica:</strong> ogni immagine richiede due versioni — stessa inquadratura, luce diversa. Prevedere doppia sessione fotografica (mattina e sera/notte) o post-produzione mirata.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════ NOTE TECNICHE ══════════════════════════════════ -->
+<div class="section-label">07 — Note tecniche</div>
+<div style="display:flex; flex-direction:column; gap:8px;">
+  <div class="note">→ <strong>Prenota ora</strong> — CTA sempre visibile in header. Integrazione da valutare: Lodgify, Hostaway, oppure widget diretto Airbnb/Booking.com. Su mobile: pulsante fisso bottom bar.</div>
+  <div class="note">→ <strong>Suite Iris</strong> — non è una pagina separata, non ha voce di menu. Appare come box visivo in evidenza all'interno de La Dimora. Richiede sessione fotografica dedicata.</div>
+  <div class="note">→ <strong>Calendario eventi</strong> nella pagina Esperienze deve essere aggiornabile facilmente dal proprietario — valutare integrazione con Google Calendar o CMS con blocco calendario.</div>
+  <div class="note">→ <strong>Lingue</strong> — prevedere dall'inizio versione IT + EN. Il pubblico nord-europeo e anglosassone ha forte interesse per giardino all'italiana, affreschi, fauna tipica.</div>
+  <div class="note">→ <strong>SEO tecnico</strong> — ogni pagina deve avere title tag, meta description e URL slug definiti prima dello sviluppo. I testi del blog vanno ottimizzati già in fase di scrittura.</div>
+  <div class="note">→ <strong>Futuro</strong> — se "Vivi la Badia" cresce come brand autonomo con revenue separata, attivare il sottodominio <em>esperienze.labadia.it</em> senza perdere l'autorità SEO del dominio principale.</div>
+</div>
+
+
+<!-- ══════════════════════════════════ FOOTER ══════════════════════════════════ -->
+<footer class="doc-footer">
+  <div>La Badia · Vocabolo Badia 5, San Venanzo · Umbria</div>
+  <div>Architettura del sito v2.0 · Palette: in attesa</div>
+</footer>
+
+</body>
+</html>

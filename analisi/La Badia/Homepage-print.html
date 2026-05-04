@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Badia — San Venanzo, Umbria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #F6F0E6;
+    color: #2A2E2B;
+    font-family: 'Cormorant Garamond', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a { color: inherit; }
+  ::selection { background: #C4674A; color: #F6F0E6; }
+
+  /* ───────────── PRINT ──────────────────────────────────────────── */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  @media print {
+    html, body {
+      background: #F6F0E6 !important;
+      overflow: visible !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Hide UI chrome that doesn't belong in print */
+    header[data-print-hide],
+    [data-print-hide],
+    .tweaks-panel,
+    [class*="TweaksPanel"],
+    [class*="tweaks"] {
+      display: none !important;
+    }
+
+    /* Each <section> becomes its own page */
+    section {
+      break-inside: avoid;
+      break-after: page;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+    section:last-of-type { break-after: auto; page-break-after: auto; }
+    footer {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    /* Sticky/fixed elements break print pagination — flatten them */
+    [style*="position: fixed"],
+    [style*="position:fixed"] {
+      position: static !important;
+    }
+
+    /* Don't clip hero / closing photo sections */
+    section[style*="overflow: hidden"],
+    section[style*="overflow:hidden"] {
+      overflow: visible !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+  // Force "day" theme & manual mode for print (auto-detect would yield night at runtime).
+  // We can't easily inject into the React tree, so we set a flag the App reads.
+  window.__PRINT_MODE = true;
+  window.__TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "heroVariant": "overlay",
+    "doorsLayout": "asymmetric",
+    "showEvents": true
+  }/*EDITMODE-END*/;
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="homepage.jsx"></script>
+
+<script type="text/babel">
+  // Wait for React render + fonts, then trigger print
+  (async () => {
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch (e) {}
+    }
+    // wait for React tree to render the hero image
+    const waitForHero = () => new Promise((resolve) => {
+      const start = Date.now();
+      const tick = () => {
+        const img = document.querySelector('section img');
+        if (img && img.complete) return resolve();
+        if (Date.now() - start > 4000) return resolve();
+        requestAnimationFrame(tick);
+      };
+      tick();
+    });
+    await waitForHero();
+    // hide the fixed header which causes overlap on first page
+    document.querySelectorAll('header').forEach(h => h.setAttribute('data-print-hide', ''));
+    // Force day mode by clicking the toggle if night is active
+    const themeBtn = [...document.querySelectorAll('button')].find(b => /notte|night/i.test(b.textContent));
+    if (themeBtn) {
+      // The toggle label reads "notte" when night mode is active
+      try { themeBtn.click(); } catch (e) {}
+    }
+    setTimeout(() => window.print(), 700);
+  })();
+</script>
+</body>
+</html>

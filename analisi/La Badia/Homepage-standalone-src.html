@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Badia — San Venanzo, Umbria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="ext-resource-dependency" content="photos/hero-ulivi-tramonto.jpg" data-resource-id="heroDay" />
+<meta name="ext-resource-dependency" content="photos/hero-notte.jpg" data-resource-id="heroNight" />
+<meta name="ext-resource-dependency" content="photos/vista-colline.jpg" data-resource-id="vistaDay" />
+<meta name="ext-resource-dependency" content="photos/vista-colline-notte.jpg" data-resource-id="vistaNight" />
+<template id="__bundler_thumbnail" data-bg-color="#3A2818">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#3A2818"/>
+    <rect x="0" y="540" width="1200" height="260" fill="#1d130b"/>
+    <circle cx="900" cy="240" r="60" fill="#F0C84E" opacity="0.85"/>
+    <text x="600" y="430" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="120" fill="#F6F0E6">La Badia</text>
+    <text x="600" y="490" text-anchor="middle" font-family="monospace" font-size="22" letter-spacing="8" fill="#F0C84E" opacity="0.8">SAN  VENANZO  ·  UMBRIA</text>
+  </svg>
+</template>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #F6F0E6;
+    color: #2A2E2B;
+    font-family: 'Cormorant Garamond', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  ::selection { background: #C4674A; color: #F6F0E6; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+  window.__TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "heroVariant": "overlay",
+    "doorsLayout": "asymmetric",
+    "showEvents": true
+  }/*EDITMODE-END*/;
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="homepage.jsx"></script>
+</body>
+</html>
