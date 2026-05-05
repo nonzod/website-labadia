@@ -161,8 +161,8 @@ export interface Media {
   alt: string;
   caption?: string | null;
   credit?: string | null;
-  usageArea?: ('shared' | 'home' | 'dimora' | 'experiences' | 'territory' | 'stories') | null;
-  readiness?: ('draft' | 'ready-it' | 'ready-it-en') | null;
+  usageArea: 'shared' | 'home' | 'dimora' | 'experiences' | 'territory' | 'stories';
+  readiness: 'draft' | 'ready-it' | 'ready-it-en';
   ownerNotes?: string | null;
   updatedAt: string;
   createdAt: string;
