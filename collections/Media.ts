@@ -36,5 +36,22 @@ export const Media: CollectionConfig = {
       type: 'text',
       label: 'Credit',
     },
+    {
+      name: 'usageArea',
+      type: 'select',
+      options: ['shared', 'home', 'dimora', 'experiences', 'territory', 'stories'],
+      label: 'Usage area',
+    },
+    {
+      name: 'readiness',
+      type: 'select',
+      options: ['draft', 'ready-it', 'ready-it-en'],
+      label: 'Readiness',
+    },
+    {
+      name: 'ownerNotes',
+      type: 'textarea',
+      label: 'Owner notes',
+    },
   ],
 }

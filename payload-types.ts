@@ -161,6 +161,9 @@ export interface Media {
   alt: string;
   caption?: string | null;
   credit?: string | null;
+  usageArea?: ('shared' | 'home' | 'dimora' | 'experiences' | 'territory' | 'stories') | null;
+  readiness?: ('draft' | 'ready-it' | 'ready-it-en') | null;
+  ownerNotes?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -347,6 +350,9 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   credit?: T;
+  usageArea?: T;
+  readiness?: T;
+  ownerNotes?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -454,14 +460,29 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface EditorialSetting {
   id: number;
+  /**
+   * Contenuto visibile sul sito pubblico. Inserire solo testimonianze e fonti pronte per la pubblicazione.
+   */
   homepageProofItems?:
     | {
+        /**
+         * Testo mostrato live in homepage. Scrivere solo copy definitivo e pubblico.
+         */
         quote: string;
+        /**
+         * Fonte mostrata live accanto alla citazione. Usare solo nomi o riferimenti pubblicabili.
+         */
         source: string;
         id?: string | null;
       }[]
     | null;
+  /**
+   * Testo mostrato live nella sezione eventi della homepage. Inserire solo contenuti pronti per il pubblico.
+   */
   homepageEventsBody?: string | null;
+  /**
+   * Messaggio live mostrato quando non ci sono eventi nella pagina esperienze. Mantenere il testo pubblico e definitivo.
+   */
   experiencesEventsEmptyState?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
