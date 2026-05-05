@@ -55,6 +55,7 @@ export type HomeProofSection = {
 
 export type HomeEventsSection = {
   body: string
+  emptyStateBody: string
   eyebrow: string
   items: Array<{
     body: string
@@ -334,6 +335,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       doorsSectionLabel: 'Editorial entry points',
       events: {
         body: 'Some dates will stay open to local guests and travelers alike: long-table dinners, seasonal gatherings, and small cultural evenings shaped for this house.',
+        emptyStateBody: 'The events surface is ready even when the next public date has not been published yet.',
         eyebrow: 'Open moments',
         items: [
           {
@@ -586,6 +588,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       doorsSectionLabel: 'Ingressi editoriali',
       events: {
         body: 'Alcune date resteranno aperte anche a chi non soggiorna: tavolate stagionali, piccoli incontri e serate culturali costruite sul ritmo di questa casa.',
+        emptyStateBody: 'La superficie eventi e pronta anche quando la prossima data pubblica non e ancora stata pubblicata.',
         eyebrow: 'Momenti aperti',
         items: [
           {

@@ -8,6 +8,12 @@ import { EventsPreview } from '@/components/public/EventsPreview'
 import { HomeHero } from '@/components/public/HomeHero'
 import { ProofSection } from '@/components/public/ProofSection'
 import { SectionHeading } from '@/components/public/SectionHeading'
+import {
+  getEditorialSettings,
+  getHomepageEventsSectionCopy,
+  getHomepageProofSection,
+} from '@/lib/editorial-settings'
+import { getHomepageEvents } from '@/lib/events'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
@@ -38,6 +44,24 @@ export default async function HomePage({ params }: LocalePageProps) {
   }
 
   const copy = publicContent[lang].home
+  const [editorialSettings, homepageEvents] = await Promise.all([
+    getEditorialSettings(lang),
+    getHomepageEvents(lang),
+  ])
+  const [proofSection, eventSectionCopy] = await Promise.all([
+    getHomepageProofSection(lang, editorialSettings),
+    getHomepageEventsSectionCopy(lang, editorialSettings),
+  ])
+  const eventSection = {
+    ...eventSectionCopy,
+    items:
+      homepageEvents.length > 0
+        ? homepageEvents.map((event) => ({
+            body: event.summary,
+            title: event.title,
+          }))
+        : copy.events.items,
+  }
 
   return (
     <main className="page-shell" id="main-content">
@@ -51,8 +75,12 @@ export default async function HomePage({ params }: LocalePageProps) {
         />
 
         <DoorGrid doors={copy.doors} locale={lang} sectionLabel={copy.doorsSectionLabel} />
-        <ProofSection section={copy.proof} />
-        <EventsPreview locale={lang} section={copy.events} />
+        <ProofSection section={proofSection} />
+        <EventsPreview
+          locale={lang}
+          section={eventSection}
+          useEmptyState={homepageEvents.length === 0}
+        />
 
         <CtaBand
           body={copy.cta.body}

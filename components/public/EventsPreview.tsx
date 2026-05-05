@@ -8,15 +8,16 @@ import { getPublicHref } from '@/lib/public-pages'
 type EventsPreviewProps = {
   locale: AppLocale
   section: HomeEventsSection
+  useEmptyState?: boolean
 }
 
-export function EventsPreview({ locale, section }: EventsPreviewProps) {
+export function EventsPreview({ locale, section, useEmptyState = false }: EventsPreviewProps) {
   return (
     <section className="events-preview">
       <div className="section-heading">
         <p className="section-eyebrow">{section.eyebrow}</p>
         <h2>{section.title}</h2>
-        <p className="section-body">{section.body}</p>
+        <p className="section-body">{useEmptyState ? section.emptyStateBody : section.body}</p>
       </div>
 
       <div className="detail-grid">

@@ -64,6 +64,6 @@ export const getExperiencesEventsEmptyState = async (
 
   return (
     getTrimmedString(resolvedSettings.experiencesEventsEmptyState) ??
-    publicContent[locale].home.events.body
+    publicContent[locale].home.events.emptyStateBody
   )
 }

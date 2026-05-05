@@ -1,5 +1,26 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+const { getEditorialSettings, getHomepageProofSection, getHomepageEventsSectionCopy } =
+  vi.hoisted(() => ({
+    getEditorialSettings: vi.fn(),
+    getHomepageProofSection: vi.fn(),
+    getHomepageEventsSectionCopy: vi.fn(),
+  }))
+
+const { getHomepageEvents } = vi.hoisted(() => ({
+  getHomepageEvents: vi.fn(),
+}))
+
+vi.mock('@/lib/editorial-settings', () => ({
+  getEditorialSettings,
+  getHomepageProofSection,
+  getHomepageEventsSectionCopy,
+}))
+
+vi.mock('@/lib/events', () => ({
+  getHomepageEvents,
+}))
 
 import { DoorGrid } from '@/components/public/DoorGrid'
 import { EventsPreview } from '@/components/public/EventsPreview'
@@ -7,6 +28,14 @@ import HomePage from '@/app/[lang]/page'
 import { publicContent } from '@/lib/public-content'
 
 describe('homepage editorial sections', () => {
+  beforeEach(() => {
+    vi.resetModules()
+    getEditorialSettings.mockReset()
+    getHomepageProofSection.mockReset()
+    getHomepageEventsSectionCopy.mockReset()
+    getHomepageEvents.mockReset()
+  })
+
   it('renders the two editorial doors in Italian with a localized section label', () => {
     render(
       <DoorGrid
@@ -35,6 +64,13 @@ describe('homepage editorial sections', () => {
   })
 
   it('assembles the Italian homepage with section links from localized content', async () => {
+    getEditorialSettings.mockResolvedValue({ id: 1 })
+    getHomepageProofSection.mockResolvedValue(publicContent.it.home.proof)
+    getHomepageEventsSectionCopy.mockResolvedValue(publicContent.it.home.events)
+    getHomepageEvents.mockResolvedValue([])
+
+    const { default: HomePage } = await import('@/app/[lang]/page')
+
     render(await HomePage({ params: Promise.resolve({ lang: 'it' }) }))
 
     expect(screen.getByRole('heading', { level: 1, name: /una dimora di campagna/i })).toBeInTheDocument()
@@ -54,6 +90,13 @@ describe('homepage editorial sections', () => {
   })
 
   it('assembles the English homepage with section links from localized content', async () => {
+    getEditorialSettings.mockResolvedValue({ id: 2 })
+    getHomepageProofSection.mockResolvedValue(publicContent.en.home.proof)
+    getHomepageEventsSectionCopy.mockResolvedValue(publicContent.en.home.events)
+    getHomepageEvents.mockResolvedValue([])
+
+    const { default: HomePage } = await import('@/app/[lang]/page')
+
     render(await HomePage({ params: Promise.resolve({ lang: 'en' }) }))
 
     expect(
