@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -6,11 +8,23 @@ import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
+import { siteConfig } from '@/lib/site'
 
 type ContactPageProps = {
   params: Promise<{
     lang: string
   }>
+}
+
+export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
+  const { lang } = await params
+  const locale = isSupportedLocale(lang) ? lang : 'it'
+  const copy = publicContent[locale].contact
+
+  return {
+    description: copy.hero.body,
+    title: `${copy.hero.eyebrow} | ${siteConfig.projectName}`,
+  }
 }
 
 export default async function ContactPage({ params }: ContactPageProps) {
