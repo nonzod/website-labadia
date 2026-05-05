@@ -28,7 +28,7 @@ export function EventsPreview({ locale, section }: EventsPreviewProps) {
         ))}
       </div>
 
-      <Link className="secondary-link" href={getPublicHref('experiences', locale)}>
+      <Link className="secondary-link" href={getPublicHref(section.primaryHref, locale)}>
         {section.primaryLabel}
       </Link>
     </section>

@@ -36,7 +36,9 @@ export type HomeHeroCopy = {
   eyebrow: string
   imageAlt: string
   imageSrc: string
+  primaryHref: PublicRouteKey
   primaryLabel: string
+  secondaryHref: PublicRouteKey
   secondaryLabel: string
   title: string
 }
@@ -58,6 +60,7 @@ export type HomeEventsSection = {
     body: string
     title: string
   }>
+  primaryHref: PublicRouteKey
   primaryLabel: string
   title: string
 }
@@ -71,6 +74,7 @@ type HomeCopy = {
     title: string
   }
   doors: HomeDoor[]
+  doorsSectionLabel: string
   events: HomeEventsSection
   hero: HomeHeroCopy
   intro: {
@@ -242,6 +246,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
           title: 'Live La Badia',
         },
       ],
+      doorsSectionLabel: 'Editorial entry points',
       events: {
         body: 'Some dates will stay open to local guests and travelers alike: long-table dinners, seasonal gatherings, and small cultural evenings shaped for this house.',
         eyebrow: 'Open moments',
@@ -259,6 +264,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
             title: 'A measured rhythm',
           },
         ],
+        primaryHref: 'experiences',
         primaryLabel: 'Go to experiences',
         title: 'Events open to everyone will arrive here.',
       },
@@ -267,7 +273,9 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         eyebrow: 'La Badia, San Venanzo',
         imageAlt: 'La Badia at sunset, framed by olive trees and the garden wall.',
         imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+        primaryHref: 'contact',
         primaryLabel: 'Request your stay',
+        secondaryHref: 'dimora',
         secondaryLabel: 'Discover the house',
         title: 'A countryside dimora to live slowly, together.',
       },
@@ -399,6 +407,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
           title: 'Vivi La Badia',
         },
       ],
+      doorsSectionLabel: 'Ingressi editoriali',
       events: {
         body: 'Alcune date resteranno aperte anche a chi non soggiorna: tavolate stagionali, piccoli incontri e serate culturali costruite sul ritmo di questa casa.',
         eyebrow: 'Momenti aperti',
@@ -416,6 +425,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
             title: 'Un ritmo misurato',
           },
         ],
+        primaryHref: 'experiences',
         primaryLabel: 'Vai alle esperienze',
         title: 'Eventi aperti a tutti arriveranno qui.',
       },
@@ -424,7 +434,9 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         eyebrow: 'La Badia, San Venanzo',
         imageAlt: 'La Badia al tramonto, tra il giardino e gli ulivi.',
         imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+        primaryHref: 'contact',
         primaryLabel: 'Richiedi il tuo soggiorno',
+        secondaryHref: 'dimora',
         secondaryLabel: 'Scopri la dimora',
         title: 'Una dimora di campagna da vivere insieme, con lentezza.',
       },

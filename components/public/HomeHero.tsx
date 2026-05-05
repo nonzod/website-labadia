@@ -21,10 +21,10 @@ export function HomeHero({ hero, locale }: HomeHeroProps) {
         <p className="lead">{hero.body}</p>
 
         <div className="cta-row">
-          <Link className="primary-link" href={getPublicHref('contact', locale)}>
+          <Link className="primary-link" href={getPublicHref(hero.primaryHref, locale)}>
             {hero.primaryLabel}
           </Link>
-          <Link className="secondary-link" href={getPublicHref('dimora', locale)}>
+          <Link className="secondary-link" href={getPublicHref(hero.secondaryHref, locale)}>
             {hero.secondaryLabel}
           </Link>
         </div>

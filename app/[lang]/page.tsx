@@ -36,7 +36,7 @@ export default async function HomePage({ params }: LocalePageProps) {
           title={copy.intro.title}
         />
 
-        <DoorGrid doors={copy.doors} locale={lang} />
+        <DoorGrid doors={copy.doors} locale={lang} sectionLabel={copy.doorsSectionLabel} />
         <ProofSection section={copy.proof} />
         <EventsPreview locale={lang} section={copy.events} />
 

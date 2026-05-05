@@ -8,11 +8,12 @@ import { getPublicHref } from '@/lib/public-pages'
 type DoorGridProps = {
   doors: HomeDoor[]
   locale: AppLocale
+  sectionLabel: string
 }
 
-export function DoorGrid({ doors, locale }: DoorGridProps) {
+export function DoorGrid({ doors, locale, sectionLabel }: DoorGridProps) {
   return (
-    <section className="door-grid" aria-label="Editorial entry points">
+    <section className="door-grid" aria-label={sectionLabel}>
       {doors.map((door) => (
         <article className="door-card" key={door.title}>
           <img alt={door.imageAlt} className="door-card-image" src={door.imageSrc} />
