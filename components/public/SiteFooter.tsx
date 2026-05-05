@@ -24,7 +24,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
 
         <nav className="site-footer-nav" aria-label={copy.navigationLabel}>
           {copy.links.map((item) => (
-            <Link href={getPublicHref(item.href, locale)} key={item.href}>
+            <Link href={getPublicHref(item.href, locale)} key={item.label}>
               {item.label}
             </Link>
           ))}

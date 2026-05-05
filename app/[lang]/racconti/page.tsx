@@ -6,8 +6,6 @@ import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
 
-export const dynamic = 'force-dynamic'
-
 type LocalePageProps = {
   params: Promise<{
     lang: string

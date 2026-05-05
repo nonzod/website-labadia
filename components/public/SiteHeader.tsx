@@ -25,7 +25,7 @@ export function SiteHeader({ currentPathname, locale, localeSwitchPathnames }: S
 
       <nav className="site-nav" aria-label={copy.navigationLabel}>
         {copy.navigation.map((item) => (
-          <Link className="site-nav-link" href={getPublicHref(item.href, locale)} key={item.href}>
+          <Link className="site-nav-link" href={getPublicHref(item.href, locale)} key={item.label}>
             {item.label}
           </Link>
         ))}
