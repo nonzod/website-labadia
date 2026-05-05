@@ -5,7 +5,8 @@ import { CtaBand } from '@/components/public/CtaBand'
 import { FeatureShowcase } from '@/components/public/FeatureShowcase'
 import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
-import { getPublicHref, publicContent } from '@/lib/public-content'
+import { publicContent } from '@/lib/public-content'
+import { getPublicHref } from '@/lib/public-pages'
 
 type LocalePageProps = {
   params: Promise<{

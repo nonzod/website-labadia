@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 import { CtaBand } from '@/components/public/CtaBand'
 import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
-import { getPublicHref, publicContent } from '@/lib/public-content'
+import { publicContent } from '@/lib/public-content'
+import { getPublicHref } from '@/lib/public-pages'
 
 type ContactPageProps = {
   params: Promise<{

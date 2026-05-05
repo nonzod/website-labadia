@@ -7,7 +7,8 @@ import { CtaBand } from '@/components/public/CtaBand'
 import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale, type AppLocale } from '@/lib/i18n'
 import { getPostHref, getPublishedPosts } from '@/lib/posts'
-import { getPublicHref, publicContent } from '@/lib/public-content'
+import { publicContent } from '@/lib/public-content'
+import { getPublicHref } from '@/lib/public-pages'
 import { siteConfig } from '@/lib/site'
 
 type BlogPageProps = {

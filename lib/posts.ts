@@ -7,7 +7,7 @@ import type { AppLocale } from '@/lib/i18n'
 import type { Post } from '@/payload-types'
 
 import { appLocales, getLocalizedPathname, isSupportedLocale } from '@/lib/i18n'
-import { publicPathnames } from '@/lib/public-content'
+import { publicPathnames } from '@/lib/public-pages'
 
 const getPayloadClient = cache(async () => getPayload({ config }))
 
