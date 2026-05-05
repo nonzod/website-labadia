@@ -1,15 +1,29 @@
 :root {
-  --background: #f3ebdf;
-  --surface: rgba(255, 250, 244, 0.88);
-  --surface-strong: rgba(255, 248, 239, 0.95);
-  --surface-border: rgba(105, 73, 42, 0.14);
-  --text-primary: #1f140d;
-  --text-secondary: #5f4a37;
-  --accent: #8a5e38;
-  --accent-strong: #5c3921;
-  --accent-soft: #d9c1a3;
-  --shadow-soft: 0 24px 60px rgba(47, 32, 19, 0.12);
-  --shadow-deep: 0 32px 90px rgba(38, 25, 16, 0.16);
+  --cotto-base: #c4674a;
+  --cotto-deep: #8f3e26;
+  --venanzite-base: #6e7b72;
+  --venanzite-deep: #3a433e;
+  --colline-base: #7a9458;
+  --colline-deep: #516243;
+  --narciso-base: #f0c84e;
+  --glicine-base: #9d8ec9;
+  --page-cream: #f6f0e6;
+  --page-paper: #faf5eb;
+  --page-mist: rgba(250, 245, 235, 0.94);
+  --page-glass: rgba(255, 251, 246, 0.88);
+  --page-glass-strong: rgba(255, 249, 241, 0.95);
+  --border-editorial: rgba(58, 67, 62, 0.12);
+  --text-primary: #2a2e2b;
+  --text-secondary: #5d5a52;
+  --background: var(--page-cream);
+  --surface: var(--page-glass);
+  --surface-strong: var(--page-glass-strong);
+  --surface-border: var(--border-editorial);
+  --accent: var(--cotto-base);
+  --accent-strong: var(--venanzite-deep);
+  --accent-soft: rgba(122, 148, 88, 0.28);
+  --shadow-soft: 0 24px 60px rgba(39, 31, 24, 0.12);
+  --shadow-deep: 0 32px 90px rgba(39, 31, 24, 0.18);
 }
 
 * {
@@ -18,9 +32,9 @@
 
 html {
   background:
-    radial-gradient(circle at top left, rgba(180, 137, 89, 0.2), transparent 34%),
-    radial-gradient(circle at top right, rgba(120, 81, 46, 0.12), transparent 26%),
-    linear-gradient(180deg, #f6efe6 0%, #ecdfcf 100%);
+    radial-gradient(circle at top left, rgba(196, 103, 74, 0.18), transparent 34%),
+    radial-gradient(circle at top right, rgba(157, 142, 201, 0.1), transparent 28%),
+    linear-gradient(180deg, var(--page-paper) 0%, #eee2d2 100%);
   color: var(--text-primary);
   scroll-behavior: smooth;
 }
@@ -267,6 +281,105 @@ a {
   display: grid;
   gap: 1.2rem;
   margin-top: 1.2rem;
+}
+
+.home-hero,
+.proof-section,
+.events-preview {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.home-hero {
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  align-items: stretch;
+}
+
+.home-hero-image,
+.door-card-image {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+.home-hero-image {
+  min-height: 32rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 32px;
+  box-shadow: var(--shadow-deep);
+}
+
+.home-hero-copy {
+  display: grid;
+  align-content: end;
+  gap: 1rem;
+  padding: 2.4rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(250, 245, 235, 0.9) 0%, rgba(250, 245, 235, 0.98) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+
+.door-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.door-card {
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: 28px;
+  background: var(--page-mist);
+  box-shadow: var(--shadow-soft);
+}
+
+.door-card-image {
+  height: 20rem;
+}
+
+.door-card-copy {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.6rem;
+}
+
+.door-card-copy h2,
+.events-preview h3 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.door-card-copy p,
+.events-preview p,
+.proof-section p {
+  margin: 0;
+  line-height: 1.62;
+  color: var(--text-secondary);
+}
+
+.proof-section,
+.events-preview {
+  padding: 2rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 28px;
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+
+.proof-section {
+  background:
+    linear-gradient(135deg, rgba(250, 245, 235, 0.96) 0%, rgba(240, 230, 213, 0.9) 100%);
+}
+
+.events-preview {
+  background:
+    linear-gradient(135deg, rgba(255, 251, 246, 0.96) 0%, rgba(233, 238, 226, 0.9) 100%);
 }
 
 .section-heading {
@@ -522,6 +635,8 @@ a {
   .site-actions,
   .hero-grid,
   .contact-hero,
+  .home-hero,
+  .door-grid,
   .feature-showcase,
   .blog-grid,
   .detail-grid,
@@ -534,8 +649,11 @@ a {
 
   .hero-card,
   .hero-panel,
+  .home-hero-copy,
   .feature-copy,
   .feature-media,
+  .proof-section,
+  .events-preview,
   .blog-card,
   .cta-band,
   .detail-card,
@@ -560,5 +678,11 @@ a {
   .locale-switcher {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  .home-hero-image,
+  .door-card-image {
+    min-height: 0;
+    height: 16rem;
   }
 }

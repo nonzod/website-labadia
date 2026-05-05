@@ -1,8 +1,10 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { CtaBand } from '@/components/public/CtaBand'
-import { FeatureShowcase } from '@/components/public/FeatureShowcase'
+import { DoorGrid } from '@/components/public/DoorGrid'
+import { EventsPreview } from '@/components/public/EventsPreview'
+import { HomeHero } from '@/components/public/HomeHero'
+import { ProofSection } from '@/components/public/ProofSection'
 import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
@@ -25,60 +27,25 @@ export default async function HomePage({ params }: LocalePageProps) {
 
   return (
     <main className="page-shell" id="main-content">
-      <section className="hero-grid">
-        <div className="hero-card">
-          <p className="eyebrow">{copy.hero.eyebrow}</p>
-          <h1>{copy.hero.title}</h1>
-          <p className="lead">{copy.hero.body}</p>
-
-          <div className="cta-row">
-            <Link className="primary-link" href={getPublicHref('contact', lang)}>
-              {copy.hero.primaryLabel}
-            </Link>
-            <a className="secondary-link" href="#house-overview">
-              {copy.hero.secondaryLabel}
-            </a>
-          </div>
-        </div>
-
-        <aside className="hero-panel" aria-label={copy.highlightsLabel}>
-          <p className="section-eyebrow">{copy.highlightsLabel}</p>
-          <ul className="hero-highlights">
-            {copy.highlights.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </aside>
-      </section>
-
       <section className="content-stack" id="house-overview">
+        <HomeHero hero={copy.hero} locale={lang} />
+
         <SectionHeading
           body={copy.intro.body}
           eyebrow={copy.intro.eyebrow}
           title={copy.intro.title}
         />
 
-        {copy.features.map((feature, index) => (
-          <FeatureShowcase
-            body={feature.body}
-            eyebrow={feature.eyebrow}
-            id={index === 0 ? 'stay-overview' : 'territory-overview'}
-            items={feature.items}
-            key={feature.title}
-            mediaBody={feature.mediaBody}
-            mediaKicker={feature.mediaKicker}
-            mediaTitle={feature.mediaTitle}
-            reversed={index % 2 === 1}
-            title={feature.title}
-          />
-        ))}
+        <DoorGrid doors={copy.doors} locale={lang} />
+        <ProofSection section={copy.proof} />
+        <EventsPreview locale={lang} section={copy.events} />
 
         <CtaBand
           body={copy.cta.body}
           eyebrow={copy.cta.eyebrow}
           primaryHref={getPublicHref('contact', lang)}
           primaryLabel={copy.cta.primaryLabel}
-          secondaryHref="#territory-overview"
+          secondaryHref={getPublicHref('territory', lang)}
           secondaryLabel={copy.cta.secondaryLabel}
           title={copy.cta.title}
         />

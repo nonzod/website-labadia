@@ -22,6 +22,46 @@ type FooterLink = {
   label: string
 }
 
+export type HomeDoor = {
+  body: string
+  href: PublicRouteKey
+  imageAlt: string
+  imageSrc: string
+  label: string
+  title: string
+}
+
+export type HomeHeroCopy = {
+  body: string
+  eyebrow: string
+  imageAlt: string
+  imageSrc: string
+  primaryLabel: string
+  secondaryLabel: string
+  title: string
+}
+
+export type HomeProofSection = {
+  body: string
+  eyebrow: string
+  items: Array<{
+    quote: string
+    source: string
+  }>
+  title: string
+}
+
+export type HomeEventsSection = {
+  body: string
+  eyebrow: string
+  items: Array<{
+    body: string
+    title: string
+  }>
+  primaryLabel: string
+  title: string
+}
+
 type HomeCopy = {
   cta: {
     body: string
@@ -30,21 +70,15 @@ type HomeCopy = {
     secondaryLabel: string
     title: string
   }
-  features: SectionFeature[]
-  hero: {
-    body: string
-    eyebrow: string
-    primaryLabel: string
-    secondaryLabel: string
-    title: string
-  }
-  highlights: string[]
-  highlightsLabel: string
+  doors: HomeDoor[]
+  events: HomeEventsSection
+  hero: HomeHeroCopy
   intro: {
     body: string
     eyebrow: string
     title: string
   }
+  proof: HomeProofSection
 }
 
 type ContactCopy = {
@@ -184,57 +218,82 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     },
     home: {
       cta: {
-        body: 'Tell us your dates, the number of guests, and whether you are imagining a quiet stay, a private dinner, or time built around Umbria.',
+        body: 'Tell us your dates, the number of guests, and whether you are imagining a quiet stay, an open event, or time shaped around the Umbrian hills.',
         eyebrow: 'Start your stay',
         primaryLabel: 'Request information',
         secondaryLabel: 'Discover the territory',
         title: 'Begin with the kind of time you want to spend at La Badia.',
       },
-      features: [
+      doors: [
         {
-          body: 'La Badia is rented as a whole apartment inside a stone house in the countryside borgo of San Venanzo. The stay is shaped by generous rooms, antique furniture, new bathrooms, and the freedom to move between house and garden at your own rhythm.',
-          eyebrow: 'Stay',
-          items: [
-            'Around 150 sqm across the third and fourth floors',
-            'Six beds across three rooms, including an upper-floor suite',
-            'Frescoed salon, oval dining table, and access to the Italian garden',
-          ],
-          mediaBody: 'A stay here is not room by room. It is the feeling of having the house, the garden, and the slower rhythm of the borgo around you.',
-          mediaKicker: 'Where to stay',
-          mediaTitle: 'Stone, frescoes, quiet',
-          title: 'A house to inhabit fully, not a standard overnight stop.',
+          body: 'A whole apartment inside a stone house, with frescoes, antique furniture, generous rooms, and the freedom to move between salon and garden at your own rhythm.',
+          href: 'dimora',
+          imageAlt: 'Sunset light over La Badia, olive trees, and the stone garden wall.',
+          imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+          label: 'Stay',
+          title: 'The house',
         },
         {
-          body: 'Beyond the stay, La Badia opens onto local wines, countryside walks, private dinners, and days shaped around Umbria rather than a fixed program.',
-          eyebrow: 'Territory',
-          items: [
-            'Local wine selection, partner wineries, and nearby restaurants',
-            'Private cooks, tastings, guided visits, and transfers on request',
-            'The frescoed salon, the garden, and the adjoining apse hall for intimate gatherings',
-          ],
-          mediaBody: 'The territory begins at the gate: olive trees, stone roofs, wild orchids, and routes worth taking slowly.',
-          mediaKicker: 'Experiences',
-          mediaTitle: 'Umbria at a human pace',
-          title: 'The surrounding landscape is part of the stay, not an optional extra.',
+          body: 'Open events, private dinners, tastings, local routes, and occasions that turn the stay into a slower way of being in Umbria.',
+          href: 'experiences',
+          imageAlt: 'Umbrian hills seen from La Badia in warm evening light.',
+          imageSrc: '/images/editorial/vista-colline.jpg',
+          label: 'Experience',
+          title: 'Live La Badia',
         },
       ],
+      events: {
+        body: 'Some dates will stay open to local guests and travelers alike: long-table dinners, seasonal gatherings, and small cultural evenings shaped for this house.',
+        eyebrow: 'Open moments',
+        items: [
+          {
+            body: 'Small evenings where food, wine, and conversation stay close to the house and its slower pace.',
+            title: 'Open dinners',
+          },
+          {
+            body: 'Readings, seasonal notes, and intimate gatherings designed for guests already here and for people arriving just for the event.',
+            title: 'Editorial evenings',
+          },
+          {
+            body: 'Events remain intentionally limited in size, so the atmosphere stays quiet, warm, and coherent with the place.',
+            title: 'A measured rhythm',
+          },
+        ],
+        primaryLabel: 'Go to experiences',
+        title: 'Events open to everyone will arrive here.',
+      },
       hero: {
         body: 'A whole apartment in a stone house, between an Italian garden and the Umbrian hills of San Venanzo. Three rooms, six beds, zodiac frescoes, antique furniture, and the quiet of a small borgo.',
         eyebrow: 'La Badia, San Venanzo',
+        imageAlt: 'La Badia at sunset, framed by olive trees and the garden wall.',
+        imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
         primaryLabel: 'Request your stay',
         secondaryLabel: 'Discover the house',
         title: 'A countryside dimora to live slowly, together.',
       },
-      highlights: [
-        'Whole apartment of around 150 sqm, rented as a whole and not by the room.',
-        'Italian garden of 2,000 sqm with olive trees and a circular stone rose bed.',
-        'Six beds, three rooms, frescoes, local wines, and the Umbrian countryside just outside the door.',
-      ],
-      highlightsLabel: 'At a glance',
       intro: {
         body: 'At La Badia you do not book a generic stay. You enter a stone house with zodiac frescoes, a 2,000-square-metre garden, and a way of spending time that stays close to the landscape.',
         eyebrow: 'The house',
         title: 'A place for stays, family time, and quiet days in Umbria.',
+      },
+      proof: {
+        body: 'Even in this first editorial version, the promise needs to feel concrete: a whole apartment, a real garden, and a pace that already belongs to the place.',
+        eyebrow: 'Why it feels credible',
+        items: [
+          {
+            quote: 'Around 150 sqm across the third and fourth floors, rented as a whole apartment and not room by room.',
+            source: 'Stay format',
+          },
+          {
+            quote: 'Six beds across three rooms, with a frescoed salon, oval dining table, and access to the Italian garden.',
+            source: 'House details',
+          },
+          {
+            quote: 'Local wines, private cooks, nearby routes, and a small Umbrian borgo just outside the door.',
+            source: 'Territory and rhythm',
+          },
+        ],
+        title: 'The stay is specific, not generic.',
       },
     },
   },
@@ -316,57 +375,82 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     },
     home: {
       cta: {
-        body: 'Raccontaci il periodo, il numero di ospiti e se immagini un soggiorno quieto, una cena privata o giornate costruite attorno all Umbria.',
+        body: 'Raccontaci il periodo, il numero di ospiti e se immagini un soggiorno quieto, un evento aperto o giornate costruite attorno alle colline umbre.',
         eyebrow: 'Inizia il soggiorno',
         primaryLabel: 'Richiedi informazioni',
         secondaryLabel: 'Scopri il territorio',
         title: 'Parti da come vuoi vivere il tempo alla Badia.',
       },
-      features: [
+      doors: [
         {
-          body: 'La Badia si affitta come appartamento intero dentro una casa in pietra nel borgo di campagna di San Venanzo. Il soggiorno prende forma tra stanze generose, mobili antichi, bagni nuovi e la liberta di passare dal salone al giardino con il proprio ritmo.',
-          eyebrow: 'Soggiorno',
-          items: [
-            'Circa 150 mq tra terzo e quarto piano',
-            'Sei posti letto tra tre camere e una suite al piano superiore',
-            'Salone affrescato, tavolo ovale antico e accesso al giardino all italiana',
-          ],
-          mediaBody: 'Qui non si prenota una camera soltanto: si entra in una casa con il giardino, il silenzio e il ritmo lento del borgo tutto intorno.',
-          mediaKicker: 'Dove stare',
-          mediaTitle: 'Pietra, affreschi, quiete',
-          title: 'Una casa da abitare interamente, non una sosta standard.',
+          body: 'Un appartamento intero dentro una casa in pietra, con affreschi, mobili antichi, stanze generose e la liberta di passare dal salone al giardino con il proprio ritmo.',
+          href: 'dimora',
+          imageAlt: 'La Badia al tramonto tra ulivi, muro in pietra e giardino.',
+          imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+          label: 'Soggiorno',
+          title: 'La dimora',
         },
         {
-          body: 'Oltre al soggiorno, La Badia apre verso vini del territorio, camminate di campagna, cene private e giornate costruite sull Umbria invece che su un programma fisso.',
-          eyebrow: 'Territorio',
-          items: [
-            'Selezione di vini locali, cantine partner e tavole dei dintorni',
-            'Cuoco privato, degustazioni, visite guidate e transfer su richiesta',
-            'Il salone affrescato, il giardino e la sala abside adiacente per momenti raccolti',
-          ],
-          mediaBody: 'Il territorio comincia dal cancello: ulivi, tetti di pietra, orchidee selvatiche e strade da prendere con lentezza.',
-          mediaKicker: 'Esperienze',
-          mediaTitle: 'Umbria a misura umana',
-          title: 'Il paesaggio attorno fa parte del soggiorno, non e un extra opzionale.',
+          body: 'Eventi aperti, cene private, degustazioni, percorsi locali e occasioni che trasformano il soggiorno in un modo piu lento di stare in Umbria.',
+          href: 'experiences',
+          imageAlt: 'Le colline umbre viste dalla Badia nella luce calda della sera.',
+          imageSrc: '/images/editorial/vista-colline.jpg',
+          label: 'Esperienze',
+          title: 'Vivi La Badia',
         },
       ],
+      events: {
+        body: 'Alcune date resteranno aperte anche a chi non soggiorna: tavolate stagionali, piccoli incontri e serate culturali costruite sul ritmo di questa casa.',
+        eyebrow: 'Momenti aperti',
+        items: [
+          {
+            body: 'Serate raccolte dove cucina, vino e conversazione restano vicini alla casa e al suo passo piu lento.',
+            title: 'Cene aperte',
+          },
+          {
+            body: 'Letture, appunti stagionali e piccoli incontri pensati per chi soggiorna e per chi arriva solo per l evento.',
+            title: 'Serate editoriali',
+          },
+          {
+            body: 'Il numero resta contenuto, cosi l atmosfera puo rimanere quieta, calda e coerente con il luogo.',
+            title: 'Un ritmo misurato',
+          },
+        ],
+        primaryLabel: 'Vai alle esperienze',
+        title: 'Eventi aperti a tutti arriveranno qui.',
+      },
       hero: {
         body: 'Un appartamento intero in una casa di pietra, tra giardino all italiana e colline umbre a San Venanzo. Tre camere, sei posti letto, affreschi zodiacali, mobili antichi e la quiete di un piccolo borgo.',
         eyebrow: 'La Badia, San Venanzo',
+        imageAlt: 'La Badia al tramonto, tra il giardino e gli ulivi.',
+        imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
         primaryLabel: 'Richiedi il tuo soggiorno',
         secondaryLabel: 'Scopri la dimora',
         title: 'Una dimora di campagna da vivere insieme, con lentezza.',
       },
-      highlights: [
-        'Appartamento intero di circa 150 mq, affittato nella sua interezza e non a camere.',
-        'Giardino all italiana di 2000 mq con ulivi e roseto circolare in pietra.',
-        'Sei posti letto, tre camere, salone affrescato, vini del territorio e campagna umbra appena fuori dalla porta.',
-      ],
-      highlightsLabel: 'In breve',
       intro: {
         body: 'Alla Badia non si prenota un soggiorno generico. Si entra in una casa di pietra con affreschi zodiacali, un giardino di duemila metri e un modo di stare che resta vicino al paesaggio.',
         eyebrow: 'La dimora',
         title: 'Un luogo per stare, ritrovarsi e attraversare l Umbria con calma.',
+      },
+      proof: {
+        body: 'Anche in questa prima superficie editoriale la promessa deve restare concreta: un appartamento intero, un giardino reale e un ritmo che appartiene gia al luogo.',
+        eyebrow: 'Perche appare credibile',
+        items: [
+          {
+            quote: 'Circa 150 mq tra terzo e quarto piano, affittati come appartamento intero e non a camere.',
+            source: 'Formato del soggiorno',
+          },
+          {
+            quote: 'Sei posti letto tra tre camere, con salone affrescato, tavolo ovale antico e accesso al giardino all italiana.',
+            source: 'Dettagli della casa',
+          },
+          {
+            quote: 'Vini del territorio, cuoco privato, percorsi vicini e il piccolo borgo umbro appena fuori dalla porta.',
+            source: 'Territorio e ritmo',
+          },
+        ],
+        title: 'Il soggiorno e specifico, non generico.',
       },
     },
   },
