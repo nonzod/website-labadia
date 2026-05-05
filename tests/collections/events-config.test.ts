@@ -39,4 +39,21 @@ describe('Events collection config', () => {
       } as never),
     ).toThrow('La data di fine non puo essere precedente alla data di inizio.')
   })
+
+  it('rejects a partial update when the effective end date is earlier than the stored start date', () => {
+    const beforeValidate = Events.hooks?.beforeValidate?.[0]
+
+    expect(beforeValidate).toBeTypeOf('function')
+
+    expect(() =>
+      beforeValidate?.({
+        data: {
+          endDate: '2026-06-09T10:00:00.000Z',
+        },
+        originalDoc: {
+          startDate: '2026-06-10T10:00:00.000Z',
+        },
+      } as never),
+    ).toThrow('La data di fine non puo essere precedente alla data di inizio.')
+  })
 })

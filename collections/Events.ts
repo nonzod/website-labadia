@@ -17,17 +17,19 @@ export const Events: CollectionConfig = {
   defaultSort: 'startDate',
   hooks: {
     beforeValidate: [
-      ({ data }) => {
+      ({ data, originalDoc }) => {
         if (!data || typeof data !== 'object') {
           return data
         }
 
-        const { startDate, endDate } = data as { endDate?: unknown; startDate?: unknown }
+        const typedData = data as { endDate?: unknown; startDate?: unknown }
+        const effectiveStartDate = typedData.startDate ?? originalDoc?.startDate
+        const effectiveEndDate = typedData.endDate ?? originalDoc?.endDate
 
         if (
-          typeof startDate === 'string' &&
-          typeof endDate === 'string' &&
-          new Date(endDate).getTime() < new Date(startDate).getTime()
+          typeof effectiveStartDate === 'string' &&
+          typeof effectiveEndDate === 'string' &&
+          new Date(effectiveEndDate).getTime() < new Date(effectiveStartDate).getTime()
         ) {
           throw new Error('La data di fine non puo essere precedente alla data di inizio.')
         }
