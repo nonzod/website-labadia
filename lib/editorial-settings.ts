@@ -11,15 +11,29 @@ const getTrimmedString = (value: string | null | undefined): string | null => {
   return trimmedValue ? trimmedValue : null
 }
 
-const getEditorialSettings = async (locale: AppLocale): Promise<EditorialSetting> => {
-  const payload = await getPayloadClient()
+const editorialSettingsByLocale = new Map<AppLocale, Promise<EditorialSetting>>()
 
-  return payload.findGlobal({
-    slug: 'editorial-settings',
-    depth: 0,
-    fallbackLocale: 'it',
-    locale,
-  })
+const getEditorialSettings = (locale: AppLocale): Promise<EditorialSetting> => {
+  const cachedSettings = editorialSettingsByLocale.get(locale)
+
+  if (cachedSettings) {
+    return cachedSettings
+  }
+
+  const settingsPromise = (async () => {
+    const payload = await getPayloadClient()
+
+    return payload.findGlobal({
+      slug: 'editorial-settings',
+      depth: 0,
+      fallbackLocale: 'it',
+      locale,
+    })
+  })()
+
+  editorialSettingsByLocale.set(locale, settingsPromise)
+
+  return settingsPromise
 }
 
 export const getHomepageProofSection = async (locale: AppLocale): Promise<HomeProofSection> => {

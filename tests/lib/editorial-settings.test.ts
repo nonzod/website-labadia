@@ -8,19 +8,16 @@ vi.mock('@/lib/payload', () => ({
   getPayloadClient,
 }))
 
-import {
-  getExperiencesEventsEmptyState,
-  getHomepageEventsSectionCopy,
-  getHomepageProofSection,
-} from '@/lib/editorial-settings'
 import { publicContent } from '@/lib/public-content'
 
 describe('editorial settings helpers', () => {
   beforeEach(() => {
     getPayloadClient.mockReset()
+    vi.resetModules()
   })
 
   it('falls back to static M1 proof when the global is empty', async () => {
+    const { getHomepageProofSection } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({ homepageProofItems: [] })
 
     getPayloadClient.mockResolvedValue({ findGlobal })
@@ -37,6 +34,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('replaces proof items with valid CMS-managed entries', async () => {
+    const { getHomepageProofSection } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({
       homepageProofItems: [
         { quote: 'Accoglienza rara.', source: 'Ospite, primavera' },
@@ -56,6 +54,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('uses the CMS homepage events body when present', async () => {
+    const { getHomepageEventsSectionCopy } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({
       homepageEventsBody: 'Updated event copy from the CMS.',
     })
@@ -71,6 +70,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('falls back to static homepage events copy when the CMS value is missing', async () => {
+    const { getHomepageEventsSectionCopy } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({})
 
     getPayloadClient.mockResolvedValue({ findGlobal })
@@ -81,6 +81,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('falls back to static homepage events copy when the CMS value is blank', async () => {
+    const { getHomepageEventsSectionCopy } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({
       homepageEventsBody: '   ',
     })
@@ -93,6 +94,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('uses the CMS experiences empty state when present', async () => {
+    const { getExperiencesEventsEmptyState } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({
       experiencesEventsEmptyState: 'No public events are scheduled right now.',
     })
@@ -105,6 +107,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('falls back to the static events body when the experiences empty state is missing', async () => {
+    const { getExperiencesEventsEmptyState } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({})
 
     getPayloadClient.mockResolvedValue({ findGlobal })
@@ -115,6 +118,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('falls back to the static events body when the experiences empty state is blank', async () => {
+    const { getExperiencesEventsEmptyState } = await import('@/lib/editorial-settings')
     const findGlobal = vi.fn().mockResolvedValue({
       experiencesEventsEmptyState: '   ',
     })
@@ -124,5 +128,22 @@ describe('editorial settings helpers', () => {
     await expect(getExperiencesEventsEmptyState('it')).resolves.toBe(
       publicContent.it.home.events.body,
     )
+  })
+
+  it('reuses a single global read across helpers for the same locale', async () => {
+    const { getHomepageEventsSectionCopy, getHomepageProofSection } = await import(
+      '@/lib/editorial-settings'
+    )
+    const findGlobal = vi.fn().mockResolvedValue({
+      homepageProofItems: [{ quote: 'Accoglienza rara.', source: 'Ospite, primavera' }],
+      homepageEventsBody: 'Updated event copy from the CMS.',
+    })
+
+    getPayloadClient.mockResolvedValue({ findGlobal })
+
+    await getHomepageProofSection('it')
+    await getHomepageEventsSectionCopy('it')
+
+    expect(findGlobal).toHaveBeenCalledTimes(1)
   })
 })
