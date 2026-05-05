@@ -21,15 +21,30 @@ describe('Media collection config', () => {
     })
 
     expect(fieldsByName.get('usageArea')).toMatchObject({
+      defaultValue: 'shared',
       name: 'usageArea',
+      required: true,
       type: 'select',
-      options: ['shared', 'home', 'dimora', 'experiences', 'territory', 'stories'],
+      options: [
+        { label: 'Shared', value: 'shared' },
+        { label: 'Home', value: 'home' },
+        { label: 'Dimora', value: 'dimora' },
+        { label: 'Esperienze', value: 'experiences' },
+        { label: 'Territorio', value: 'territory' },
+        { label: 'Racconti / Blog', value: 'stories' },
+      ],
     })
 
     expect(fieldsByName.get('readiness')).toMatchObject({
+      defaultValue: 'draft',
       name: 'readiness',
+      required: true,
       type: 'select',
-      options: ['draft', 'ready-it', 'ready-it-en'],
+      options: [
+        { label: 'Draft', value: 'draft' },
+        { label: 'Ready IT', value: 'ready-it' },
+        { label: 'Ready IT/EN', value: 'ready-it-en' },
+      ],
     })
 
     expect(fieldsByName.get('ownerNotes')).toMatchObject({
