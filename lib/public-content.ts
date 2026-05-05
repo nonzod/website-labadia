@@ -81,6 +81,7 @@ export type EditorialFactItem = {
 
 type EditorialEventsSection = {
   body: string
+  emptyStateBody: string
   eyebrow: string
   title: string
 }
@@ -269,6 +270,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     experiences: {
       eventsSection: {
         body: 'Public events stay tied to the scale of the house: a small calendar of dinners, seasonal gatherings, and hosted moments that still feel close to La Badia.',
+        emptyStateBody: 'No public events are scheduled right now. Check back for the next gathering at La Badia.',
         eyebrow: 'Events',
         title: 'Public events',
       },
@@ -527,6 +529,7 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
     experiences: {
       eventsSection: {
         body: 'Gli appuntamenti pubblici restano legati alla scala della casa: un piccolo calendario di cene, incontri stagionali e momenti ospitati che restano vicini alla Badia.',
+        emptyStateBody: 'Al momento non ci sono eventi pubblici in calendario. Torna a controllare per il prossimo appuntamento alla Badia.',
         eyebrow: 'Eventi',
         title: 'Appuntamenti pubblici',
       },

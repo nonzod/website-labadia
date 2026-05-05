@@ -104,7 +104,12 @@ describe('CMS-backed public editorial surfaces', () => {
     expect(getEditorialSettings).toHaveBeenCalledTimes(1)
 
     expect(screen.getByText(/events, dinners, and hosted moments with a quieter rhythm/i)).toBeInTheDocument()
-    expect(screen.getByText('No public events are scheduled right now. Check back for the next gathering.')).toBeInTheDocument()
+    const emptyState = screen.getByText(
+      'No public events are scheduled right now. Check back for the next gathering.',
+    )
+
+    expect(emptyState).toBeInTheDocument()
+    expect(emptyState.closest('section')?.querySelector('.detail-grid')).toBeNull()
   })
 
   it('renders the homepage empty-state branch when no featured events are available', async () => {

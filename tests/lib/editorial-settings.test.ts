@@ -113,7 +113,7 @@ describe('editorial settings helpers', () => {
     getPayloadClient.mockResolvedValue({ findGlobal })
 
     await expect(getExperiencesEventsEmptyState('it')).resolves.toBe(
-      publicContent.it.home.events.emptyStateBody,
+      publicContent.it.experiences.eventsSection.emptyStateBody,
     )
   })
 
@@ -126,7 +126,7 @@ describe('editorial settings helpers', () => {
     getPayloadClient.mockResolvedValue({ findGlobal })
 
     await expect(getExperiencesEventsEmptyState('it')).resolves.toBe(
-      publicContent.it.home.events.emptyStateBody,
+      publicContent.it.experiences.eventsSection.emptyStateBody,
     )
   })
 
