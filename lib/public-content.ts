@@ -79,10 +79,20 @@ export type EditorialFactItem = {
   title: string
 }
 
+type EditorialEventsSection = {
+  body: string
+  eyebrow: string
+  title: string
+}
+
 type EditorialFactsPage = {
   facts: EditorialFactItem[]
   factsTitle: string
   hero: EditorialPageHeroCopy
+}
+
+type ExperiencesPage = EditorialFactsPage & {
+  eventsSection: EditorialEventsSection
 }
 
 type StoriesPage = {
@@ -157,7 +167,7 @@ type PublicCopy = {
   blog: BlogCopy
   contact: ContactCopy
   dimora: EditorialFactsPage
-  experiences: EditorialFactsPage
+  experiences: ExperiencesPage
   footer: {
     links: FooterLink[]
     navigationLabel: string
@@ -257,6 +267,11 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       },
     },
     experiences: {
+      eventsSection: {
+        body: 'Public events stay tied to the scale of the house: a small calendar of dinners, seasonal gatherings, and hosted moments that still feel close to La Badia.',
+        eyebrow: 'Events',
+        title: 'Public events',
+      },
       facts: [
         {
           body: 'Open dinners and small gatherings can welcome local guests and travelers without forcing the house into a large-event logic.',
@@ -510,6 +525,11 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       },
     },
     experiences: {
+      eventsSection: {
+        body: 'Gli appuntamenti pubblici restano legati alla scala della casa: un piccolo calendario di cene, incontri stagionali e momenti ospitati che restano vicini alla Badia.',
+        eyebrow: 'Eventi',
+        title: 'Appuntamenti pubblici',
+      },
       facts: [
         {
           body: 'Cene aperte e piccoli incontri possono accogliere ospiti del territorio e viaggiatori senza trasformare la casa in un luogo da grande evento.',

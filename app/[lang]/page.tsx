@@ -60,7 +60,7 @@ export default async function HomePage({ params }: LocalePageProps) {
             body: event.summary,
             title: event.title,
           }))
-        : copy.events.items,
+        : eventSectionCopy.items,
   }
 
   return (

@@ -49,9 +49,9 @@ export default async function EsperienzePage({ params }: LocalePageProps) {
 
       <section className="content-stack">
         <SectionHeading
-          body={upcomingEvents.length > 0 ? copy.hero.body : emptyState}
-          eyebrow={lang === 'it' ? 'Eventi' : 'Events'}
-          title={lang === 'it' ? 'Appuntamenti pubblici' : 'Public events'}
+          body={upcomingEvents.length > 0 ? copy.eventsSection.body : emptyState}
+          eyebrow={copy.eventsSection.eyebrow}
+          title={copy.eventsSection.title}
         />
 
         {upcomingEvents.length > 0 ? (

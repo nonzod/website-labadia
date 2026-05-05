@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { publicContent } from '@/lib/public-content'
+
 const {
   getEditorialSettings,
   getHomepageProofSection,
@@ -103,5 +105,23 @@ describe('CMS-backed public editorial surfaces', () => {
 
     expect(screen.getByText(/events, dinners, and hosted moments with a quieter rhythm/i)).toBeInTheDocument()
     expect(screen.getByText('No public events are scheduled right now. Check back for the next gathering.')).toBeInTheDocument()
+  })
+
+  it('renders the homepage empty-state branch when no featured events are available', async () => {
+    const settings = { id: 9 }
+
+    getEditorialSettings.mockResolvedValue(settings)
+    getHomepageProofSection.mockResolvedValue(publicContent.en.home.proof)
+    getHomepageEventsSectionCopy.mockResolvedValue(publicContent.en.home.events)
+    getHomepageEvents.mockResolvedValue([])
+
+    const { default: HomePage } = await import('@/app/[lang]/page')
+
+    render(await HomePage({ params: Promise.resolve({ lang: 'en' }) }))
+
+    expect(getEditorialSettings).toHaveBeenCalledWith('en')
+    expect(getHomepageEvents).toHaveBeenCalledWith('en')
+    expect(screen.getByText(publicContent.en.home.events.emptyStateBody)).toBeInTheDocument()
+    expect(screen.getByText(publicContent.en.home.events.items[0].title)).toBeInTheDocument()
   })
 })
