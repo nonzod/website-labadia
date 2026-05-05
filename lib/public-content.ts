@@ -1,21 +1,9 @@
 import type { AppLocale } from '@/lib/i18n'
 
-import { getLocalizedPathname } from '@/lib/i18n'
+import type { PublicRouteKey } from '@/lib/public-pages'
 
-export const publicPathnames = {
-  blog: '/blog',
-  contact: '/contatti',
-  home: '/',
-} as const
-
-export const publicRouteKeys = Object.keys(publicPathnames) as Array<keyof typeof publicPathnames>
-
-export const getPublicHref = (
-  route: keyof typeof publicPathnames,
-  locale: AppLocale,
-): string => {
-  return getLocalizedPathname(publicPathnames[route], locale)
-}
+export { getPublicHref, publicPageOrder, publicPathnames } from '@/lib/public-pages'
+export type { PublicRouteKey } from '@/lib/public-pages'
 
 type SectionFeature = {
   body: string
@@ -33,7 +21,7 @@ type ContactCard = {
 }
 
 type FooterLink = {
-  href: keyof typeof publicPathnames
+  href: PublicRouteKey
   label: string
 }
 
