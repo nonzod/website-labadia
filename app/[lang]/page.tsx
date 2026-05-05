@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+
 import { notFound } from 'next/navigation'
 
 import { CtaBand } from '@/components/public/CtaBand'
@@ -9,11 +11,23 @@ import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
+import { siteConfig } from '@/lib/site'
 
 type LocalePageProps = {
   params: Promise<{
     lang: string
   }>
+}
+
+export async function generateMetadata({ params }: LocalePageProps): Promise<Metadata> {
+  const { lang } = await params
+  const locale = isSupportedLocale(lang) ? lang : 'it'
+  const copy = publicContent[locale].home
+
+  return {
+    description: copy.hero.body,
+    title: `${copy.hero.eyebrow} | ${siteConfig.projectName}`,
+  }
 }
 
 export default async function HomePage({ params }: LocalePageProps) {
