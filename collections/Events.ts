@@ -2,6 +2,16 @@ import { ValidationError, type CollectionConfig } from 'payload'
 
 import { authenticatedAccess, publishedContentReadAccess } from '@/lib/payload/access'
 
+const toComparableDate = (value: unknown): number | null => {
+  if (typeof value === 'string' || value instanceof Date) {
+    const timestamp = new Date(value).getTime()
+
+    return Number.isNaN(timestamp) ? null : timestamp
+  }
+
+  return null
+}
+
 export const Events: CollectionConfig = {
   slug: 'events',
   access: {
@@ -27,11 +37,13 @@ export const Events: CollectionConfig = {
         const hasEndDate = Object.prototype.hasOwnProperty.call(typedData, 'endDate')
         const effectiveStartDate = hasStartDate ? typedData.startDate : originalDoc?.startDate
         const effectiveEndDate = hasEndDate ? typedData.endDate : originalDoc?.endDate
+        const comparableStartDate = toComparableDate(effectiveStartDate)
+        const comparableEndDate = toComparableDate(effectiveEndDate)
 
         if (
-          typeof effectiveStartDate === 'string' &&
-          typeof effectiveEndDate === 'string' &&
-          new Date(effectiveEndDate).getTime() < new Date(effectiveStartDate).getTime()
+          comparableStartDate !== null &&
+          comparableEndDate !== null &&
+          comparableEndDate < comparableStartDate
         ) {
           throw new ValidationError({
             collection: 'events',

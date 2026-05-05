@@ -76,6 +76,23 @@ describe('Events collection config', () => {
     ).toThrow(ValidationError)
   })
 
+  it('rejects an invalid range when effective values mix Date objects and ISO strings', () => {
+    const beforeValidate = Events.hooks?.beforeValidate?.[0]
+
+    expect(beforeValidate).toBeTypeOf('function')
+
+    expect(() =>
+      beforeValidate?.({
+        data: {
+          endDate: new Date('2026-06-09T10:00:00.000Z'),
+        },
+        originalDoc: {
+          startDate: '2026-06-10T10:00:00.000Z',
+        },
+      } as never),
+    ).toThrow(ValidationError)
+  })
+
   it('allows clearing endDate explicitly while moving startDate later', () => {
     const beforeValidate = Events.hooks?.beforeValidate?.[0]
 
