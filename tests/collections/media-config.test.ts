@@ -22,6 +22,7 @@ describe('Media collection config', () => {
 
     expect(fieldsByName.get('usageArea')).toMatchObject({
       defaultValue: 'shared',
+      label: 'Area di utilizzo',
       name: 'usageArea',
       required: true,
       type: 'select',
@@ -37,6 +38,7 @@ describe('Media collection config', () => {
 
     expect(fieldsByName.get('readiness')).toMatchObject({
       defaultValue: 'draft',
+      label: 'Prontezza editoriale',
       name: 'readiness',
       required: true,
       type: 'select',
@@ -48,6 +50,7 @@ describe('Media collection config', () => {
     })
 
     expect(fieldsByName.get('ownerNotes')).toMatchObject({
+      label: 'Note operative',
       name: 'ownerNotes',
       type: 'textarea',
     })
