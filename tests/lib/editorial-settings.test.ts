@@ -131,7 +131,7 @@ describe('editorial settings helpers', () => {
   })
 
   it('reuses a single global read across helpers for the same locale', async () => {
-    const { getHomepageEventsSectionCopy, getHomepageProofSection } = await import(
+    const { getEditorialSettings, getHomepageEventsSectionCopy, getHomepageProofSection } = await import(
       '@/lib/editorial-settings'
     )
     const findGlobal = vi.fn().mockResolvedValue({
@@ -141,8 +141,10 @@ describe('editorial settings helpers', () => {
 
     getPayloadClient.mockResolvedValue({ findGlobal })
 
-    await getHomepageProofSection('it')
-    await getHomepageEventsSectionCopy('it')
+    const settings = await getEditorialSettings('it')
+
+    await getHomepageProofSection('it', settings)
+    await getHomepageEventsSectionCopy('it', settings)
 
     expect(findGlobal).toHaveBeenCalledTimes(1)
   })

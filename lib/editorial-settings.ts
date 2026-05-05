@@ -11,36 +11,25 @@ const getTrimmedString = (value: string | null | undefined): string | null => {
   return trimmedValue ? trimmedValue : null
 }
 
-const editorialSettingsByLocale = new Map<AppLocale, Promise<EditorialSetting>>()
+export const getEditorialSettings = async (locale: AppLocale): Promise<EditorialSetting> => {
+  const payload = await getPayloadClient()
 
-const getEditorialSettings = (locale: AppLocale): Promise<EditorialSetting> => {
-  const cachedSettings = editorialSettingsByLocale.get(locale)
-
-  if (cachedSettings) {
-    return cachedSettings
-  }
-
-  const settingsPromise = (async () => {
-    const payload = await getPayloadClient()
-
-    return payload.findGlobal({
-      slug: 'editorial-settings',
-      depth: 0,
-      fallbackLocale: 'it',
-      locale,
-    })
-  })()
-
-  editorialSettingsByLocale.set(locale, settingsPromise)
-
-  return settingsPromise
+  return payload.findGlobal({
+    slug: 'editorial-settings',
+    depth: 0,
+    fallbackLocale: 'it',
+    locale,
+  })
 }
 
-export const getHomepageProofSection = async (locale: AppLocale): Promise<HomeProofSection> => {
-  const settings = await getEditorialSettings(locale)
+export const getHomepageProofSection = async (
+  locale: AppLocale,
+  settings?: EditorialSetting,
+): Promise<HomeProofSection> => {
+  const resolvedSettings = settings ?? (await getEditorialSettings(locale))
   const fallback = publicContent[locale].home.proof
   const items =
-    settings.homepageProofItems
+    resolvedSettings.homepageProofItems
       ?.map((item) => ({
         quote: getTrimmedString(item?.quote),
         source: getTrimmedString(item?.source),
@@ -56,18 +45,25 @@ export const getHomepageProofSection = async (locale: AppLocale): Promise<HomePr
 
 export const getHomepageEventsSectionCopy = async (
   locale: AppLocale,
+  settings?: EditorialSetting,
 ): Promise<HomeEventsSection> => {
-  const settings = await getEditorialSettings(locale)
+  const resolvedSettings = settings ?? (await getEditorialSettings(locale))
   const fallback = publicContent[locale].home.events
 
   return {
     ...fallback,
-    body: getTrimmedString(settings.homepageEventsBody) ?? fallback.body,
+    body: getTrimmedString(resolvedSettings.homepageEventsBody) ?? fallback.body,
   }
 }
 
-export const getExperiencesEventsEmptyState = async (locale: AppLocale): Promise<string> => {
-  const settings = await getEditorialSettings(locale)
+export const getExperiencesEventsEmptyState = async (
+  locale: AppLocale,
+  settings?: EditorialSetting,
+): Promise<string> => {
+  const resolvedSettings = settings ?? (await getEditorialSettings(locale))
 
-  return getTrimmedString(settings.experiencesEventsEmptyState) ?? publicContent[locale].home.events.body
+  return (
+    getTrimmedString(resolvedSettings.experiencesEventsEmptyState) ??
+    publicContent[locale].home.events.body
+  )
 }
