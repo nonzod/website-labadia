@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import { ValidationError, type CollectionConfig } from 'payload'
 
 import { authenticatedAccess, publishedContentReadAccess } from '@/lib/payload/access'
 
@@ -33,7 +33,15 @@ export const Events: CollectionConfig = {
           typeof effectiveEndDate === 'string' &&
           new Date(effectiveEndDate).getTime() < new Date(effectiveStartDate).getTime()
         ) {
-          throw new Error('La data di fine non puo essere precedente alla data di inizio.')
+          throw new ValidationError({
+            collection: 'events',
+            errors: [
+              {
+                message: 'La data di fine non puo essere precedente alla data di inizio.',
+                path: 'endDate',
+              },
+            ],
+          })
         }
 
         return data

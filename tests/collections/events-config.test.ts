@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest'
+import { ValidationError } from 'payload'
 
 import { Events } from '@/collections/Events'
 
 describe('Events collection config', () => {
+  const invalidRangeMessage = 'La data di fine non puo essere precedente alla data di inizio.'
+
   it('uses the expected slug and admin title field', () => {
     expect(Events.slug).toBe('events')
     expect(Events.admin?.useAsTitle).toBe('title')
@@ -30,14 +33,30 @@ describe('Events collection config', () => {
 
     expect(beforeValidate).toBeTypeOf('function')
 
-    expect(() =>
+    let thrownError: unknown
+
+    try {
       beforeValidate?.({
         data: {
           startDate: '2026-06-10T10:00:00.000Z',
           endDate: '2026-06-09T10:00:00.000Z',
         },
-      } as never),
-    ).toThrow('La data di fine non puo essere precedente alla data di inizio.')
+      } as never)
+    } catch (error) {
+      thrownError = error
+    }
+
+    expect(thrownError).toBeInstanceOf(ValidationError)
+    expect(thrownError).toBeInstanceOf(Error)
+    expect((thrownError as ValidationError).data).toMatchObject({
+      collection: 'events',
+      errors: [
+        {
+          message: invalidRangeMessage,
+          path: 'endDate',
+        },
+      ],
+    })
   })
 
   it('rejects a partial update when the effective end date is earlier than the stored start date', () => {
@@ -54,7 +73,7 @@ describe('Events collection config', () => {
           startDate: '2026-06-10T10:00:00.000Z',
         },
       } as never),
-    ).toThrow('La data di fine non puo essere precedente alla data di inizio.')
+    ).toThrow(ValidationError)
   })
 
   it('allows clearing endDate explicitly while moving startDate later', () => {
