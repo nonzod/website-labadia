@@ -13,6 +13,7 @@ import { getHomepageEvents, getUpcomingEvents } from '@/lib/events'
 describe('event helpers', () => {
   beforeEach(() => {
     getPayloadClient.mockReset()
+    vi.useRealTimers()
   })
 
   it('returns only featured published homepage events in start-date order', async () => {
@@ -50,6 +51,9 @@ describe('event helpers', () => {
   })
 
   it('queries upcoming published events with locale fallback', async () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-05-05T09:30:00.000Z'))
+
     const find = vi.fn().mockResolvedValue({
       docs: [
         {
@@ -76,7 +80,7 @@ describe('event helpers', () => {
       where: {
         and: [
           { status: { equals: 'published' } },
-          { startDate: { greater_than_equal: expect.any(String) } },
+          { startDate: { greater_than_equal: '2026-05-05T09:30:00.000Z' } },
         ],
       },
     })

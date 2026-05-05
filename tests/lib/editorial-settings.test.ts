@@ -41,6 +41,7 @@ describe('editorial settings helpers', () => {
       homepageProofItems: [
         { quote: 'Accoglienza rara.', source: 'Ospite, primavera' },
         { quote: '', source: 'Da ignorare' },
+        { quote: '   ', source: '  ' },
       ],
     })
 
@@ -79,6 +80,18 @@ describe('editorial settings helpers', () => {
     expect(section).toEqual(publicContent.it.home.events)
   })
 
+  it('falls back to static homepage events copy when the CMS value is blank', async () => {
+    const findGlobal = vi.fn().mockResolvedValue({
+      homepageEventsBody: '   ',
+    })
+
+    getPayloadClient.mockResolvedValue({ findGlobal })
+
+    const section = await getHomepageEventsSectionCopy('it')
+
+    expect(section).toEqual(publicContent.it.home.events)
+  })
+
   it('uses the CMS experiences empty state when present', async () => {
     const findGlobal = vi.fn().mockResolvedValue({
       experiencesEventsEmptyState: 'No public events are scheduled right now.',
@@ -93,6 +106,18 @@ describe('editorial settings helpers', () => {
 
   it('falls back to the static events body when the experiences empty state is missing', async () => {
     const findGlobal = vi.fn().mockResolvedValue({})
+
+    getPayloadClient.mockResolvedValue({ findGlobal })
+
+    await expect(getExperiencesEventsEmptyState('it')).resolves.toBe(
+      publicContent.it.home.events.body,
+    )
+  })
+
+  it('falls back to the static events body when the experiences empty state is blank', async () => {
+    const findGlobal = vi.fn().mockResolvedValue({
+      experiencesEventsEmptyState: '   ',
+    })
 
     getPayloadClient.mockResolvedValue({ findGlobal })
 

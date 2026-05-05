@@ -5,6 +5,12 @@ import type { EditorialSetting } from '@/payload-types'
 import { getPayloadClient } from '@/lib/payload'
 import { publicContent } from '@/lib/public-content'
 
+const getTrimmedString = (value: string | null | undefined): string | null => {
+  const trimmedValue = value?.trim()
+
+  return trimmedValue ? trimmedValue : null
+}
+
 const getEditorialSettings = async (locale: AppLocale): Promise<EditorialSetting> => {
   const payload = await getPayloadClient()
 
@@ -21,7 +27,11 @@ export const getHomepageProofSection = async (locale: AppLocale): Promise<HomePr
   const fallback = publicContent[locale].home.proof
   const items =
     settings.homepageProofItems
-      ?.filter((item) => Boolean(item?.quote) && Boolean(item?.source))
+      ?.map((item) => ({
+        quote: getTrimmedString(item?.quote),
+        source: getTrimmedString(item?.source),
+      }))
+      .filter((item): item is { quote: string; source: string } => Boolean(item.quote && item.source))
       .map((item) => ({
         quote: item.quote,
         source: item.source,
@@ -38,12 +48,12 @@ export const getHomepageEventsSectionCopy = async (
 
   return {
     ...fallback,
-    body: settings.homepageEventsBody || fallback.body,
+    body: getTrimmedString(settings.homepageEventsBody) ?? fallback.body,
   }
 }
 
 export const getExperiencesEventsEmptyState = async (locale: AppLocale): Promise<string> => {
   const settings = await getEditorialSettings(locale)
 
-  return settings.experiencesEventsEmptyState || publicContent[locale].home.events.body
+  return getTrimmedString(settings.experiencesEventsEmptyState) ?? publicContent[locale].home.events.body
 }
