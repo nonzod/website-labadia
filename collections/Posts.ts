@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { authenticatedAccess, publishedPostsReadAccess } from '@/lib/payload/access'
+import { authenticatedAccess, publishedContentReadAccess } from '@/lib/payload/access'
 
 const locales = ['it', 'en'] as const
 
@@ -29,7 +29,7 @@ export const Posts: CollectionConfig = {
   access: {
     create: authenticatedAccess,
     delete: authenticatedAccess,
-    read: publishedPostsReadAccess,
+    read: publishedContentReadAccess,
     update: authenticatedAccess,
   },
   admin: {

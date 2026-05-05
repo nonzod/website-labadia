@@ -2,7 +2,7 @@ import type { Access, CollectionConfig } from 'payload'
 
 export const authenticatedAccess: Access = ({ req: { user } }) => Boolean(user)
 
-export const publishedPostsReadAccess: Access = ({ req: { user } }) => {
+export const publishedContentReadAccess: Access = ({ req: { user } }) => {
   if (user) {
     return true
   }

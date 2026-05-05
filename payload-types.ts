@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     posts: Post;
     leads: Lead;
+    events: Event;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('it' | 'en') | ('it' | 'en')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'editorial-settings': EditorialSetting;
+  };
+  globalsSelect: {
+    'editorial-settings': EditorialSettingsSelect<false> | EditorialSettingsSelect<true>;
+  };
   locale: 'it' | 'en';
   widgets: {
     collections: CollectionsWidget;
@@ -210,6 +216,23 @@ export interface Lead {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  summary: string;
+  venue?: string | null;
+  startDate: string;
+  endDate?: string | null;
+  coverImage?: (number | null) | Media;
+  featuredOnHome?: boolean | null;
+  status: 'draft' | 'published' | 'archived';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -247,6 +270,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'leads';
         value: number | Lead;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -367,6 +394,22 @@ export interface LeadsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  summary?: T;
+  venue?: T;
+  startDate?: T;
+  endDate?: T;
+  coverImage?: T;
+  featuredOnHome?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -404,6 +447,42 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "editorial-settings".
+ */
+export interface EditorialSetting {
+  id: number;
+  homepageProofItems?:
+    | {
+        quote: string;
+        source: string;
+        id?: string | null;
+      }[]
+    | null;
+  homepageEventsBody?: string | null;
+  experiencesEventsEmptyState?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "editorial-settings_select".
+ */
+export interface EditorialSettingsSelect<T extends boolean = true> {
+  homepageProofItems?:
+    | T
+    | {
+        quote?: T;
+        source?: T;
+        id?: T;
+      };
+  homepageEventsBody?: T;
+  experiencesEventsEmptyState?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

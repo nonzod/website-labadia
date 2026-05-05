@@ -4,10 +4,12 @@ import { fileURLToPath } from 'node:url'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { buildConfig } from 'payload'
 
+import { Events } from './collections/Events'
 import { Leads } from './collections/Leads'
 import { Media } from './collections/Media'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { EditorialSettings } from './globals/EditorialSettings'
 import { serverEnv } from './lib/env'
 
 const filename = fileURLToPath(import.meta.url)
@@ -20,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Posts, Leads],
+  collections: [Users, Media, Posts, Leads, Events],
   db: sqliteAdapter({
     client: {
       url: serverEnv.databaseUrl,
@@ -43,6 +45,7 @@ export default buildConfig({
     ],
   },
   secret: serverEnv.payloadSecret,
+  globals: [EditorialSettings],
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
