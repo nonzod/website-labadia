@@ -14,10 +14,10 @@ export function ProofSection({ section }: ProofSectionProps) {
       </div>
 
       <div className="detail-grid">
-        {section.items.map((item) => (
-          <article className="detail-card" key={item.quote}>
-            <p>{item.quote}</p>
-            <p className="section-eyebrow">{item.source}</p>
+        {section.items.map(({ quote, source }) => (
+          <article className="detail-card" key={`${quote}-${source}`}>
+            <p>{quote}</p>
+            <p className="section-eyebrow">{source}</p>
           </article>
         ))}
       </div>
