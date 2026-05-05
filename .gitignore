@@ -20,3 +20,5 @@ data/*.sqlite-*
 
 media/*
 !media/.gitkeep
+
+.worktrees/
