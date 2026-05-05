@@ -8,7 +8,7 @@ import { defaultLocale, resolveLocale } from '@/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'La Badia',
-  description: 'Baseline applicativa Next.js + Payload per il progetto La Badia con routing bilingue IT/EN.',
+  description: 'Dimora rurale a San Venanzo tra soggiorno, paesaggio, racconti ed esperienze.',
 }
 
 export default async function RootLayout({

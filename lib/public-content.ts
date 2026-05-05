@@ -65,6 +65,35 @@ export type HomeEventsSection = {
   title: string
 }
 
+export type EditorialPageHeroCopy = {
+  body: string
+  eyebrow: string
+  imageAlt: string
+  imageSrc: string
+  title: string
+}
+
+export type EditorialFactItem = {
+  body: string
+  title: string
+}
+
+type EditorialFactsPage = {
+  facts: EditorialFactItem[]
+  factsTitle: string
+  hero: EditorialPageHeroCopy
+}
+
+type StoriesPage = {
+  blogBridge: {
+    body: string
+    eyebrow: string
+    primaryLabel: string
+    title: string
+  }
+  hero: EditorialPageHeroCopy
+}
+
 type HomeCopy = {
   cta: {
     body: string
@@ -126,6 +155,8 @@ type BlogCopy = {
 type PublicCopy = {
   blog: BlogCopy
   contact: ContactCopy
+  dimora: EditorialFactsPage
+  experiences: EditorialFactsPage
   footer: {
     links: FooterLink[]
     navigationLabel: string
@@ -141,6 +172,8 @@ type PublicCopy = {
     skipToContentLabel: string
   }
   home: HomeCopy
+  stories: StoriesPage
+  territory: EditorialFactsPage
 }
 
 export const publicContent: Record<AppLocale, PublicCopy> = {
@@ -198,9 +231,60 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         title: 'The first exchange should already feel clear, warm, and tailored.',
       },
     },
+    dimora: {
+      facts: [
+        {
+          body: 'A whole apartment of around 150 square metres spread across the third and fourth floors, designed for families or small groups who want to stay together.',
+          title: 'A complete stay format',
+        },
+        {
+          body: 'Three bedrooms, six beds, a frescoed salon, antique furnishings, and an oval dining table shape the stay with character rather than generic hospitality cues.',
+          title: 'Rooms with identity',
+        },
+        {
+          body: 'The Italian garden, the small borgo setting, and the quiet pace of San Venanzo turn the house into a base for slower days in Umbria.',
+          title: 'A house tied to its place',
+        },
+      ],
+      factsTitle: 'What defines the stay at La Badia.',
+      hero: {
+        body: 'La Badia is not a scattered room offer. It is a whole apartment inside a stone house, where family time, shared meals, and quiet routines can unfold with space and character.',
+        eyebrow: 'The house',
+        imageAlt: 'The stone house of La Badia framed by olive trees at sunset.',
+        imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+        title: 'A countryside dimora shaped for staying together.',
+      },
+    },
+    experiences: {
+      facts: [
+        {
+          body: 'Open dinners and small gatherings can welcome local guests and travelers without forcing the house into a large-event logic.',
+          title: 'Open moments with measure',
+        },
+        {
+          body: 'Private dinners, tastings, and hosted occasions can be built around the stay itself, keeping the atmosphere intimate and coherent.',
+          title: 'Hosted experiences',
+        },
+        {
+          body: 'The goal is not volume. It is a calendar of occasions that feel editorial, seasonal, and genuinely connected to the rhythm of the house.',
+          title: 'Seasonal and story-led',
+        },
+      ],
+      factsTitle: 'How experiences can grow from the house.',
+      hero: {
+        body: 'Experiences at La Badia begin from the scale of the house: small dinners, seasonal gatherings, local tastings, and occasions where guests and place can still feel close to one another.',
+        eyebrow: 'Experiences',
+        imageAlt: 'Umbrian hills viewed from La Badia in warm evening light.',
+        imageSrc: '/images/editorial/vista-colline.jpg',
+        title: 'Events, dinners, and hosted moments with a quieter rhythm.',
+      },
+    },
     footer: {
       links: [
-        { href: 'home', label: 'Home' },
+        { href: 'dimora', label: 'The house' },
+        { href: 'experiences', label: 'Experiences' },
+        { href: 'territory', label: 'Territory' },
+        { href: 'stories', label: 'Stories' },
         { href: 'blog', label: 'Journal' },
         { href: 'contact', label: 'Contact' },
       ],
@@ -212,9 +296,10 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       brandKicker: 'Country house',
       languageSwitcherLabel: 'Language switcher',
       navigation: [
-        { href: 'home', label: 'Home' },
-        { href: 'blog', label: 'Journal' },
-        { href: 'contact', label: 'Contact' },
+        { href: 'dimora', label: 'The house' },
+        { href: 'experiences', label: 'Experiences' },
+        { href: 'territory', label: 'Territory' },
+        { href: 'stories', label: 'Stories' },
       ],
       navigationLabel: 'Primary navigation',
       primaryCtaLabel: 'Plan your stay',
@@ -304,6 +389,45 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         title: 'The stay is specific, not generic.',
       },
     },
+    stories: {
+      blogBridge: {
+        body: 'The journal is where house notes, local routes, and slower seasonal pieces can accumulate over time. This page frames that editorial direction before the archive becomes richer.',
+        eyebrow: 'Editorial bridge',
+        primaryLabel: 'Open the journal',
+        title: 'Stories are the place where stay, landscape, and return visits meet.',
+      },
+      hero: {
+        body: 'Racconti is the editorial threshold for notes from the house, landscape fragments, seasonal observations, and routes that turn a stay into a longer memory.',
+        eyebrow: 'Stories',
+        imageAlt: 'Night view over the Umbrian hills from La Badia.',
+        imageSrc: '/images/editorial/vista-colline.jpg',
+        title: 'A narrative surface for the house and the territory around it.',
+      },
+    },
+    territory: {
+      facts: [
+        {
+          body: 'San Venanzo sits between hills, borgos, woods, and practical day routes that can stay close to the house instead of demanding long transfers.',
+          title: 'A usable local radius',
+        },
+        {
+          body: 'Wine, food, walking routes, and small Umbrian landmarks matter here when they support a slower stay rather than a checklist itinerary.',
+          title: 'Landscape with rhythm',
+        },
+        {
+          body: 'The territory page should help guests understand how the house connects with outings, returns, and quieter days in between.',
+          title: 'Stay and place together',
+        },
+      ],
+      factsTitle: 'How the surrounding territory supports the stay.',
+      hero: {
+        body: 'The territory around La Badia is part of the stay itself: hills, small towns, seasonal routes, and local producers that make Umbria feel close, legible, and never rushed.',
+        eyebrow: 'Territory',
+        imageAlt: 'Rolling Umbrian hills seen from La Badia at dusk.',
+        imageSrc: '/images/editorial/vista-colline.jpg',
+        title: 'A house that opens directly onto slower routes through Umbria.',
+      },
+    },
   },
   it: {
     blog: {
@@ -359,9 +483,60 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         title: 'Il primo contatto deve gia sembrare chiaro, caldo e su misura.',
       },
     },
+    dimora: {
+      facts: [
+        {
+          body: 'Un appartamento intero di circa 150 mq tra terzo e quarto piano, pensato per famiglie o piccoli gruppi che vogliono stare insieme.',
+          title: 'Un formato di soggiorno completo',
+        },
+        {
+          body: 'Tre camere, sei posti letto, un salone affrescato, arredi antichi e un tavolo ovale danno al soggiorno carattere invece di un ospitalita generica.',
+          title: 'Stanze con identita',
+        },
+        {
+          body: 'Il giardino all italiana, il piccolo borgo e il ritmo quieto di San Venanzo fanno della dimora una base naturale per giorni lenti in Umbria.',
+          title: 'Una casa legata al luogo',
+        },
+      ],
+      factsTitle: 'Cio che definisce il soggiorno alla Badia.',
+      hero: {
+        body: 'La Badia non e un offerta di camere sparse. E un appartamento intero dentro una casa in pietra, dove tempo condiviso, pasti lenti e giorni quieti possono prendere forma con spazio e carattere.',
+        eyebrow: 'La dimora',
+        imageAlt: 'La casa in pietra della Badia tra ulivi e luce di tramonto.',
+        imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+        title: 'Una dimora di campagna pensata per stare insieme.',
+      },
+    },
+    experiences: {
+      facts: [
+        {
+          body: 'Cene aperte e piccoli incontri possono accogliere ospiti del territorio e viaggiatori senza trasformare la casa in un luogo da grande evento.',
+          title: 'Momenti aperti ma misurati',
+        },
+        {
+          body: 'Cene private, degustazioni e occasioni ospitate possono nascere dal soggiorno stesso, mantenendo l atmosfera raccolta e coerente.',
+          title: 'Esperienze ospitate',
+        },
+        {
+          body: 'L obiettivo non e il volume ma un calendario di occasioni stagionali, editoriali e realmente legate al ritmo della dimora.',
+          title: 'Un calendario stagionale',
+        },
+      ],
+      factsTitle: 'Come possono nascere le esperienze alla Badia.',
+      hero: {
+        body: 'Le esperienze alla Badia partono dalla scala della casa: piccole cene, incontri stagionali, degustazioni e occasioni in cui ospiti e luogo possono restare vicini.',
+        eyebrow: 'Esperienze',
+        imageAlt: 'Le colline umbre viste dalla Badia nella luce calda della sera.',
+        imageSrc: '/images/editorial/vista-colline.jpg',
+        title: 'Eventi, cene e momenti ospitati con un ritmo piu quieto.',
+      },
+    },
     footer: {
       links: [
-        { href: 'home', label: 'Home' },
+        { href: 'dimora', label: 'La Dimora' },
+        { href: 'experiences', label: 'Esperienze' },
+        { href: 'territory', label: 'Territorio' },
+        { href: 'stories', label: 'Racconti' },
         { href: 'blog', label: 'Blog' },
         { href: 'contact', label: 'Contatti' },
       ],
@@ -373,9 +548,10 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
       brandKicker: 'Dimora rurale',
       languageSwitcherLabel: 'Cambio lingua',
       navigation: [
-        { href: 'home', label: 'Home' },
-        { href: 'blog', label: 'Blog' },
-        { href: 'contact', label: 'Contatti' },
+        { href: 'dimora', label: 'La Dimora' },
+        { href: 'experiences', label: 'Esperienze' },
+        { href: 'territory', label: 'Territorio' },
+        { href: 'stories', label: 'Racconti' },
       ],
       navigationLabel: 'Navigazione principale',
       primaryCtaLabel: 'Richiedi informazioni',
@@ -463,6 +639,45 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
           },
         ],
         title: 'Il soggiorno e specifico, non generico.',
+      },
+    },
+    stories: {
+      blogBridge: {
+        body: 'Il blog e il luogo dove possono accumularsi appunti dalla casa, percorsi locali e testi stagionali. Questa pagina introduce quella direzione editoriale prima che l archivio si allarghi.',
+        eyebrow: 'Ponte editoriale',
+        primaryLabel: 'Apri il blog',
+        title: 'I racconti sono il punto in cui soggiorno, paesaggio e ritorno si incontrano.',
+      },
+      hero: {
+        body: 'Racconti e la soglia editoriale per appunti dalla dimora, frammenti di paesaggio, note stagionali e percorsi che trasformano il soggiorno in una memoria piu lunga.',
+        eyebrow: 'Racconti',
+        imageAlt: 'Vista serale sulle colline umbre dalla Badia.',
+        imageSrc: '/images/editorial/vista-colline.jpg',
+        title: 'Una superficie narrativa per la dimora e il territorio che la circonda.',
+      },
+    },
+    territory: {
+      facts: [
+        {
+          body: 'San Venanzo si trova tra colline, borghi, boschi e percorsi praticabili in giornata, senza imporre spostamenti lunghi o frenetici.',
+          title: 'Un raggio locale davvero utile',
+        },
+        {
+          body: 'Vino, cucina, cammini e piccoli riferimenti umbri contano quando sostengono un soggiorno lento invece di una lista da spuntare.',
+          title: 'Paesaggio con ritmo',
+        },
+        {
+          body: 'La pagina territorio deve aiutare a capire come la casa si lega alle uscite, ai ritorni e alle giornate piu quiete in mezzo.',
+          title: 'Dimora e luogo insieme',
+        },
+      ],
+      factsTitle: 'Come il territorio accompagna il soggiorno.',
+      hero: {
+        body: 'Il territorio attorno alla Badia fa parte del soggiorno stesso: colline, piccoli paesi, percorsi stagionali e produttori locali che rendono l Umbria vicina, leggibile e mai forzata.',
+        eyebrow: 'Territorio',
+        imageAlt: 'Le colline umbre viste dalla Badia al calare della sera.',
+        imageSrc: '/images/editorial/vista-colline.jpg',
+        title: 'Una casa che si apre direttamente su percorsi lenti in Umbria.',
       },
     },
   },
