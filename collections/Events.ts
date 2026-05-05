@@ -23,8 +23,10 @@ export const Events: CollectionConfig = {
         }
 
         const typedData = data as { endDate?: unknown; startDate?: unknown }
-        const effectiveStartDate = typedData.startDate ?? originalDoc?.startDate
-        const effectiveEndDate = typedData.endDate ?? originalDoc?.endDate
+        const hasStartDate = Object.prototype.hasOwnProperty.call(typedData, 'startDate')
+        const hasEndDate = Object.prototype.hasOwnProperty.call(typedData, 'endDate')
+        const effectiveStartDate = hasStartDate ? typedData.startDate : originalDoc?.startDate
+        const effectiveEndDate = hasEndDate ? typedData.endDate : originalDoc?.endDate
 
         if (
           typeof effectiveStartDate === 'string' &&

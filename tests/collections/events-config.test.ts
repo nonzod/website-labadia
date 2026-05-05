@@ -56,4 +56,23 @@ describe('Events collection config', () => {
       } as never),
     ).toThrow('La data di fine non puo essere precedente alla data di inizio.')
   })
+
+  it('allows clearing endDate explicitly while moving startDate later', () => {
+    const beforeValidate = Events.hooks?.beforeValidate?.[0]
+
+    expect(beforeValidate).toBeTypeOf('function')
+
+    expect(() =>
+      beforeValidate?.({
+        data: {
+          startDate: '2026-06-12T10:00:00.000Z',
+          endDate: null,
+        },
+        originalDoc: {
+          startDate: '2026-06-10T10:00:00.000Z',
+          endDate: '2026-06-11T10:00:00.000Z',
+        },
+      } as never),
+    ).not.toThrow()
+  })
 })
