@@ -1,15 +1,9 @@
-import { cache } from 'react'
-
-import config from '@payload-config'
-import { getPayload } from 'payload'
-
 import type { AppLocale } from '@/lib/i18n'
 import type { Post } from '@/payload-types'
 
 import { appLocales, getLocalizedPathname, isSupportedLocale } from '@/lib/i18n'
+import { getPayloadClient } from '@/lib/payload'
 import { publicPathnames } from '@/lib/public-pages'
-
-const getPayloadClient = cache(async () => getPayload({ config }))
 
 const isBlogPostPathname = (pathname: string) => {
   const segments = pathname.split('/').filter(Boolean)
