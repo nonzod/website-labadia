@@ -24,4 +24,19 @@ describe('Events collection config', () => {
       ]),
     )
   })
+
+  it('rejects an end date earlier than the start date', () => {
+    const beforeValidate = Events.hooks?.beforeValidate?.[0]
+
+    expect(beforeValidate).toBeTypeOf('function')
+
+    expect(() =>
+      beforeValidate?.({
+        data: {
+          startDate: '2026-06-10T10:00:00.000Z',
+          endDate: '2026-06-09T10:00:00.000Z',
+        },
+      } as never),
+    ).toThrow('La data di fine non puo essere precedente alla data di inizio.')
+  })
 })

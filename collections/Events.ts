@@ -15,6 +15,27 @@ export const Events: CollectionConfig = {
     useAsTitle: 'title',
   },
   defaultSort: 'startDate',
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (!data || typeof data !== 'object') {
+          return data
+        }
+
+        const { startDate, endDate } = data as { endDate?: unknown; startDate?: unknown }
+
+        if (
+          typeof startDate === 'string' &&
+          typeof endDate === 'string' &&
+          new Date(endDate).getTime() < new Date(startDate).getTime()
+        ) {
+          throw new Error('La data di fine non puo essere precedente alla data di inizio.')
+        }
+
+        return data
+      },
+    ],
+  },
   fields: [
     {
       name: 'title',
