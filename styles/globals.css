@@ -712,7 +712,7 @@ a:focus-visible {
   display: grid;
   gap: 2rem;
   min-height: min(100svh, 56rem);
-  padding: 7rem 0 1.6rem;
+  padding: 6rem 0 1.6rem;
   grid-template-rows: auto 1fr auto auto;
 }
 
@@ -905,7 +905,7 @@ a:focus-visible {
 }
 
 .home-intro-strip-shell {
-  padding: 7.5rem 0;
+  padding: 7rem 0;
 }
 
 .home-intro-strip-grid {
@@ -963,7 +963,7 @@ a:focus-visible {
   grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
   gap: 2rem 3rem;
   align-items: center;
-  padding: 5.5rem 0;
+  padding: 4rem 0;
 }
 
 .home-media-story-reversed .home-media-story-shell {
@@ -1014,7 +1014,7 @@ a:focus-visible {
 }
 
 .door-grid-editorial {
-  padding: 8.75rem 0 7.5rem;
+  padding: 7rem 0;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 2.5rem 3rem;
 }
@@ -1052,7 +1052,7 @@ a:focus-visible {
 }
 
 .door-grid-editorial .door-card:nth-of-type(2) {
-  margin-top: 5.5rem;
+  margin-top: 2.5rem;
 }
 
 .door-grid-editorial .door-card {
@@ -1153,7 +1153,7 @@ a:focus-visible {
 }
 
 .detail-strip-shell {
-  padding: 2.8rem 0;
+  padding: 4rem 0;
 }
 
 .detail-strip-grid {
@@ -1200,7 +1200,7 @@ a:focus-visible {
 }
 
 .reviews-section-shell {
-  padding: 7.5rem 0;
+  padding: 7rem 0;
 }
 
 .reviews-section-heading {
@@ -1317,7 +1317,7 @@ a:focus-visible {
 }
 
 .home-closing-shell {
-  padding: 10rem 0;
+  padding: 7rem 0;
 }
 
 .home-closing-copy {
@@ -1410,7 +1410,7 @@ a:focus-visible {
   width: 100%;
   margin-right: 0;
   margin-left: 0;
-  padding: 7.5rem 0;
+  padding: 7rem 0;
   border-top: 1px solid rgba(76, 87, 80, 0.14);
   border-radius: 0;
   background: linear-gradient(180deg, rgba(248, 244, 235, 0.84) 0%, rgba(240, 244, 233, 0.9) 100%);
@@ -1455,7 +1455,7 @@ a:focus-visible {
 }
 
 .event-agenda-card-tone-2 .event-agenda-poster {
-  background: linear-gradient(180deg, #8e7fc1 0%, #bdb3df 100%);
+  background: linear-gradient(180deg, #567034 0%, #7a9458 100%);
 }
 
 .event-agenda-card-tone-3 .event-agenda-poster {
@@ -1506,7 +1506,7 @@ a:focus-visible {
 
 .event-agenda-card-tone-2 .event-agenda-day,
 .event-agenda-card-tone-2 .event-agenda-footer {
-  color: var(--glicine-700);
+  color: var(--colline-700);
 }
 
 .event-agenda-card-tone-3 .event-agenda-day,
@@ -1918,7 +1918,7 @@ a:focus-visible {
     left: 0;
     right: 0;
     width: auto;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border-radius: 0;
     transform: none;
   }
@@ -1936,7 +1936,8 @@ a:focus-visible {
   }
 
   .site-nav {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    gap: 0.4rem;
   }
 
   .site-actions,
@@ -2016,7 +2017,7 @@ a:focus-visible {
 
   .home-hero-shell {
     min-height: 42rem;
-    padding: 11rem 0 2rem;
+    padding: 6rem 0 2rem;
   }
 
   .home-hero-immersive {
@@ -2060,6 +2061,11 @@ a:focus-visible {
     padding-top: 3rem;
     padding-bottom: 3rem;
     gap: 1.5rem;
+  }
+
+  .events-preview {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .door-grid-heading-copy,

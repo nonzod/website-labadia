@@ -11,6 +11,7 @@ Obiettivo: avere nuovi contesti rapidi, puliti e subito operativi.
 - Il progetto riguarda il sito web de La Badia, struttura ricettiva a San Venanzo, in Umbria.
 - Il sito deve unire presentazione della dimora, racconto del luogo, valorizzazione del territorio e supporto alla conversione.
 - Non va pensato come una semplice brochure: deve tenere insieme contenuti, fiducia, scoperta e contatto/prenotazione.
+- Non chiedere conferma prima di modificare file
 
 ## Direzione tecnica
 
