@@ -3,7 +3,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { CtaBand } from '@/components/public/CtaBand'
+import { submitContactLeadAction } from '@/app/[lang]/contatti/actions'
+import { ContactInquiryForm } from '@/components/public/ContactInquiryForm'
 import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
@@ -53,6 +54,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
             </a>
           </div>
         </div>
+
+        <ContactInquiryForm action={submitContactLeadAction.bind(null, lang)} copy={copy.form} />
       </section>
 
       <section className="content-stack" id="contact-areas">
@@ -79,16 +82,6 @@ export default async function ContactPage({ params }: ContactPageProps) {
             ))}
           </ul>
         </section>
-
-        <CtaBand
-          body={copy.hero.body}
-          eyebrow={copy.process.eyebrow}
-          primaryHref={getPublicHref('home', lang)}
-          primaryLabel={copy.hero.primaryLabel}
-          secondaryHref="#contact-areas"
-          secondaryLabel={copy.hero.secondaryLabel}
-          title={copy.process.title}
-        />
       </section>
     </main>
   )

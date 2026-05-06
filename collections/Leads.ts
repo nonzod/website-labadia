@@ -33,6 +33,19 @@ export const Leads: CollectionConfig = {
       label: 'Telefono',
     },
     {
+      name: 'desiredPeriod',
+      type: 'text',
+      required: true,
+      label: 'Periodo desiderato',
+    },
+    {
+      name: 'guestCount',
+      type: 'number',
+      min: 1,
+      required: true,
+      label: 'Numero ospiti',
+    },
+    {
       name: 'message',
       type: 'textarea',
       required: true,

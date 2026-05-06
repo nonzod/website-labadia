@@ -13,11 +13,12 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 | T05 | P1 | completato | Shell frontend pubblico e layout condiviso | T03 | base UI server-first per pagine pubbliche |
 | T06 | P1 | completato | Blog pubblico bilingue | T04, T05 | lista e dettaglio articoli funzionanti |
 | T12 | P1 | completato | Riposizionamento homepage e copy pubblica | T05 | narrativa home coerente con la dimora |
-| T13 | P1 | pending | Ristrutturazione homepage: hero, due porte, proof, eventi | T05, T12 | homepage allineata all'architettura editoriale |
-| T14 | P1 | pending | Allineamento design system pubblico a palette ufficiale | T05 | token, tipografia e stati UI coerenti |
-| T15 | P1 | pending | Integrazione fotografia e media narrativi in homepage | T12, T13, T14 | homepage visualmente immersiva |
-| T16 | P1 | pending | Navigazione pubblica e CTA di conversione | T12, T13, T14 | header e percorsi pubblici piu orientati a soggiorno ed esperienze |
-| T07 | P1 | pending | Pagina contatti e persistenza lead | T04, T05 | form pubblico con salvataggio dati |
+| T13 | P1 | completato | Ristrutturazione homepage: hero, due porte, proof, eventi | T05, T12 | homepage allineata all'architettura editoriale |
+| T14 | P1 | completato | Allineamento design system pubblico a palette ufficiale | T05 | token, tipografia e stati UI coerenti |
+| T14b | P0 | completato | Allineamento layout homepage al riferimento standalone | T13, T14 | hero, sequenza sezioni e ritmo editoriale coerenti |
+| T15 | P1 | completato | Integrazione fotografia e media narrativi in homepage | T12, T13, T14, T14b | homepage visualmente immersiva |
+| T16 | P1 | completato | Navigazione pubblica e CTA di conversione | T12, T13, T14, T14b | header e percorsi pubblici piu orientati a soggiorno ed esperienze |
+| T07 | P1 | completato | Pagina contatti e persistenza lead | T04, T05 | form pubblico con salvataggio dati |
 | T08 | P1 | pending | Integrazione email `SMTP` per richieste contatto | T07 | invio email post-salvataggio |
 | T09 | P1 | pending | SEO tecnico di base | T03, T05, T06 | metadata, sitemap e robots coerenti |
 | T10 | P2 | pending | Deploy `Kubernetes` con volume persistente | T02, T08, T09 | manifest e strategia runtime production |
@@ -38,11 +39,12 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 - [T05 - Shell frontend pubblico](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T05-shell-frontend.md) `completato`
 - [T06 - Blog pubblico bilingue](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T06-blog-pubblico.md) `completato`
 - [T12 - Riposizionamento homepage e copy pubblica](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T12-homepage-copy-positioning.md) `completato`
-- [T13 - Ristrutturazione homepage](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T13-homepage-ia-sections.md)
-- [T14 - Allineamento design system pubblico](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T14-design-system-pubblico.md)
-- [T15 - Integrazione fotografia e media narrativi](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T15-homepage-media-fotografia.md)
+- [T13 - Ristrutturazione homepage](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T13-homepage-ia-sections.md) `completato`
+- [T14 - Allineamento design system pubblico](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T14-design-system-pubblico.md) `completato`
+- [T14b - Allineamento layout homepage al riferimento standalone](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T14b-homepage-layout-allineamento-riferimento.md) `completato`
+- [T15 - Integrazione fotografia e media narrativi](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T15-homepage-media-fotografia.md) `completato`
 - [T16 - Navigazione pubblica e CTA di conversione](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T16-nav-cta-conversione.md)
-- [T07 - Contatti e lead persistence](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T07-contatti-leads.md)
+- [T07 - Contatti e lead persistence](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T07-contatti-leads.md) `completato`
 - [T08 - Integrazione SMTP](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T08-smtp-email.md)
 - [T09 - SEO tecnico di base](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T09-seo-tecnico.md)
 - [T10 - Deploy Kubernetes](/mnt/XFS1TB/Workspace/io/Badia/bot/tasks/T10-deploy-k8s.md)
@@ -50,8 +52,9 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 
 ## Nuovi interventi homepage
 
-I task `T12-T16` derivano dalla review comparativa tra stato attuale, riferimento `Homepage-standalone-src.html` e palette ufficiale in `analisi/remixed-c8b29026.html`.
+I task `T12-T16` e `T14b` derivano dalla review comparativa tra stato attuale, riferimento `Homepage-standalone-src.html` e palette ufficiale in `analisi/remixed-c8b29026.html`.
 
 - obiettivo: trasformare la home da shell tecnica calda a vera homepage hospitality/editoriale
 - focus: narrativa della dimora, architettura a due porte, proof e conversione, palette ufficiale, tipografia brand, fotografia reale
 - criterio guida: nessun linguaggio tecnico o admin-facing deve emergere nel layer pubblico
+- urgenza: `T14b` va chiuso prima di proseguire con `T15` e `T16`, per evitare di consolidare media e CTA sopra un impianto layout ancora divergente dal riferimento

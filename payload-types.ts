@@ -209,6 +209,8 @@ export interface Lead {
   name: string;
   email: string;
   phone?: string | null;
+  desiredPeriod: string;
+  guestCount: number;
   message: string;
   lang: 'it' | 'en';
   sourcePage: string;
@@ -390,6 +392,8 @@ export interface LeadsSelect<T extends boolean = true> {
   name?: T;
   email?: T;
   phone?: T;
+  desiredPeriod?: T;
+  guestCount?: T;
   message?: T;
   lang?: T;
   sourcePage?: T;

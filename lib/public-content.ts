@@ -22,24 +22,41 @@ type FooterLink = {
   label: string
 }
 
-export type HomeDoor = {
-  body: string
-  href: PublicRouteKey
+type EditorialImageCopy = {
   imageAlt: string
+  imageCaption: string
+  imageLabel: string
   imageSrc: string
+}
+
+export type HomeDoor = EditorialImageCopy & {
+  body: string
+  ctaLabel: string
+  href: PublicRouteKey
   label: string
+  number: string
+  stats: string[]
+  sublabel: string
   title: string
 }
 
-export type HomeHeroCopy = {
+export type HomeHeroCopy = EditorialImageCopy & {
   body: string
   eyebrow: string
-  imageAlt: string
-  imageSrc: string
+  metaEnd: string
+  metaStart: string
   primaryHref: PublicRouteKey
   primaryLabel: string
+  scrollLabel: string
   secondaryHref: PublicRouteKey
   secondaryLabel: string
+  title: string
+}
+
+export type HomeMediaStoryCopy = EditorialImageCopy & {
+  body: string
+  eyebrow: string
+  id: string
   title: string
 }
 
@@ -59,7 +76,10 @@ export type HomeEventsSection = {
   eyebrow: string
   items: Array<{
     body: string
+    date: string
+    schedule: string
     title: string
+    venue: string
   }>
   primaryHref: PublicRouteKey
   primaryLabel: string
@@ -77,6 +97,12 @@ export type EditorialPageHeroCopy = {
 export type EditorialFactItem = {
   body: string
   title: string
+}
+
+export type HomeDetailItem = {
+  label: string
+  unit: string
+  value: string
 }
 
 type EditorialEventsSection = {
@@ -107,28 +133,84 @@ type StoriesPage = {
 }
 
 type HomeCopy = {
-  cta: {
+  cta: EditorialImageCopy & {
     body: string
     eyebrow: string
     primaryLabel: string
     secondaryLabel: string
     title: string
   }
+  detailItems: HomeDetailItem[]
   doors: HomeDoor[]
+  doorsEyebrow: string
   doorsSectionLabel: string
+  doorsTitle: string
   events: HomeEventsSection
+  facts: EditorialFactItem[]
+  factsTitle: string
   hero: HomeHeroCopy
   intro: {
     body: string
     eyebrow: string
     title: string
   }
+  mediaStories: HomeMediaStoryCopy[]
   proof: HomeProofSection
+  reviewsMeta: string[]
 }
 
 type ContactCopy = {
   cards: ContactCard[]
   cardsLabel: string
+  confirmation: {
+    body: string
+    eyebrow: string
+    primaryLabel: string
+    secondaryLabel: string
+    title: string
+  }
+  form: {
+    body: string
+    eyebrow: string
+    errors: {
+      desiredPeriod: string
+      email: string
+      guestCount: string
+      message: string
+      name: string
+      summary: string
+    }
+    fields: {
+      desiredPeriod: {
+        label: string
+        placeholder: string
+      }
+      email: {
+        label: string
+        placeholder: string
+      }
+      guestCount: {
+        label: string
+        placeholder: string
+      }
+      message: {
+        label: string
+        placeholder: string
+      }
+      name: {
+        label: string
+        placeholder: string
+      }
+      phone: {
+        hint: string
+        label: string
+        placeholder: string
+      }
+    }
+    pendingLabel: string
+    submitLabel: string
+    title: string
+  }
   hero: {
     body: string
     eyebrow: string
@@ -226,6 +308,56 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         },
       ],
       cardsLabel: 'Inquiry areas',
+      confirmation: {
+        body: 'Your first request is safely with us. We will reply as soon as we can with a more tailored next step.',
+        eyebrow: 'Request received',
+        primaryLabel: 'Back to the home page',
+        secondaryLabel: 'Open the contact page again',
+        title: 'Request received.',
+      },
+      form: {
+        body: 'Share your preferred timing, how many guests are travelling, and the atmosphere you have in mind. We store the request before anything else happens.',
+        eyebrow: 'Inquiry form',
+        errors: {
+          desiredPeriod: 'Tell us the period you have in mind.',
+          email: 'Enter a valid email address.',
+          guestCount: 'Enter a guest count greater than zero.',
+          message: 'Add a little more detail to your request.',
+          name: 'Enter your name.',
+          summary: 'Check the highlighted fields and try again.',
+        },
+        fields: {
+          desiredPeriod: {
+            label: 'Desired period',
+            placeholder: 'Late September or 24-28 September',
+          },
+          email: {
+            label: 'Email',
+            placeholder: 'guest@example.com',
+          },
+          guestCount: {
+            label: 'Guest count',
+            placeholder: '4',
+          },
+          message: {
+            label: 'Message',
+            placeholder:
+              'Tell us about your stay, who is travelling, and any detail that will help us understand the request.',
+          },
+          name: {
+            label: 'Name',
+            placeholder: 'Ada Lovelace',
+          },
+          phone: {
+            hint: 'Optional, if you would like to be called back.',
+            label: 'Phone',
+            placeholder: '+44 7700 900123',
+          },
+        },
+        pendingLabel: 'Sending request...',
+        submitLabel: 'Send request',
+        title: 'Tell us about your stay.',
+      },
       hero: {
         body: 'Use this page to tell us when you would like to come, who is travelling, and whether you are planning a stay, a private occasion, or time shaped around the territory.',
         eyebrow: 'Contact',
@@ -320,65 +452,119 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         { href: 'stories', label: 'Stories' },
       ],
       navigationLabel: 'Primary navigation',
-      primaryCtaLabel: 'Plan your stay',
+      primaryCtaLabel: 'Book now',
       skipToContentLabel: 'Skip to content',
     },
     home: {
       cta: {
         body: 'Tell us your dates, the number of guests, and whether you are imagining a quiet stay, an open event, or time shaped around the Umbrian hills.',
         eyebrow: 'Start your stay',
-        primaryLabel: 'Request information',
+        imageAlt: 'Night view from La Badia across the rooftops and Umbrian hills.',
+        imageCaption: 'Stone roofs, distant hills, and the quieter side of San Venanzo after sunset.',
+        imageLabel: 'After sunset',
+        imageSrc: '/images/editorial/vista-colline-notte.jpg',
+        primaryLabel: 'Book now',
         secondaryLabel: 'Discover the territory',
         title: 'Begin with the kind of time you want to spend at La Badia.',
       },
+      detailItems: [
+        { label: 'Whole apartment', unit: 'sqm', value: '150' },
+        { label: 'Italian garden', unit: 'sqm', value: '2,000' },
+        { label: 'Three rooms, one suite', unit: 'beds', value: '6' },
+        { label: 'Frescoed salon', unit: 'sqm', value: '41' },
+        { label: 'From the paved road', unit: 'm', value: '100' },
+      ],
       doors: [
         {
           body: 'A whole apartment inside a stone house, with frescoes, antique furniture, generous rooms, and the freedom to move between salon and garden at your own rhythm.',
+          ctaLabel: 'Discover the house',
           href: 'dimora',
           imageAlt: 'Sunset light over La Badia, olive trees, and the stone garden wall.',
+          imageCaption: 'Olive trees, the garden wall, and the first exterior view of the house at golden hour.',
+          imageLabel: 'The house from outside',
           imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
           label: 'Stay',
+          number: 'I',
+          stats: ['150 sqm', '6 beds', '3 rooms', '2,000 sqm garden'],
+          sublabel: 'For those looking for where to stay',
           title: 'The house',
         },
         {
           body: 'Open events, private dinners, tastings, local routes, and occasions that turn the stay into a slower way of being in Umbria.',
+          ctaLabel: 'Discover the experiences',
           href: 'experiences',
           imageAlt: 'Umbrian hills seen from La Badia in warm evening light.',
+          imageCaption: 'The hills begin directly outside the house, before dinner and after it.',
+          imageLabel: 'The surrounding landscape',
           imageSrc: '/images/editorial/vista-colline.jpg',
           label: 'Experience',
+          number: 'II',
+          stats: ['Wine club', 'Concerts', 'Tertulias', 'Apse hall'],
+          sublabel: 'For those looking for an experience',
           title: 'Live La Badia',
         },
       ],
+      doorsEyebrow: 'Two doors',
       doorsSectionLabel: 'Editorial entry points',
+      doorsTitle: 'Two editorial ways to enter La Badia.',
       events: {
-        body: 'Some dates will stay open to local guests and travelers alike: long-table dinners, seasonal gatherings, and small cultural evenings shaped for this house.',
-        emptyStateBody: 'The events surface is ready even when the next public date has not been published yet.',
-        eyebrow: 'Open moments',
+        body: 'The frescoed salon, the garden, and the apse hall next door host a first agenda of open evenings, dinners, and measured gatherings. You can join even without staying overnight.',
+        emptyStateBody: 'The agenda is ready even when the next public date has not been published yet.',
+        eyebrow: 'Agenda · spring — summer 2026',
         items: [
           {
-            body: 'Small evenings where food, wine, and conversation stay close to the house and its slower pace.',
-            title: 'Open dinners',
+            body: 'A shared dinner in the garden with Umbrian wines and a small table gathered around the season.',
+            date: '24 May 2026',
+            schedule: '19:30',
+            title: 'Long-table dinner',
+            venue: 'Italian garden',
           },
           {
-            body: 'Readings, seasonal notes, and intimate gatherings designed for guests already here and for people arriving just for the event.',
-            title: 'Editorial evenings',
+            body: 'Readings, conversation, and candlelight in the frescoed room, open to guests and local visitors alike.',
+            date: '7 June 2026',
+            schedule: '18:30',
+            title: 'Editorial evening',
+            venue: 'Frescoed salon',
           },
           {
-            body: 'Events remain intentionally limited in size, so the atmosphere stays quiet, warm, and coherent with the place.',
-            title: 'A measured rhythm',
+            body: 'A guided tasting followed by a quieter concert in the adjacent hall, kept intentionally limited in size.',
+            date: '21 June 2026',
+            schedule: '18:00',
+            title: 'Wine club and chamber music',
+            venue: 'Apse hall',
           },
         ],
         primaryHref: 'experiences',
         primaryLabel: 'Go to experiences',
-        title: 'Events open to everyone will arrive here.',
+        title: 'Events open to everyone.',
       },
+      facts: [
+        {
+          body: 'Around 150 square metres across the third and fourth floors, kept as one apartment so families and small groups can live the house together.',
+          title: 'A whole-stay format',
+        },
+        {
+          body: 'Three bedrooms, six beds, a frescoed salon, an oval dining table, and direct access to the Italian garden make the stay concrete from the first glance.',
+          title: 'House details with character',
+        },
+        {
+          body: 'San Venanzo, local wineries, private cooks, and slower routes through Umbria turn the house into a base, not just a room to sleep in.',
+          title: 'A stay tied to place',
+        },
+      ],
+      factsTitle: 'Three concrete details that shape the stay.',
       hero: {
         body: 'A whole apartment in a stone house, between an Italian garden and the Umbrian hills of San Venanzo. Three rooms, six beds, zodiac frescoes, antique furniture, and the quiet of a small borgo.',
         eyebrow: 'La Badia, San Venanzo',
         imageAlt: 'La Badia at sunset, framed by olive trees and the garden wall.',
+        imageCaption: 'Olive trees, the stone wall, and the garden edge frame the house before you even step inside.',
+        imageLabel: 'Stone house · Italian garden',
         imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+        metaEnd: 'Vocabolo Badia 5 — MMXXVI',
+        metaStart: '42°51′N · 12°16′E',
         primaryHref: 'contact',
-        primaryLabel: 'Request your stay',
+        primaryLabel: 'Book now',
+        scrollLabel: 'Scroll',
         secondaryHref: 'dimora',
         secondaryLabel: 'Discover the house',
         title: 'A countryside dimora to live slowly, together.',
@@ -388,25 +574,48 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         eyebrow: 'The house',
         title: 'A place for stays, family time, and quiet days in Umbria.',
       },
+      mediaStories: [
+        {
+          body: 'The visual direction needs to make the stay feel grounded immediately: stone walls, low evening light, and the sense that the house belongs to a real borgo rather than a hospitality template. The frescoed salon and the garden matter more once the atmosphere is already believable.',
+          eyebrow: 'Stone and quiet',
+          id: 'media-house',
+          imageAlt: 'La Badia in blue hour light, with stone walls and the quiet garden nearby.',
+          imageCaption: 'Stone walls, low lights, and the calm that begins before entering the house.',
+          imageLabel: 'Blue hour in the borgo',
+          imageSrc: '/images/editorial/hero-notte.jpg',
+          title: 'The house should be seen before it is fully explained.',
+        },
+        {
+          body: 'The territory is not a separate excursion layer. It is the horizon that shapes breakfasts, returns, open evenings, and the slower tempo of the stay itself. Showing that horizon in the homepage keeps the narrative tied to Umbria instead of flattening it into generic booking copy.',
+          eyebrow: 'Territory in sight',
+          id: 'media-territory',
+          imageAlt: 'Night view over the rooftops and Umbrian hills seen from La Badia.',
+          imageCaption: 'Rooflines, distance, and the slower geography that stays around San Venanzo at night.',
+          imageLabel: 'Hills after dark',
+          imageSrc: '/images/editorial/vista-colline-notte.jpg',
+          title: 'The Umbrian hills stay inside the experience of the house.',
+        },
+      ],
       proof: {
-        body: 'Even in this first editorial version, the promise needs to feel concrete: a whole apartment, a real garden, and a pace that already belongs to the place.',
-        eyebrow: 'Why it feels credible',
+        body: 'What returns in the reviews is not generic comfort. Guests speak about atmosphere, quiet, and the feeling of inhabiting a real place rather than a hospitality template.',
+        eyebrow: 'Guest voices',
         items: [
           {
-            quote: 'Around 150 sqm across the third and fourth floors, rented as a whole apartment and not room by room.',
-            source: 'Stay format',
+            quote: 'The house is more beautiful than any photograph. The garden at dawn, with hoopoes calling, is something we still talk about.',
+            source: 'Chiara & Matteo · Airbnb · May 2025',
           },
           {
-            quote: 'Six beds across three rooms, with a frescoed salon, oval dining table, and access to the Italian garden.',
-            source: 'House details',
+            quote: 'Rare balance: generous spaces, real silence, and a salon that makes dinner feel like part of the stay, not just a practical moment.',
+            source: 'Helen R. · Booking · September 2025',
           },
           {
-            quote: 'Local wines, private cooks, nearby routes, and a small Umbrian borgo just outside the door.',
-            source: 'Territory and rhythm',
+            quote: 'We came for Umbria and ended up rearranging our days around the house itself. That almost never happens.',
+            source: 'Luca and friends · Guest note · June 2024',
           },
         ],
-        title: 'The stay is specific, not generic.',
+        title: 'People return, and then they write back.',
       },
+      reviewsMeta: ['Airbnb · 4.98 / 5 · 84 reviews', 'Booking · 9.6 / 10 · 52 reviews', 'Open since 2021'],
     },
     stories: {
       blogBridge: {
@@ -485,6 +694,56 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         },
       ],
       cardsLabel: 'Ambiti di richiesta',
+      confirmation: {
+        body: 'La tua prima richiesta e gia con noi. Ti risponderemo appena possibile con un prossimo passo piu preciso e su misura.',
+        eyebrow: 'Richiesta ricevuta',
+        primaryLabel: 'Torna alla home',
+        secondaryLabel: 'Apri di nuovo la pagina contatti',
+        title: 'Richiesta ricevuta.',
+      },
+      form: {
+        body: 'Condividi il periodo che hai in mente, quante persone viaggiano con te e il tipo di atmosfera che stai cercando. La richiesta viene salvata prima di qualsiasi altro passaggio.',
+        eyebrow: 'Modulo richiesta',
+        errors: {
+          desiredPeriod: 'Indica il periodo desiderato.',
+          email: 'Inserisci un indirizzo email valido.',
+          guestCount: 'Indica un numero di ospiti maggiore di zero.',
+          message: 'Aggiungi qualche dettaglio in piu alla richiesta.',
+          name: 'Inserisci il tuo nome.',
+          summary: 'Controlla i campi evidenziati e riprova.',
+        },
+        fields: {
+          desiredPeriod: {
+            label: 'Periodo desiderato',
+            placeholder: 'Fine settembre o 24-28 settembre',
+          },
+          email: {
+            label: 'Email',
+            placeholder: 'ospite@example.com',
+          },
+          guestCount: {
+            label: 'Numero di ospiti',
+            placeholder: '4',
+          },
+          message: {
+            label: 'Messaggio',
+            placeholder:
+              'Raccontaci il tipo di soggiorno che immagini, chi viaggia con te e ogni dettaglio utile per capire meglio la richiesta.',
+          },
+          name: {
+            label: 'Nome',
+            placeholder: 'Ada Lovelace',
+          },
+          phone: {
+            hint: 'Opzionale, se preferisci essere ricontattato anche al telefono.',
+            label: 'Telefono',
+            placeholder: '+39 333 1234567',
+          },
+        },
+        pendingLabel: 'Invio in corso...',
+        submitLabel: 'Invia la richiesta',
+        title: 'Raccontaci il tuo soggiorno.',
+      },
       hero: {
         body: 'Qui puoi raccontarci quando vorresti venire, chi viaggia con te e se stai pensando a un soggiorno, a un occasione privata o a tempo costruito attorno al territorio.',
         eyebrow: 'Contatti',
@@ -579,65 +838,119 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         { href: 'stories', label: 'Racconti' },
       ],
       navigationLabel: 'Navigazione principale',
-      primaryCtaLabel: 'Richiedi informazioni',
+      primaryCtaLabel: 'Prenota ora',
       skipToContentLabel: 'Vai al contenuto',
     },
     home: {
       cta: {
         body: 'Raccontaci il periodo, il numero di ospiti e se immagini un soggiorno quieto, un evento aperto o giornate costruite attorno alle colline umbre.',
         eyebrow: 'Inizia il soggiorno',
-        primaryLabel: 'Richiedi informazioni',
+        imageAlt: 'Vista notturna dai tetti della Badia verso le colline umbre.',
+        imageCaption: 'Tetti in pietra, colline lontane e il lato piu quieto di San Venanzo dopo il tramonto.',
+        imageLabel: 'Dopo il tramonto',
+        imageSrc: '/images/editorial/vista-colline-notte.jpg',
+        primaryLabel: 'Prenota ora',
         secondaryLabel: 'Scopri il territorio',
         title: 'Parti da come vuoi vivere il tempo alla Badia.',
       },
+      detailItems: [
+        { label: 'Appartamento intero', unit: 'mq', value: '150' },
+        { label: 'Giardino all italiana', unit: 'mq', value: '2.000' },
+        { label: 'Tre camere, una suite', unit: 'letti', value: '6' },
+        { label: 'Salone con affreschi', unit: 'mq', value: '41' },
+        { label: 'Dalla strada asfaltata', unit: 'm', value: '100' },
+      ],
       doors: [
         {
           body: 'Un appartamento intero dentro una casa in pietra, con affreschi, mobili antichi, stanze generose e la liberta di passare dal salone al giardino con il proprio ritmo.',
+          ctaLabel: 'Scopri la dimora',
           href: 'dimora',
           imageAlt: 'La Badia al tramonto tra ulivi, muro in pietra e giardino.',
+          imageCaption: 'Ulivi, muro del giardino e primo affaccio esterno della dimora nella luce calda.',
+          imageLabel: 'La dimora da fuori',
           imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
           label: 'Soggiorno',
+          number: 'I',
+          stats: ['150 mq', '6 posti letto', '3 camere', 'Giardino 2.000 mq'],
+          sublabel: 'Per chi cerca dove soggiornare',
           title: 'La dimora',
         },
         {
           body: 'Eventi aperti, cene private, degustazioni, percorsi locali e occasioni che trasformano il soggiorno in un modo piu lento di stare in Umbria.',
+          ctaLabel: 'Scopri le esperienze',
           href: 'experiences',
           imageAlt: 'Le colline umbre viste dalla Badia nella luce calda della sera.',
+          imageCaption: 'Le colline iniziano subito fuori dalla casa, prima di cena e dopo il rientro.',
+          imageLabel: 'Il paesaggio intorno',
           imageSrc: '/images/editorial/vista-colline.jpg',
           label: 'Esperienze',
+          number: 'II',
+          stats: ['Club del vino', 'Concerti', 'Tertulie', 'Sala abside'],
+          sublabel: 'Per chi cerca un esperienza',
           title: 'Vivi La Badia',
         },
       ],
+      doorsEyebrow: 'Due porte',
       doorsSectionLabel: 'Ingressi editoriali',
+      doorsTitle: 'Due modi editoriali per entrare nella Badia.',
       events: {
-        body: 'Alcune date resteranno aperte anche a chi non soggiorna: tavolate stagionali, piccoli incontri e serate culturali costruite sul ritmo di questa casa.',
-        emptyStateBody: 'La superficie eventi e pronta anche quando la prossima data pubblica non e ancora stata pubblicata.',
-        eyebrow: 'Momenti aperti',
+        body: 'Il salone affrescato, il giardino e la sala abside adiacente ospitano una prima agenda di cene, serate e incontri misurati. Si puo partecipare anche senza soggiornare.',
+        emptyStateBody: 'L agenda resta pronta anche quando la prossima data pubblica non e ancora stata pubblicata.',
+        eyebrow: 'Agenda · primavera — estate 2026',
         items: [
           {
-            body: 'Serate raccolte dove cucina, vino e conversazione restano vicini alla casa e al suo passo piu lento.',
-            title: 'Cene aperte',
+            body: 'Una tavolata in giardino con cucina umbra, vini del territorio e un numero volutamente contenuto di ospiti.',
+            date: '24 maggio 2026',
+            schedule: '19:30',
+            title: 'Cena conviviale in giardino',
+            venue: 'Giardino all italiana',
           },
           {
-            body: 'Letture, appunti stagionali e piccoli incontri pensati per chi soggiorna e per chi arriva solo per l evento.',
-            title: 'Serate editoriali',
+            body: 'Letture, conversazione e luce di candela nel salone con affreschi, aperte a chi e gia in casa e a chi arriva solo per la serata.',
+            date: '7 giugno 2026',
+            schedule: '18:30',
+            title: 'Serata editoriale',
+            venue: 'Salone affrescato',
           },
           {
-            body: 'Il numero resta contenuto, cosi l atmosfera puo rimanere quieta, calda e coerente con il luogo.',
-            title: 'Un ritmo misurato',
+            body: 'Una degustazione guidata seguita da un piccolo concerto, con ritmo raccolto e posti limitati.',
+            date: '21 giugno 2026',
+            schedule: '18:00',
+            title: 'Club del vino e musica da camera',
+            venue: 'Sala abside',
           },
         ],
         primaryHref: 'experiences',
         primaryLabel: 'Vai alle esperienze',
-        title: 'Eventi aperti a tutti arriveranno qui.',
+        title: 'Eventi aperti a tutti.',
       },
+      facts: [
+        {
+          body: 'Circa 150 mq tra terzo e quarto piano, vissuti come appartamento unico cosi famiglie e piccoli gruppi possono abitare la casa insieme.',
+          title: 'Un formato di soggiorno intero',
+        },
+        {
+          body: 'Tre camere, sei posti letto, salone affrescato, tavolo ovale antico e accesso diretto al giardino all italiana rendono l esperienza concreta fin dal primo sguardo.',
+          title: 'Dettagli di casa con carattere',
+        },
+        {
+          body: 'San Venanzo, cantine vicine, cuochi privati e percorsi lenti in Umbria trasformano la dimora in una base da vivere, non in una stanza da occupare.',
+          title: 'Un soggiorno legato al luogo',
+        },
+      ],
+      factsTitle: 'Tre elementi concreti che danno forma al soggiorno.',
       hero: {
         body: 'Un appartamento intero in una casa di pietra, tra giardino all italiana e colline umbre a San Venanzo. Tre camere, sei posti letto, affreschi zodiacali, mobili antichi e la quiete di un piccolo borgo.',
         eyebrow: 'La Badia, San Venanzo',
         imageAlt: 'La Badia al tramonto, tra il giardino e gli ulivi.',
+        imageCaption: 'Ulivi, muro in pietra e bordo del giardino incorniciano la casa prima ancora di entrarci.',
+        imageLabel: 'Casa in pietra · giardino all italiana',
         imageSrc: '/images/editorial/hero-ulivi-tramonto.jpg',
+        metaEnd: 'Vocabolo Badia 5 — MMXXVI',
+        metaStart: '42°51′N · 12°16′E',
         primaryHref: 'contact',
-        primaryLabel: 'Richiedi il tuo soggiorno',
+        primaryLabel: 'Prenota ora',
+        scrollLabel: 'Continua',
         secondaryHref: 'dimora',
         secondaryLabel: 'Scopri la dimora',
         title: 'Una dimora di campagna da vivere insieme, con lentezza.',
@@ -647,25 +960,48 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         eyebrow: 'La dimora',
         title: 'Un luogo per stare, ritrovarsi e attraversare l Umbria con calma.',
       },
+      mediaStories: [
+        {
+          body: 'La direzione visiva deve rendere il soggiorno concreto ancora prima dei dettagli: mura in pietra, luce bassa, quiete del borgo e il senso che la casa appartenga davvero al luogo. Affreschi, salone e giardino acquistano peso proprio quando l atmosfera smette di sembrare astratta.',
+          eyebrow: 'Pietra e quiete',
+          id: 'media-house',
+          imageAlt: 'La Badia nella luce blu della sera, tra muri in pietra e giardino quieto.',
+          imageCaption: 'Muri in pietra, luci basse e la calma che comincia prima di entrare nella dimora.',
+          imageLabel: 'Ora blu nel borgo',
+          imageSrc: '/images/editorial/hero-notte.jpg',
+          title: 'La casa va vista prima di essere spiegata fino in fondo.',
+        },
+        {
+          body: 'Il territorio non e un blocco separato da visitare dopo. E l orizzonte che da forma alle colazioni, ai rientri, alle serate aperte e al ritmo lento del soggiorno stesso. Mostrarlo dentro la homepage tiene la narrazione agganciata all Umbria invece di ridurla a una promessa generica.',
+          eyebrow: 'Territorio in vista',
+          id: 'media-territory',
+          imageAlt: 'Vista notturna sui tetti del borgo e sulle colline umbre dalla Badia.',
+          imageCaption: 'Linee di tetto, distanza e geografia lenta che resta attorno a San Venanzo di notte.',
+          imageLabel: 'Colline dopo il buio',
+          imageSrc: '/images/editorial/vista-colline-notte.jpg',
+          title: 'Le colline umbre restano dentro l esperienza della casa.',
+        },
+      ],
       proof: {
-        body: 'Anche in questa prima superficie editoriale la promessa deve restare concreta: un appartamento intero, un giardino reale e un ritmo che appartiene gia al luogo.',
-        eyebrow: 'Perche appare credibile',
+        body: 'Nelle recensioni non torna un comfort generico. Tornano atmosfera, silenzio, affaccio sul giardino e il senso di abitare un luogo vero invece di un format ospitale qualsiasi.',
+        eyebrow: 'Voci degli ospiti',
         items: [
           {
-            quote: 'Circa 150 mq tra terzo e quarto piano, affittati come appartamento intero e non a camere.',
-            source: 'Formato del soggiorno',
+            quote: 'La casa e piu bella di qualunque fotografia. Il giardino all alba, con il canto delle upupe, e una cosa che non si dimentica.',
+            source: 'Chiara e Matteo · Airbnb · maggio 2025',
           },
           {
-            quote: 'Sei posti letto tra tre camere, con salone affrescato, tavolo ovale antico e accesso al giardino all italiana.',
-            source: 'Dettagli della casa',
+            quote: 'Raro equilibrio: spazi generosi, vero silenzio e un salone che rende la cena parte del soggiorno, non solo un momento pratico.',
+            source: 'Helen R. · Booking · settembre 2025',
           },
           {
-            quote: 'Vini del territorio, cuoco privato, percorsi vicini e il piccolo borgo umbro appena fuori dalla porta.',
-            source: 'Territorio e ritmo',
+            quote: 'Siamo arrivati per vedere l Umbria e abbiamo finito per organizzare le giornate attorno alla casa stessa. Succede di rado.',
+            source: 'Luca e amici · Guest note · giugno 2024',
           },
         ],
-        title: 'Il soggiorno e specifico, non generico.',
+        title: 'Chi torna, poi scrive.',
       },
+      reviewsMeta: ['Airbnb · 4.98 / 5 · 84 recensioni', 'Booking · 9.6 / 10 · 52 recensioni', 'Aperti dal 2021'],
     },
     stories: {
       blogBridge: {

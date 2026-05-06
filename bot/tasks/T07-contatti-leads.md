@@ -1,5 +1,9 @@
 # T07 - Pagina contatti e persistenza lead
 
+## Stato
+
+`completato`
+
 ## Priorita
 
 `P1`

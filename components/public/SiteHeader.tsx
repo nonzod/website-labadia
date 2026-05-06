@@ -15,9 +15,10 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ currentPathname, locale, localeSwitchPathnames }: SiteHeaderProps) {
   const copy = publicContent[locale].header
+  const isHomepage = currentPathname === `/${locale}` || currentPathname === `/${locale}/`
 
   return (
-    <header className="site-header">
+    <header className={isHomepage ? 'site-header site-header-home' : 'site-header'}>
       <Link className="brand-mark" href={getPublicHref('home', locale)}>
         <span className="brand-kicker">{copy.brandKicker}</span>
         <span className="brand-name">{siteConfig.projectName}</span>

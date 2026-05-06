@@ -5,6 +5,7 @@ import { getLocalizedPathname } from '@/lib/i18n'
 export const publicPathnames = {
   blog: '/blog',
   contact: '/contatti',
+  contactConfirmation: '/contatti/conferma',
   dimora: '/dimora',
   experiences: '/esperienze',
   home: '/',
