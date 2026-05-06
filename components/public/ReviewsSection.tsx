@@ -26,19 +26,35 @@ export function ReviewsSection({ meta, section }: ReviewsSectionProps) {
         </div>
 
         <div className="reviews-grid">
-          {section.items.map(({ quote, source }) => (
-            <article className="review-card" key={`${quote}-${source}`}>
-              <span className="review-mark" aria-hidden="true">
-                "
-              </span>
-              <p className="review-quote">{quote}</p>
-              <div className="review-footer">
-                <p className="review-source">{source}</p>
-              </div>
-            </article>
-          ))}
+          {section.items.map(({ quote, source }) => {
+            const { metaLine, name } = splitReviewSource(source)
+
+            return (
+              <article className="review-card" key={`${quote}-${source}`}>
+                <span className="review-mark" aria-hidden="true">
+                  "
+                </span>
+                <p className="review-quote">{quote}</p>
+                <div className="review-footer">
+                  <div className="review-source">
+                    <p className="review-source-name">{name}</p>
+                    {metaLine ? <p className="review-source-meta">{metaLine}</p> : null}
+                  </div>
+                </div>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>
   )
+}
+
+function splitReviewSource(source: string) {
+  const [name, ...rest] = source.split('·').map((chunk) => chunk.trim())
+
+  return {
+    metaLine: rest.join(' · '),
+    name,
+  }
 }

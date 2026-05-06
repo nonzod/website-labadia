@@ -31,6 +31,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const currentPathname = requestHeaders.get('x-badia-pathname') ?? `/${lang}`
   const localeSwitchPathnames = await getPostLocaleSwitcherPathnames(currentPathname)
   const skipToContentLabel = publicContent[lang].header.skipToContentLabel
+  const isHomepage = currentPathname === `/${lang}` || currentPathname === `/${lang}/`
 
   return (
     <div className="site-shell">
@@ -43,7 +44,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         localeSwitchPathnames={localeSwitchPathnames}
       />
       {children}
-      <SiteFooter locale={lang} />
+      <SiteFooter isHomepage={isHomepage} locale={lang} />
     </div>
   )
 }

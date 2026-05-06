@@ -27,20 +27,67 @@ export function EventsPreview({ locale, section, useEmptyState = false }: Events
       </div>
 
       <div className="events-preview-grid">
-        {section.items.map((item) => (
-          <article className="event-agenda-card" key={`${item.title}-${item.date}`}>
-            <div className="event-agenda-meta">
-              <p>{item.date}</p>
-              <p>{item.schedule}</p>
-            </div>
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-            <div className="event-agenda-footer">
-              <span>{item.venue}</span>
-            </div>
-          </article>
-        ))}
+        {section.items.map((item, index) => {
+          const { prominentDate, secondaryDate } = splitEventDate(item.date)
+
+          return (
+            <article
+              className={`event-agenda-card event-agenda-card-tone-${(index % 3) + 1}`}
+              key={`${item.title}-${item.date}`}
+            >
+              <div aria-hidden="true" className="event-agenda-poster" />
+
+              <div className="event-agenda-content">
+                <div className="event-agenda-meta">
+                  <div className="event-agenda-date">
+                    <p className="event-agenda-day">{prominentDate}</p>
+
+                    <div className="event-agenda-date-meta">
+                      <p>{secondaryDate}</p>
+                      <p>{item.schedule}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <h3>{item.title}</h3>
+                <p className="event-agenda-summary">{item.body}</p>
+
+                <div className="event-agenda-footer">
+                  <span>{item.venue}</span>
+                </div>
+              </div>
+            </article>
+          )
+        })}
       </div>
     </section>
   )
+}
+
+function splitEventDate(date: string) {
+  const normalizedDate = date.replace(/\s+/g, ' ').trim()
+  const leadingDayMatch = normalizedDate.match(/^(\d{1,2})\s+(.+)$/)
+
+  if (leadingDayMatch) {
+    return {
+      prominentDate: leadingDayMatch[1],
+      secondaryDate: leadingDayMatch[2],
+    }
+  }
+
+  const trailingDayMatch = normalizedDate.match(/^([A-Za-z]{3,})\s+(\d{1,2}),?\s*(.+)?$/)
+
+  if (trailingDayMatch) {
+    const remainder = [trailingDayMatch[1], trailingDayMatch[3]].filter(Boolean).join(' ')
+
+    return {
+      prominentDate: trailingDayMatch[2],
+      secondaryDate: remainder,
+    }
+  }
+
+  return {
+    prominentDate: normalizedDate,
+    secondaryDate: '',
+  }
 }

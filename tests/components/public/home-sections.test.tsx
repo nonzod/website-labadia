@@ -24,6 +24,7 @@ vi.mock('@/lib/events', () => ({
 
 import { DoorGrid } from '@/components/public/DoorGrid'
 import { EventsPreview } from '@/components/public/EventsPreview'
+import { ReviewsSection } from '@/components/public/ReviewsSection'
 import HomePage from '@/app/[lang]/page'
 import { publicContent } from '@/lib/public-content'
 
@@ -66,6 +67,20 @@ describe('homepage editorial sections', () => {
       'href',
       '/en/esperienze',
     )
+    expect(document.querySelectorAll('.event-agenda-poster')).toHaveLength(
+      publicContent.en.home.events.items.length,
+    )
+  })
+
+  it('splits review attribution into author and meta lines for editorial rendering', () => {
+    render(
+      <ReviewsSection meta={publicContent.it.home.reviewsMeta} section={publicContent.it.home.proof} />,
+    )
+
+    expect(screen.getByText('Chiara e Matteo')).toBeInTheDocument()
+    expect(screen.getByText('Airbnb · maggio 2025')).toBeInTheDocument()
+    expect(document.querySelector('.review-source-name')).not.toBeNull()
+    expect(document.querySelector('.review-source-meta')).not.toBeNull()
   })
 
   it('assembles the Italian homepage with section links from localized content', async () => {
