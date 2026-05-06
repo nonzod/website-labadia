@@ -34,7 +34,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const isHomepage = currentPathname === `/${lang}` || currentPathname === `/${lang}/`
 
   return (
-    <div className="site-shell">
+    <div className={isHomepage ? 'site-shell site-shell-home' : 'site-shell'}>
       <a className="skip-link" href="#main-content">
         {skipToContentLabel}
       </a>

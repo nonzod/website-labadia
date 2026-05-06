@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
 import Link from 'next/link'
 
 import type { AppLocale } from '@/lib/i18n'
@@ -16,12 +20,39 @@ type SiteHeaderProps = {
 export function SiteHeader({ currentPathname, locale, localeSwitchPathnames }: SiteHeaderProps) {
   const copy = publicContent[locale].header
   const isHomepage = currentPathname === `/${locale}` || currentPathname === `/${locale}/`
+  const homeLocationLabel = siteConfig.locationLabel.replace(', ', ' · ')
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    if (!isHomepage) {
+      return
+    }
+
+    const syncScrollState = () => {
+      setIsScrolled(window.scrollY > 24)
+    }
+
+    syncScrollState()
+    window.addEventListener('scroll', syncScrollState, { passive: true })
+
+    return () => window.removeEventListener('scroll', syncScrollState)
+  }, [isHomepage])
+
+  const headerClassName = [
+    'site-header',
+    isHomepage ? 'site-header-home site-header-fixed' : null,
+    isHomepage && isScrolled ? 'site-header-scrolled' : null,
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
-    <header className={isHomepage ? 'site-header site-header-home' : 'site-header'}>
+    <header className={headerClassName}>
       <Link className="brand-mark" href={getPublicHref('home', locale)}>
-        <span className="brand-kicker">{copy.brandKicker}</span>
         <span className="brand-name">{siteConfig.projectName}</span>
+        <span className={isHomepage ? 'brand-locality' : 'brand-kicker'}>
+          {isHomepage ? homeLocationLabel : copy.brandKicker}
+        </span>
       </Link>
 
       <nav className="site-nav" aria-label={copy.navigationLabel}>
