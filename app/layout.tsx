@@ -31,5 +31,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
-  return <>{children}</>
+  const lang = resolveLocale(await headers())
+  return (
+    <html lang={lang} suppressHydrationWarning>
+      <body>{children}</body>
+    </html>
+  )
 }
