@@ -31,12 +31,5 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
-  const requestHeaders = await headers()
-  const activeLocale = resolveLocale(requestHeaders.get('x-badia-locale') ?? defaultLocale)
-
-  return (
-    <html lang={activeLocale}>
-      <body>{children}</body>
-    </html>
-  )
+  return <>{children}</>
 }
