@@ -19,10 +19,10 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 | T15 | P1 | completato | Integrazione fotografia e media narrativi in homepage | T12, T13, T14, T14b | homepage visualmente immersiva |
 | T16 | P1 | completato | Navigazione pubblica e CTA di conversione | T12, T13, T14, T14b | header e percorsi pubblici piu orientati a soggiorno ed esperienze |
 | T07 | P1 | completato | Pagina contatti e persistenza lead | T04, T05 | form pubblico con salvataggio dati |
-| T08 | P1 | pending | Integrazione email `SMTP` per richieste contatto | T07 | invio email post-salvataggio |
-| T09 | P1 | pending | SEO tecnico di base | T03, T05, T06 | metadata, sitemap e robots coerenti |
-| T10 | P2 | pending | Deploy `Kubernetes` con volume persistente | T02, T08, T09 | manifest e strategia runtime production |
-| T11 | P2 | pending | QA finale e checklist di accettazione fase 1 | T07, T08, T09, T10, T12, T13, T14, T15, T16 | verifica end-to-end pronta al rilascio |
+| T08 | P1 | completato | Integrazione email `SMTP` per richieste contatto | T07 | invio email post-salvataggio |
+| T09 | P1 | completato | SEO tecnico di base | T03, T05, T06 | metadata, sitemap e robots coerenti |
+| T10 | P2 | completato | Deploy `Kubernetes` con volume persistente | T02, T08, T09 | manifest e strategia runtime production |
+| T11 | P2 | completato | QA finale e checklist di accettazione fase 1 | T07, T08, T09, T10, T12, T13, T14, T15, T16 | verifica end-to-end pronta al rilascio |
 
 ## Note di priorita
 
@@ -53,6 +53,10 @@ Scomposizione operativa di `bot/blueprit.md` in task ordinati per priorita e dip
 ## Nuovi interventi homepage
 
 I task `T12-T16` e `T14b` derivano dalla review comparativa tra stato attuale, riferimento `Homepage-standalone-src.html` e palette ufficiale in `analisi/remixed-c8b29026.html`.
+
+## Implementazioni extra
+
+- **Day/Night mode** (da analisi sezione "Giorno / Notte"): tema duale CSS, ThemeProvider + Toggle in header, palette scura completa, transizioni fluide. Non è un task separato ma requisito dell'analisi.
 
 - obiettivo: trasformare la home da shell tecnica calda a vera homepage hospitality/editoriale
 - focus: narrativa della dimora, architettura a due porte, proof e conversione, palette ufficiale, tipografia brand, fotografia reale
