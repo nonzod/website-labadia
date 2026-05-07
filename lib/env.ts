@@ -23,4 +23,10 @@ const requireEnv = (name: string): string => {
 export const serverEnv = {
   databaseUrl: requireEnv('DATABASE_URL'),
   payloadSecret: requireEnv('PAYLOAD_SECRET'),
+  smtpHost: readEnv('SMTP_HOST'),
+  smtpPort: Number(readEnv('SMTP_PORT') ?? '587'),
+  smtpUser: readEnv('SMTP_USER'),
+  smtpPass: readEnv('SMTP_PASS'),
+  smtpFrom: readEnv('SMTP_FROM') ?? '"La Badia" <noreply@labadia.it>',
+  notifyEmail: readEnv('NOTIFY_EMAIL') ?? readEnv('SMTP_FROM'),
 }

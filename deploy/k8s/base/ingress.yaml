@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: labadia-ingress
+  namespace: labadia
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-infomaniak"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - labadia.it
+        - www.labadia.it
+      secretName: labadia-tls
+  rules:
+  - host: "www.labadia.it"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: labadia-service
+            port:
+              number: 80
+  - host: "labadia.it"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: labadia-service
+            port:
+              number: 80

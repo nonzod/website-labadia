@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: labadia-data-pvc
+  namespace: labadia
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: csi-cinder-sc-retain
+  resources:
+    requests:
+      storage: 1Gi

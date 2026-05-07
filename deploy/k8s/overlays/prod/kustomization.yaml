@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: labadia
+
+resources:
+- ../../base
+
+patches:
+- path: deployment-patch.yaml
+  target:
+    kind: Deployment
+    name: labadia
+
+configMapGenerator:
+- name: labadia-config
+  behavior: merge
+  literals:
+  - NODE_ENV=production
+
+secretGenerator:
+- name: labadia-secret
+  behavior: merge
+  literals:
+  - DATABASE_URL=file:./data/badia.db

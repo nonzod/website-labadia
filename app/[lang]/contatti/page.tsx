@@ -9,7 +9,7 @@ import { SectionHeading } from '@/components/public/SectionHeading'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
-import { siteConfig } from '@/lib/site'
+import { generateMeta } from '@/lib/seo'
 
 type ContactPageProps = {
   params: Promise<{
@@ -22,10 +22,12 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
   const locale = isSupportedLocale(lang) ? lang : 'it'
   const copy = publicContent[locale].contact
 
-  return {
+  return generateMeta({
+    title: copy.hero.eyebrow,
     description: copy.hero.body,
-    title: `${copy.hero.eyebrow} | ${siteConfig.projectName}`,
-  }
+    lang: locale,
+    path: '/contatti',
+  })
 }
 
 export default async function ContactPage({ params }: ContactPageProps) {

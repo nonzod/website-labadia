@@ -159,6 +159,17 @@ type HomeCopy = {
   reviewsMeta: string[]
 }
 
+type ContactEmailCopy = {
+  email: string
+  footer: string
+  guests: string
+  message: string
+  name: string
+  period: string
+  phone: string
+  subject: string
+}
+
 type ContactCopy = {
   cards: ContactCard[]
   cardsLabel: string
@@ -169,6 +180,7 @@ type ContactCopy = {
     secondaryLabel: string
     title: string
   }
+  email: ContactEmailCopy
   form: {
     body: string
     eyebrow: string
@@ -181,31 +193,12 @@ type ContactCopy = {
       summary: string
     }
     fields: {
-      desiredPeriod: {
-        label: string
-        placeholder: string
-      }
-      email: {
-        label: string
-        placeholder: string
-      }
-      guestCount: {
-        label: string
-        placeholder: string
-      }
-      message: {
-        label: string
-        placeholder: string
-      }
-      name: {
-        label: string
-        placeholder: string
-      }
-      phone: {
-        hint: string
-        label: string
-        placeholder: string
-      }
+      desiredPeriod: { label: string; placeholder: string }
+      email: { label: string; placeholder: string }
+      guestCount: { label: string; placeholder: string }
+      message: { label: string; placeholder: string }
+      name: { label: string; placeholder: string }
+      phone: { hint: string; label: string; placeholder: string }
     }
     pendingLabel: string
     submitLabel: string
@@ -314,6 +307,16 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         primaryLabel: 'Back to the home page',
         secondaryLabel: 'Open the contact page again',
         title: 'Request received.',
+      },
+      email: {
+        email: 'Email',
+        footer: 'This message was sent from the La Badia contact form.',
+        guests: 'Guest count',
+        message: 'Message',
+        name: 'Name',
+        period: 'Desired period',
+        phone: 'Phone',
+        subject: '[La Badia] New contact request',
       },
       form: {
         body: 'Share your preferred timing, how many guests are travelling, and the atmosphere you have in mind. We store the request before anything else happens.',
@@ -700,6 +703,16 @@ export const publicContent: Record<AppLocale, PublicCopy> = {
         primaryLabel: 'Torna alla home',
         secondaryLabel: 'Apri di nuovo la pagina contatti',
         title: 'Richiesta ricevuta.',
+      },
+      email: {
+        email: 'Email',
+        footer: 'Questo messaggio e stato inviato dal modulo contatti de La Badia.',
+        guests: 'Numero ospiti',
+        message: 'Messaggio',
+        name: 'Nome',
+        period: 'Periodo desiderato',
+        phone: 'Telefono',
+        subject: '[La Badia] Nuova richiesta contatto',
       },
       form: {
         body: 'Condividi il periodo che hai in mente, quante persone viaggiano con te e il tipo di atmosfera che stai cercando. La richiesta viene salvata prima di qualsiasi altro passaggio.',

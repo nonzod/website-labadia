@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import { ThemeToggle } from '@/components/theme/ThemeToggle'
 import type { AppLocale } from '@/lib/i18n'
 
 import { appLocales, switchLocalePathname } from '@/lib/i18n'
@@ -64,6 +65,7 @@ export function SiteHeader({ currentPathname, locale, localeSwitchPathnames }: S
       </nav>
 
       <div className="site-actions">
+        <ThemeToggle />
         <Link className="header-cta" href={getPublicHref('contact', locale)}>
           {copy.primaryCtaLabel}
         </Link>

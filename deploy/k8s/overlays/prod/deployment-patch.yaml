@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: labadia
+  namespace: labadia
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: nextjs
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "0.2"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podSelector:
+              matchLabels:
+                app: labadia

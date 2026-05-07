@@ -8,7 +8,7 @@ import { isSupportedLocale, type AppLocale } from '@/lib/i18n'
 import { getPublishedPostBySlug } from '@/lib/posts'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
-import { siteConfig } from '@/lib/site'
+import { generateMeta } from '@/lib/seo'
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -42,15 +42,20 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = await getPublishedPostBySlug(locale, slug)
 
   if (!post) {
-    return {
-      title: `${siteConfig.projectName} | ${publicContent[locale].blog.hero.eyebrow}`,
-    }
+    return generateMeta({
+      title: publicContent[locale].blog.hero.eyebrow,
+      description: publicContent[locale].blog.hero.body,
+      lang: locale,
+      path: '/blog',
+    })
   }
 
-  return {
+  return generateMeta({
+    title: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,
-    title: post.seoTitle || `${post.title} | ${siteConfig.projectName}`,
-  }
+    lang: locale,
+    path: `/blog/${post.slug}`,
+  })
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

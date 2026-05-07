@@ -7,6 +7,7 @@ import type {
 import { getPayloadClient } from '@/lib/payload'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
+import { sendContactNotification } from '@/lib/email'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i
 const minimumMessageLength = 12
@@ -119,6 +120,20 @@ export const submitContactLead = async (
   await payload.create({
     collection: 'leads',
     data: buildContactLeadCreateData(locale, values),
+  })
+
+  // Fire-and-forget: email notification sent asynchronously after lead is saved.
+  // If email fails, the lead is already persisted — no data loss.
+  sendContactNotification({
+    name: values.name,
+    email: values.email,
+    phone: values.phone || null,
+    guestCount: Number.parseInt(values.guestCount, 10),
+    desiredPeriod: values.desiredPeriod,
+    message: values.message,
+    lang: locale,
+  }).catch((error) => {
+    console.error('[contact-leads] email notification failed:', error)
   })
 
   return {

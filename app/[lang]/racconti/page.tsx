@@ -7,7 +7,7 @@ import { EditorialPageHero } from '@/components/public/EditorialPageHero'
 import { isSupportedLocale } from '@/lib/i18n'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
-import { siteConfig } from '@/lib/site'
+import { generateMeta } from '@/lib/seo'
 
 type LocalePageProps = {
   params: Promise<{
@@ -20,10 +20,14 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   const locale = isSupportedLocale(lang) ? lang : 'it'
   const copy = publicContent[locale].stories
 
-  return {
+  return generateMeta({
+    title: copy.hero.eyebrow,
     description: copy.hero.body,
-    title: `${copy.hero.eyebrow} | ${siteConfig.projectName}`,
-  }
+    lang: locale,
+    path: '/racconti',
+    image: copy.hero.imageSrc,
+    imageAlt: copy.hero.imageAlt,
+  })
 }
 
 export default async function RaccontiPage({ params }: LocalePageProps) {

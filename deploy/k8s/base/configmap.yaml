@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: labadia-config
+  namespace: labadia
+data:
+  NODE_ENV: "production"
+  # Database path relative to app working directory
+  DATABASE_RELPATH: "data/badia.db"

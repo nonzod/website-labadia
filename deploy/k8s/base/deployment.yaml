@@ -1,0 +1,107 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: labadia
+  namespace: labadia
+  labels:
+    app: labadia
+spec:
+  revisionHistoryLimit: 2
+  replicas: 2
+  selector:
+    matchLabels:
+      app: labadia
+  template:
+    metadata:
+      labels:
+        app: labadia
+    spec:
+      initContainers:
+      - name: volume-permissions
+        image: busybox:1.36
+        command:
+        - sh
+        - -c
+        - mkdir -p /app/data && chown -R 1001:1001 /app/data
+        volumeMounts:
+        - name: labadia-data
+          mountPath: /app/data
+      containers:
+      - name: nextjs
+        image: ghcr.io/nonzod/labadia:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: labadia-config
+              key: NODE_ENV
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: DATABASE_URL
+        - name: PAYLOAD_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: PAYLOAD_SECRET
+        - name: SMTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: SMTP_HOST
+        - name: SMTP_PORT
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: SMTP_PORT
+        - name: SMTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: SMTP_USER
+        - name: SMTP_PASS
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: SMTP_PASS
+        - name: SMTP_FROM
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: SMTP_FROM
+        - name: NOTIFY_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: labadia-secret
+              key: NOTIFY_EMAIL
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "0.1"
+          limits:
+            memory: "512Mi"
+            cpu: "0.5"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: labadia-data
+          mountPath: /app/data
+      volumes:
+      - name: labadia-data
+        persistentVolumeClaim:
+          claimName: labadia-data-pvc

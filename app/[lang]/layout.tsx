@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 
 import { SiteFooter } from '@/components/public/SiteFooter'
 import { SiteHeader } from '@/components/public/SiteHeader'
+import { ThemeWrapper } from '@/components/theme/ThemeWrapper'
 import { appLocales, isSupportedLocale } from '@/lib/i18n'
 import { getPostLocaleSwitcherPathnames } from '@/lib/posts'
 import { publicContent } from '@/lib/public-content'
@@ -38,13 +39,15 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <a className="skip-link" href="#main-content">
         {skipToContentLabel}
       </a>
-      <SiteHeader
-        currentPathname={currentPathname}
-        locale={lang}
-        localeSwitchPathnames={localeSwitchPathnames}
-      />
-      {children}
-      <SiteFooter isHomepage={isHomepage} locale={lang} />
+      <ThemeWrapper>
+        <SiteHeader
+          currentPathname={currentPathname}
+          locale={lang}
+          localeSwitchPathnames={localeSwitchPathnames}
+        />
+        {children}
+        <SiteFooter isHomepage={isHomepage} locale={lang} />
+      </ThemeWrapper>
     </div>
   )
 }

@@ -46,3 +46,16 @@ Obiettivo: avere nuovi contesti rapidi, puliti e subito operativi.
 
 - Analisi architetturale di partenza: `analisi/remixed-c8b29026.html`
 - Task specifici e contesti piu dettagliati: directory `bot/`
+- Fonte di verita del layout: `http://localhost:8066/Homepage-standalone-src.html`
+- Il sito deve risultare visivamente identico al riferimento standalone
+
+## Workflow di verifica
+
+- Ogni modifica al layout pubblico va verificata con Chrome (`chrome-devtools`) sul riferimento `http://localhost:8066/Homepage-standalone-src.html`
+- Prima di committare, verificare che la resa visiva corrisponda al riferimento
+
+## Day/Night Mode
+
+- Il sito deve implementare la modalità giorno/notte come da specifica in `analisi/remixed-c8b29026.html` (sezione "Giorno / Notte")
+- Il toggle sostituisce sia le variabili CSS colore sia il set fotografico attivo
+- Non è un semplice dark mode: è un cambio di storytelling visivo e narrativo

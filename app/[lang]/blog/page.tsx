@@ -9,6 +9,7 @@ import { isSupportedLocale, type AppLocale } from '@/lib/i18n'
 import { getPostHref, getPublishedPosts } from '@/lib/posts'
 import { publicContent } from '@/lib/public-content'
 import { getPublicHref } from '@/lib/public-pages'
+import { generateMeta } from '@/lib/seo'
 import { siteConfig } from '@/lib/site'
 
 type BlogPageProps = {
@@ -34,10 +35,12 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const locale = isSupportedLocale(lang) ? lang : 'it'
   const copy = publicContent[locale].blog
 
-  return {
+  return generateMeta({
+    title: copy.hero.eyebrow,
     description: copy.hero.body,
-    title: `${copy.hero.eyebrow} | ${siteConfig.projectName}`,
-  }
+    lang: locale,
+    path: '/blog',
+  })
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
